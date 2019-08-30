@@ -32,7 +32,7 @@
 				
 				<nav id="nav">
 					<ul>
-						<li><a href="/rental/location">대관</a></li>
+						<li><a href="/">대관</a></li>
 						<li><a href="/">매치</a></li>
 						<li><a href="/">용병</a></li>
 						<li><a href="/">마이페이지</a></li>
