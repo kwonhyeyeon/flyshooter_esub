@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller(value = "/rental")
 public class RentalController {
 	
-	
 	private static final Logger logger = LoggerFactory.getLogger(RentalController.class);
 	
 	@RequestMapping(value = "/rental/location.do")

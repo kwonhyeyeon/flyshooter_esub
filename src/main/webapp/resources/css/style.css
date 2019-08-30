@@ -119,6 +119,25 @@
 	line-height:85px;
 	margin:0 auto;
 }
+#header h1 {
+	font-size:40px;
+	font-weight:bold;
+}
+#header h1 a {
+	color:#fff;
+}
+#gnb ul li {
+	float:left;
+	width:95px;
+	height:85px;
+	line-height:85px;
+	text-align:center;
+}
+#gnb ul li a {
+	color:#fff;
+	font-size:20px;
+	font-weight:bold;
+}
 /* header end */
 
 /* location start */

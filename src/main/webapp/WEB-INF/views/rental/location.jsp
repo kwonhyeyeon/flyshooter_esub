@@ -14,12 +14,11 @@
 </head>
 <body>
 
-<h1>여기는 대관</h1>
 	<div id="wrapper">
 		
 		<div id="header-wrap">
 			<header id="header">
-				<h1>FLY SHOOTER</h1>
+				<h1><a href="/">FLY SHOOTER</a></h1>
 				
 				<nav id="gnb">
 					<ul>
