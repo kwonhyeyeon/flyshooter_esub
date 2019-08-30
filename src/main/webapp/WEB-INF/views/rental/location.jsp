@@ -14,9 +14,7 @@
 </head>
 <body>
 
-<<<<<<< HEAD
 <h1>여기는 대관</h1>
-=======
 	<div id="wrapper">
 		
 		<header id="header">
@@ -33,7 +31,6 @@
 		</header>
 		
 	</div>
->>>>>>> fcf70572081c07f85e1e862589a0305e85cf8ff8
 
 </body>
 </html>
