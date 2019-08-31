@@ -18,9 +18,12 @@ import com.fly.client.place.vo.PlaceVO;
 @Controller(value = "/rental")
 public class RentalController {
 	
+<<<<<<< HEAD
 	@Autowired
 	private PlaceService placeService;
 	
+=======
+>>>>>>> 2476551291516827c0da96b865ccb851c2290211
 	private static final Logger logger = LoggerFactory.getLogger(RentalController.class);
 	
 	@RequestMapping(value = "/rental/location.do")
