@@ -227,5 +227,18 @@ public class PlaceVO {
 	public void setP_regdate(Date p_regdate) {
 		this.p_regdate = p_regdate;
 	}
+
+	@Override
+	public String toString() {
+		return "PlaceVO [getP_num()=" + getP_num() + ", getM_id()=" + getM_id() + ", getP_name()=" + getP_name()
+				+ ", getP_ceo()=" + getP_ceo() + ", getP_phone()=" + getP_phone() + ", getP_address()=" + getP_address()
+				+ ", getP_bank()=" + getP_bank() + ", getP_account()=" + getP_account() + ", getP_account_num()="
+				+ getP_account_num() + ", getP_open()=" + getP_open() + ", getP_close()=" + getP_close()
+				+ ", getP_file()=" + getP_file() + ", getP_register()=" + getP_register() + ", getP_account_copy()="
+				+ getP_account_copy() + ", getP_property()=" + getP_property() + ", getP_holiday()=" + getP_holiday()
+				+ ", getP_status()=" + getP_status() + ", getP_holiday_start()=" + getP_holiday_start()
+				+ ", getP_holiday_end()=" + getP_holiday_end() + ", getP_ok()=" + getP_ok() + ", getP_ok_date()="
+				+ getP_ok_date() + ", getP_intro()=" + getP_intro() + ", getP_regdate()=" + getP_regdate() + "]";
+	}
 	
 }

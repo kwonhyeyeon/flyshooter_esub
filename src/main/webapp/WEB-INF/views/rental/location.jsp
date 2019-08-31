@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,12 +10,11 @@
 <title>FLY SHOOTER</title>
 <title>Insert title here</title>
 
-<link rel="stylesheet" href="/resources/css/reset.css" />
-<link rel="stylesheet" href="/resources/css/style.css" />
+<link rel="stylesheet"  href="/resources/css/reset.css" />
+<link rel="stylesheet"  href="/resources/css/style.css" />
 </head>
 <body>
 
-<h1>여기는 대관</h1>
 	<div id="wrapper">
 		
 		<header id="header">
@@ -29,8 +29,31 @@
 				</ul>
 			</nav>
 		</header>
-		
 	</div>
-
+		
+		<div>
+			<form action="/rental/placeList.do" method="get">
+				<table border="1">
+					<tr>
+						<td>지역검색</td>
+					</tr>
+					
+					<tr>
+						<td><input type="text" name="area" /></td>
+					</tr>
+					
+					<c:if test="${not empty message }">
+						<tr>
+							<td><span style="color: red">${message }</span></td>
+						</tr>
+					</c:if>
+					
+					<tr>
+						<td><input type="submit" /></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		
 </body>
 </html>
