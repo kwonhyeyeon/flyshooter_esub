@@ -2,6 +2,9 @@ package com.fly.member.rental.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +30,7 @@ public class RentalController {
 	@RequestMapping(value = "/rental/location.do")
 	public String suchLocation() {
 		return "rental/location";
-		}
+	}
 	
 	// 지역으로 검색한 구장리스트
 	@RequestMapping(value = "/rental/placeList.do", method = RequestMethod.GET)
