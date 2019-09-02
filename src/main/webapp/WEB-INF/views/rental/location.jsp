@@ -55,7 +55,7 @@
 				<div class="menu">
 					
 						<ul>
-							<li><a href="/">대관 예약</a></li>
+							<li><a href="/rental/location.do">대관 예약</a></li>
 							<li><a href="/">대관 확인</a></li>
 						</ul>
 						<ul>
