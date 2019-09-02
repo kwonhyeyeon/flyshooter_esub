@@ -35,7 +35,7 @@ public class RentalController {
 		
 		logger.info("============="+area);
 		
-		List<PlaceVO> suchPlaceList = placeService.suchPlaceList(area);
+		List<PlaceVO> suchPlaceList = placeService.searchPlaceList(area);
 		
 		if(suchPlaceList.isEmpty()) {
 			redirectAttr.addFlashAttribute("message", "[" + area + "]지역에는 등록된 구장이 없습니다.");

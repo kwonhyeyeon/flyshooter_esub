@@ -16,7 +16,7 @@ public class PlaceDaoImpl implements PlaceDao {
 	private static final String NAME_SPACE = "com.fly.client.place.dao.PlaceDao";
 	
 	@Override
-	public List<PlaceVO> suchPlaceList(String area) {
+	public List<PlaceVO> searchPlaceList(String area) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(NAME_SPACE + ".suchPlaceList", area);
 	}

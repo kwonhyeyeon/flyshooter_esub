@@ -16,9 +16,9 @@ public class PlaceServiceImpl implements PlaceService {
 	private PlaceDao placeDao;
 	
 	@Override
-	public List<PlaceVO> suchPlaceList(String area) {
+	public List<PlaceVO> searchPlaceList(String area) {
 		// TODO Auto-generated method stub
-		return placeDao.suchPlaceList(area);
+		return placeDao.searchPlaceList(area);
 	}
 
 }
