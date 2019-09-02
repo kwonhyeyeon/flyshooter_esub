@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fly.member.place.vo.PlaceVO;
 import com.fly.user.place.service.PlaceService;
 
-@Controller(value = "/rental")
+@Controller(value = "/user/rental")
 public class RentalController {
    
    @Autowired
@@ -41,7 +41,6 @@ public class RentalController {
       
       logger.info("============="+area);
       
-      List<PlaceVO> suchPlaceList = placeService.searchPlaceList(area);
       List<PlaceVO> searchPlaceList = placeService.searchPlaceList(area);
       
       if(searchPlaceList.isEmpty()) {
