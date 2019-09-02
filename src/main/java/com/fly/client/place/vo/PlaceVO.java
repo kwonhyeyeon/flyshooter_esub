@@ -27,67 +27,6 @@ public class PlaceVO {
 	private Date p_ok_date; // 구장 승인일
 	private String p_intro; // 소개글
 	private Date p_regdate; // 구장 등록일
-	
-	public PlaceVO() {
-		super();
-	}
-	
-	public PlaceVO(String p_num, String m_id, String p_name, String p_ceo, String p_phone, String p_address,
-			String p_bank, String p_account, String p_account_num, String p_open, String p_close, String p_file,
-			String p_register, String p_account_copy, String p_property, Date p_holiday, int p_status,
-			Date p_holiday_start, Date p_holiday_end, int p_ok, Date p_ok_date, String p_intro, Date p_regdate) {
-		super();
-		this.p_num = p_num;
-		this.m_id = m_id;
-		this.p_name = p_name;
-		this.p_ceo = p_ceo;
-		this.p_phone = p_phone;
-		this.p_address = p_address;
-		this.p_bank = p_bank;
-		this.p_account = p_account;
-		this.p_account_num = p_account_num;
-		this.p_open = p_open;
-		this.p_close = p_close;
-		this.p_file = p_file;
-		this.p_register = p_register;
-		this.p_account_copy = p_account_copy;
-		this.p_property = p_property;
-		this.p_holiday = p_holiday;
-		this.p_status = p_status;
-		this.p_holiday_start = p_holiday_start;
-		this.p_holiday_end = p_holiday_end;
-		this.p_ok = p_ok;
-		this.p_ok_date = p_ok_date;
-		this.p_intro = p_intro;
-		this.p_regdate = p_regdate;
-	}
-	
-	// 사업자등록증, 통장사본, 부동산종합공부, 정기휴일 제외 생성자
-	public PlaceVO(String p_num, String m_id, String p_name, String p_ceo, String p_phone, String p_address,
-			String p_bank, String p_account, String p_account_num, String p_open, String p_close, String p_file,
-			int p_status, Date p_holiday_start, Date p_holiday_end, int p_ok, Date p_ok_date, String p_intro,
-			Date p_regdate) {
-		super();
-		this.p_num = p_num;
-		this.m_id = m_id;
-		this.p_name = p_name;
-		this.p_ceo = p_ceo;
-		this.p_phone = p_phone;
-		this.p_address = p_address;
-		this.p_bank = p_bank;
-		this.p_account = p_account;
-		this.p_account_num = p_account_num;
-		this.p_open = p_open;
-		this.p_close = p_close;
-		this.p_file = p_file;
-		this.p_status = p_status;
-		this.p_holiday_start = p_holiday_start;
-		this.p_holiday_end = p_holiday_end;
-		this.p_ok = p_ok;
-		this.p_ok_date = p_ok_date;
-		this.p_intro = p_intro;
-		this.p_regdate = p_regdate;
-	}
 
 	public String getP_num() {
 		return p_num;
