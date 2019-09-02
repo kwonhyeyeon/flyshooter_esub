@@ -3,6 +3,14 @@
 
 <mapper namespace="com.fly.user.stadium.dao.StadiumDao">
 
-<select id="stadiumList" parameterType="String" resultType="stadium">
+	<select id="stadiumList" parameterType="String" resultType="stadium">
+		SELECT 
+			s_no, s_name, s_size, s_d_fee, s_n_fee, s_d_fee_w, s_n_fee_w, 
+			s_img1, s_img2, s_img3, s_hours
+		FROM
+			stadium
+		WHERE
+			p_num = #{ p_num }
+	</select>
 	
-</select>
+</mapper>
