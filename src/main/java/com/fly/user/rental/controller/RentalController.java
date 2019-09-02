@@ -16,8 +16,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fly.member.place.vo.PlaceVO;
 import com.fly.user.place.service.PlaceService;
 
+<<<<<<< HEAD
 @Controller
 @RequestMapping(value = "/user/rental")
+=======
+@Controller(value = "/user/rental")
+>>>>>>> 90839c736fa1539615f7e86f66fb8b7ba9070426
 public class RentalController {
    
    @Autowired

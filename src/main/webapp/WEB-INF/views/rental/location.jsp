@@ -9,8 +9,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>FLY SHOOTER</title>
 
-<link rel="stylesheet"  href="/resources/css/reset.css" />
-<link rel="stylesheet"  href="/resources/css/style.css" />
+<link rel="stylesheet" href="/resources/css/reset.css" />
+<link rel="stylesheet" href="/resources/css/style.css" />
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <script>
 	$(function() {
@@ -74,7 +74,7 @@
 					
 						<c:when test="${m_type==0}">
 						<ul class="member-menu">
-							<li><a href="/rental/rentalList.do">대관 예약 현황</a></li>
+							<li><a href="/user/rental/rentalList.do">대관 예약 현황</a></li>
 							<li><a href="/">대관 환불 현황</a></li>
 							<li><a href="/">오프라인 대관 관리</a></li>
 						</ul>
