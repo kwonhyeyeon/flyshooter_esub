@@ -21,4 +21,10 @@ public class PlaceServiceImpl implements PlaceService {
 		return placeDao.searchPlaceList(area);
 	}
 
+	@Override
+	public PlaceVO selectPlace(String p_num) {
+		// TODO Auto-generated method stub
+		return placeDao.selectPlace(p_num);
+	}
+
 }

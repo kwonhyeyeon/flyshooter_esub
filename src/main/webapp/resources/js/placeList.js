@@ -12,7 +12,7 @@ $(document).ready(function(){
 		//대관신청페이지로 이동하기 위해 form추가 (id : rentalInsertForm) 
 		$("#rentalInsertForm").attr({
 			"method":"post",
-			"action":"/rental/rentalStadium.do"
+			"action":"/user/rental/rentalStadium.do"
 		});
 		
 		$("#rentalInsertForm").submit(); 

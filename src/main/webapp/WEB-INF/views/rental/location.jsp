@@ -57,7 +57,7 @@
 					<c:choose>
 						<c:when test="${m_type==1}">
 						<ul>
-							<li><a href="/rental/location.do">대관 예약</a></li>
+							<li><a href="/user/rental/location.do">대관 예약</a></li>
 							<li><a href="/">대관 확인</a></li>
 						</ul>
 						<ul>
@@ -101,7 +101,7 @@
 		<div class="sub-v"></div>
 		
 		<div class="location-wrap">
-			<form action="/rental/placeList.do" method="get">
+			<form action="/user/rental/placeList.do" method="get">
 				<table border="1">
 					<tr>
 						<td>지역검색</td>

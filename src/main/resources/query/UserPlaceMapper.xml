@@ -3,6 +3,7 @@
 
 <mapper namespace="com.fly.user.place.dao.PlaceDao">
 
+	<!-- 지역으로 검색한 구장리스트 -->
 	<select id="searchPlaceList" parameterType="String" resultType="place">
 		select p_num, p_name, p_address, p_phone, p_open, p_close
 		from place
@@ -11,5 +12,13 @@
 				and p_address LIKE '%'|| #{area} ||'%'
 			</if>
 	</select>
-
+	
+	<!-- 대관전 구장정보 확인 -->
+	<select id="selectPlace" parameterType="String" resultType="place">
+		SELECT 
+			p_num, p_name, p_phone, p_address, p_open, p_close, p_holiday, 
+			to_char(p_holiday_start, 'yyyy-fmMM-dd') p_holiday_start, to_char(p_holiday_end, 'yyyy-fmMM-dd') p_holiday_end, p_intro
+		FROM place
+		WHERE p_num = #{p_num}
+	</select>
 </mapper>
