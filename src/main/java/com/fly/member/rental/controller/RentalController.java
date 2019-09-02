@@ -36,13 +36,14 @@ public class RentalController {
 		logger.info("============="+area);
 		
 		List<PlaceVO> suchPlaceList = placeService.searchPlaceList(area);
+		List<PlaceVO> searchPlaceList = placeService.searchPlaceList(area);
 		
-		if(suchPlaceList.isEmpty()) {
+		if(searchPlaceList.isEmpty()) {
 			redirectAttr.addFlashAttribute("message", "[" + area + "]지역에는 등록된 구장이 없습니다.");
 			return "redirect:/rental/location.do";
 		}
-		model.addAttribute("suchPlaceList", suchPlaceList);
-			for(PlaceVO list : suchPlaceList) {
+		model.addAttribute("searchPlaceList", searchPlaceList);
+			for(PlaceVO list : searchPlaceList) {
 				logger.info(list.toString());
 			}
 		return "rental/placeList";

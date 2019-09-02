@@ -3,7 +3,7 @@
 
 <mapper namespace="com.fly.client.place.dao.PlaceDao">
 
-	<select id="suchPlaceList" parameterType="String" resultType="place">
+	<select id="searchPlaceList" parameterType="String" resultType="place">
 		select p_num, p_name, p_address, p_phone, p_open, p_close
 		from place
 		<where>

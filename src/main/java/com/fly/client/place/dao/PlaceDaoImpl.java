@@ -18,7 +18,7 @@ public class PlaceDaoImpl implements PlaceDao {
 	@Override
 	public List<PlaceVO> searchPlaceList(String area) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAME_SPACE + ".suchPlaceList", area);
+		return sqlSession.selectList(NAME_SPACE + ".searchPlaceList", area);
 	}
 
 }

@@ -38,8 +38,8 @@
 				</tr>
 				
 				<c:choose>
-					<c:when test="${ not empty suchPlaceList }" >
-						<c:forEach var="place" items="${ suchPlaceList }" varStatus="status">
+					<c:when test="${ not empty searchPlaceList }" >
+						<c:forEach var="place" items="${ searchPlaceList }" varStatus="status">
 							<tr data-num="${ place.p_num }" class="goRental">
 								<td>${ place.p_name }</td>
 								<td>${ place.p_address }</td>
