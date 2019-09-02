@@ -18,12 +18,12 @@ import com.fly.user.place.service.PlaceService;
 
 @Controller
 @RequestMapping(value = "/user/rental")
-public class RentalController {
+public class UserRentalController {
    
    @Autowired
    private PlaceService placeService;
    
-   private static final Logger log = LoggerFactory.getLogger(RentalController.class);   
+   private static final Logger log = LoggerFactory.getLogger(UserRentalController.class);   
    
    @RequestMapping(value = "/location.do")
    public String searchLocation(Model model) {
