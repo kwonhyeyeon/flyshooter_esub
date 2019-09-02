@@ -5,7 +5,7 @@
   
 <configuration>
 	<typeAliases>
-<<<<<<< HEAD
+
 		<typeAlias type="com.fly.member.place.vo.PlaceVO" alias="place"/>
 	</typeAliases>
 	<!-- <typeAliases>
@@ -14,17 +14,17 @@
 		<typeAlias type="com.fly.client.place.vo.PlaceVO" alias="place"/>
 		<typeAlias type="com.fly.client.stadium.vo.StadiumVO" alias="stadium"/>
 		<typeAlias type="com.fly.client.stats.vo.StatsVO" alias="stats"/> 
-=======
+
 		<typeAlias type="com.fly.client.place.vo.PlaceVO" alias="place"/>
-<<<<<<< HEAD
+
 		<typeAlias type="com.fly.member.login.vo.LoginHistory" alias="loginHistory" />
 		<typeAlias type="com.fly.member.login.vo.LoginVO" alias="login" />
 		<typeAlias type="com.fly.member.join.vo.MemberVO" alias="member" />
-=======
->>>>>>> 344a156001047332c4e05f997d447db2ba287cf2
+
 		<typeAlias type="com.fly.common.login.vo.LoginHistory" alias="loginHistory" />
 		<typeAlias type="com.fly.common.login.vo.LoginVO" alias="login" />
 		<typeAlias type="com.fly.common.member.vo.MemberVO" alias="member" />
->>>>>>> 6d2742d12393e55baeeb257b9238b206cffccbfe
-	</typeAliases>
+
+	</typeAliases> -->
+
 </configuration>
