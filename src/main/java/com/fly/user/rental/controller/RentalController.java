@@ -28,8 +28,10 @@ public class RentalController {
    private static final Logger logger = LoggerFactory.getLogger(RentalController.class);
    
    @RequestMapping(value = "/rental/location.do")
-   public String searchLocation() {
-      
+   public String searchLocation(Model model) {
+      model.addAttribute("m_id", "aaa@naver.com");
+      model.addAttribute("m_type", 1);
+	   
       return "rental/location";
    }
    

@@ -10,7 +10,7 @@
 			m_name,
 			m_type
 		from member
-		where m_id = 'aaa@naver.com'
+		where m_id = #{m_id}
 	</select>
 	
 	<!-- 로그인 처리 쿼리 -->
