@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fly.client.place.service.PlaceService;
 import com.fly.client.place.vo.PlaceVO;
@@ -30,15 +31,15 @@ public class RentalController {
 	
 	// 지역으로 검색한 구장리스트
 	@RequestMapping(value = "/rental/placeList.do", method = RequestMethod.GET)
-	public String suchPlaceList(@ModelAttribute PlaceVO pvo ,Model model, @RequestParam(value = "area", required = true, defaultValue = "null") String area) {
+	public String suchPlaceList(@ModelAttribute PlaceVO pvo, Model model, RedirectAttributes redirectAttr, @RequestParam(value = "area", required = true, defaultValue = "null") String area) {
 		
 		logger.info("============="+area);
 		
 		List<PlaceVO> suchPlaceList = placeService.suchPlaceList(area);
 		
 		if(suchPlaceList.isEmpty()) {
-			model.addAttribute("message", "[" + area + "]지역에는 등록된 구장이 없습니다.");
-			return "rental/location";
+			redirectAttr.addFlashAttribute("message", "[" + area + "]지역에는 등록된 구장이 없습니다.");
+			return "redirect:/rental/location.do";
 		}
 		model.addAttribute("suchPlaceList", suchPlaceList);
 			for(PlaceVO list : suchPlaceList) {

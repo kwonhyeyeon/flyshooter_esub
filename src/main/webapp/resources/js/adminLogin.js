@@ -1,7 +1,13 @@
 /**
  * 
  */
+// 뒤로가기 불가
+window.history.forward();
 
+		function noBack() {
+			window.history.forward();
+		}
+		
 $(document).ready(function(){
 	
 	var try_count = 0;

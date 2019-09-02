@@ -11,26 +11,7 @@
 <link rel="stylesheet"  href="/resources/css/reset.css" />
 <link rel="stylesheet"  href="/resources/css/style.css" />
 <script src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	/* 리스트 클릭시 대관신청페이지로 이동 */
-	$(".goRental").click(function(){
-		var p_num =  $(this).attr("data-num");	
-		$("#p_num").val(p_num);
-		alert("ㅋㅋㅋㅋ글번호 : "+p_num);
-		
-		//대관신청페이지로 이동하기 위해 form추가 (id : rentalInsertForm) 
-		$("#rentalInsertForm").attr({
-			"method":"post",
-			"action":"/rental/rentalStadium.do"
-		});
-		
-		$("#rentalInsertForm").submit(); 
-	});
-	
-	
-});
-</script>
+<script type="text/javascript" src="/resources/js/placeList.js"></script>
 </head>
 <body>
 			<!-- 상세 페이지 이동을 위한 form -->
