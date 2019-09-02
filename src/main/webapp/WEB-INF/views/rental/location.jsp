@@ -12,6 +12,17 @@
 
 <link rel="stylesheet"  href="/resources/css/reset.css" />
 <link rel="stylesheet"  href="/resources/css/style.css" />
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		$("#gnb").hover(function() {
+			$(".menu-wrap").slideDown(500);
+		});
+		$(".menu-wrap").mouseleave(function() {
+			$(".menu-wrap").slideUp(500);
+		});
+	})
+</script>
 </head>
 <body>
 
@@ -29,10 +40,64 @@
 						<li><a href="/">마이페이지</a></li>
 					</ul>
 				</nav>
+				
+				<nav id="lnb">
+					<ul>
+						<li><a href="/member/join.do">회원가입</a></li>
+						<li><a href="/">로그인</a></li>
+						
+						<li><a href="/">로그아웃</a></li>
+					</ul>
+				</nav>
 			</header>
+			
+			<div class="menu-wrap">
+				<div class="menu">
+					
+						<ul>
+							<li><a href="/">대관 예약</a></li>
+							<li><a href="/">대관 확인</a></li>
+						</ul>
+						<ul>
+							<li><a href="/">매치 신청</a></li>
+						</ul>
+						<ul>
+							<li><a href="/">용병 지원</a></li>
+							<li><a href="/">용병 모집</a></li>
+						</ul>
+						<ul>
+							<li><a href="/">회원 정보 수정</a></li>
+						</ul>
+					
+					
+					<%-- <c:if test="">
+						<ul>
+							<li><a href="/">대관 예약 현황</a></li>
+							<li><a href="/">대관 환불 현황</a></li>
+							<li><a href="/">오프라인 대관 관리</a></li>
+						</ul>
+						<ul>
+							<li><a href="/">매치 신청</a></li>
+						</ul>
+						<ul>
+							<li><a href="/">용병 지원</a></li>
+							<li><a href="/">용병 모집</a></li>
+						</ul>
+						<ul>
+							<li><a href="/">회원 정보 수정</a></li>
+							<li><a href="/">구장</a></li>
+							<li><a href="/">경기장/용품</a></li>
+							<li><a href="/">정산 관리</a></li>
+							<li><a href="/">통계</a></li>
+						</ul>
+					</c:if> --%>
+				</div>
+			</div>
 		</div>
 		
-		<div>
+		<div class="sub-v"></div>
+		
+		<div class="location-wrap">
 			<form action="/rental/placeList.do" method="get">
 				<table border="1">
 					<tr>
