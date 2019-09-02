@@ -8,7 +8,6 @@
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>FLY SHOOTER</title>
-<title>Insert title here</title>
 
 <link rel="stylesheet"  href="/resources/css/reset.css" />
 <link rel="stylesheet"  href="/resources/css/style.css" />
@@ -25,7 +24,6 @@
 </script>
 </head>
 <body>
-
 	<div id="wrapper">
 
 		<div id="header-wrap">
@@ -43,17 +41,21 @@
 				
 				<nav id="lnb">
 					<ul>
-						<li><a href="/member/join.do">회원가입</a></li>
-						<li><a href="/">로그인</a></li>
-						
-						<li><a href="/">로그아웃</a></li>
+						<c:if test="${not empty m_id}">
+							<li><a href="/member/join.do">회원가입</a></li>
+							<li><a href="/">로그인</a></li>
+						</c:if>
+						<c:if test="${empty m_id}">
+							<li><a href="/">로그아웃</a></li>
+						</c:if>
 					</ul>
 				</nav>
 			</header>
 			
 			<div class="menu-wrap">
 				<div class="menu">
-					
+					<c:choose>
+						<c:when test="${m_type==1}">
 						<ul>
 							<li><a href="/rental/location.do">대관 예약</a></li>
 							<li><a href="/">대관 확인</a></li>
@@ -68,9 +70,9 @@
 						<ul>
 							<li><a href="/">회원 정보 수정</a></li>
 						</ul>
+						</c:when>
 					
-					
-					<%-- <c:if test="">
+						<c:when test="${m_type==0}">
 						<ul>
 							<li><a href="/">대관 예약 현황</a></li>
 							<li><a href="/">대관 환불 현황</a></li>
@@ -90,7 +92,8 @@
 							<li><a href="/">정산 관리</a></li>
 							<li><a href="/">통계</a></li>
 						</ul>
-					</c:if> --%>
+						</c:when>
+					</c:choose>
 				</div>
 			</div>
 		</div>

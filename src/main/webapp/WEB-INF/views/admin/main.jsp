@@ -22,7 +22,6 @@
 </head>
 <body>
 
-
 <div class="contents">
 	<c:if test="${empty adminId}">
 	<form action="/admin/main.do" method="POST">
