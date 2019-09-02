@@ -1,4 +1,4 @@
-package com.fly.common.member.controller;
+package com.fly.member.join.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fly.common.login.vo.LoginVO;
-import com.fly.common.member.service.MemberService;
-import com.fly.common.member.vo.MemberVO;
+import com.fly.member.join.service.MemberService;
+import com.fly.member.join.vo.MemberVO;
+import com.fly.member.login.vo.LoginVO;
 
 @Controller
 @RequestMapping(value = "/member")

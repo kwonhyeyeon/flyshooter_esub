@@ -41,11 +41,11 @@
 				
 				<nav id="lnb">
 					<ul>
-						<c:if test="${not empty m_id}">
+						<c:if test="${empty m_id}">
 							<li><a href="/member/join.do">회원가입</a></li>
 							<li><a href="/">로그인</a></li>
 						</c:if>
-						<c:if test="${empty m_id}">
+						<c:if test="${not empty m_id}">
 							<li><a href="/">로그아웃</a></li>
 						</c:if>
 					</ul>
@@ -73,8 +73,8 @@
 						</c:when>
 					
 						<c:when test="${m_type==0}">
-						<ul>
-							<li><a href="/">대관 예약 현황</a></li>
+						<ul class="member-menu">
+							<li><a href="/rental/rentalList.do">대관 예약 현황</a></li>
 							<li><a href="/">대관 환불 현황</a></li>
 							<li><a href="/">오프라인 대관 관리</a></li>
 						</ul>

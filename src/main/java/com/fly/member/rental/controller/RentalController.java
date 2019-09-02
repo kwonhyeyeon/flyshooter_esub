@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fly.client.place.service.PlaceService;
 import com.fly.client.place.vo.PlaceVO;
+import com.fly.member.join.vo.MemberVO;
 
 @Controller(value = "/rental")
 public class RentalController {
@@ -28,17 +29,19 @@ public class RentalController {
 	private static final Logger logger = LoggerFactory.getLogger(RentalController.class);
 	
 	@RequestMapping(value = "/rental/location.do")
-	public String suchLocation() {
+	public String searchLocation(Model model) {
+		model.addAttribute("m_id", "aaa@naver.com");
+		model.addAttribute("m_type", 0);
+		
 		return "rental/location";
 	}
 	
 	// 지역으로 검색한 구장리스트
 	@RequestMapping(value = "/rental/placeList.do", method = RequestMethod.GET)
-	public String suchPlaceList(@ModelAttribute PlaceVO pvo, Model model, RedirectAttributes redirectAttr, @RequestParam(value = "area", required = true, defaultValue = "null") String area) {
+	public String searchPlaceList(@ModelAttribute PlaceVO pvo, Model model, RedirectAttributes redirectAttr, @RequestParam(value = "area", required = true, defaultValue = "null") String area) {
 		
 		logger.info("============="+area);
 		
-		List<PlaceVO> suchPlaceList = placeService.searchPlaceList(area);
 		List<PlaceVO> searchPlaceList = placeService.searchPlaceList(area);
 		
 		if(searchPlaceList.isEmpty()) {
