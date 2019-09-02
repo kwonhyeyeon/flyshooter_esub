@@ -5,7 +5,7 @@
   
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.fly.client.place.vo.PlaceVO" alias="place"/>
+		<typeAlias type="com.fly.member.place.vo.PlaceVO" alias="place"/>
 	</typeAliases>
 	<!-- <typeAliases>
 		<typeAlias type="com.fly.client.calculate.vo.CalculateVO" alias="calculate"/>

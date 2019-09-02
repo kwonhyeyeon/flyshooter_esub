@@ -24,7 +24,7 @@ public class AdminController {
 
 	// 로그인버튼 클릭시 ID검사및 세션값 저장을 담당
 	@RequestMapping(value = "/admin/main.do", method = RequestMethod.POST)
-	public String adminlogin(HttpSession session, HttpServletRequest request ,@RequestParam(value = "adminId") String adminId,
+	public String adminlogin(HttpSession session, HttpServletRequest request, @RequestParam(value = "adminId") String adminId,
 			@RequestParam(value = "adminPw") String adminPw) {
 		
 		boolean loginPass;

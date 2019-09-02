@@ -1,4 +1,4 @@
-package com.fly.member.rental.controller;
+package com.fly.user.rental.controller;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fly.client.place.service.PlaceService;
-import com.fly.client.place.vo.PlaceVO;
+import com.fly.member.place.vo.PlaceVO;
+import com.fly.user.place.service.PlaceService;
 
 @Controller(value = "/rental")
 public class RentalController {
@@ -25,13 +25,14 @@ public class RentalController {
 	private static final Logger logger = LoggerFactory.getLogger(RentalController.class);
 	
 	@RequestMapping(value = "/rental/location.do")
-	public String suchLocation() {
+	public String searchLocation() {
+		
 		return "rental/location";
 		}
 	
 	// 지역으로 검색한 구장리스트
 	@RequestMapping(value = "/rental/placeList.do", method = RequestMethod.GET)
-	public String suchPlaceList(@ModelAttribute PlaceVO pvo, Model model, RedirectAttributes redirectAttr, @RequestParam(value = "area", required = true, defaultValue = "null") String area) {
+	public String searchPlaceList(@ModelAttribute PlaceVO pvo, Model model, RedirectAttributes redirectAttr, @RequestParam(value = "area", required = true, defaultValue = "null") String area) {
 		
 		logger.info("============="+area);
 		
