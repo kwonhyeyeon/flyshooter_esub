@@ -1,4 +1,17 @@
-package com.fly.member.rental.controller;
+<<<<<<< HEAD
+package com.fly.client.rental.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class RentalController {
+
+	// 구장별 대관 예약 현황
+	
+	
+}
+=======
+package com.fly.user.rental.controller;
 
 import java.util.List;
 
@@ -16,9 +29,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+<<<<<<<< HEAD:src/main/java/com/fly/member/rental/controller/RentalController.java
 import com.fly.client.place.service.PlaceService;
 import com.fly.client.place.vo.PlaceVO;
 import com.fly.member.join.vo.MemberVO;
+========
+import com.fly.member.place.vo.PlaceVO;
+import com.fly.user.place.service.PlaceService;
+>>>>>>>> 6d2742d12393e55baeeb257b9238b206cffccbfe:src/main/java/com/fly/user/rental/controller/RentalController.java
 
 @Controller(value = "/rental")
 public class RentalController {
@@ -29,9 +47,13 @@ public class RentalController {
 	private static final Logger logger = LoggerFactory.getLogger(RentalController.class);
 	
 	@RequestMapping(value = "/rental/location.do")
+<<<<<<<< HEAD:src/main/java/com/fly/member/rental/controller/RentalController.java
 	public String searchLocation(Model model) {
 		model.addAttribute("m_id", "aaa@naver.com");
 		model.addAttribute("m_type", 0);
+========
+	public String searchLocation() {
+>>>>>>>> 6d2742d12393e55baeeb257b9238b206cffccbfe:src/main/java/com/fly/user/rental/controller/RentalController.java
 		
 		return "rental/location";
 	}
@@ -64,3 +86,4 @@ public class RentalController {
 		return "rental/rentalStadium";
 	}
 	}
+>>>>>>> 6d2742d12393e55baeeb257b9238b206cffccbfe
