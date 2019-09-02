@@ -38,6 +38,7 @@ public class RentalController {
 		
 		logger.info("============="+area);
 		
+		List<PlaceVO> suchPlaceList = placeService.searchPlaceList(area);
 		List<PlaceVO> searchPlaceList = placeService.searchPlaceList(area);
 		
 		if(searchPlaceList.isEmpty()) {
