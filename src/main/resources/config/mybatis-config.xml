@@ -5,7 +5,9 @@
   
 <configuration>
 	<typeAliases>
-
+		<typeAlias type="com.fly.member.login.vo.LoginHistory" alias="loginHistory" />
+		<typeAlias type="com.fly.member.login.vo.LoginVO" alias="login" />
+		<typeAlias type="com.fly.member.join.vo.MemberVO" alias="member" />
 		<typeAlias type="com.fly.member.place.vo.PlaceVO" alias="place"/>
 	</typeAliases>
 	<!-- <typeAliases>
