@@ -17,17 +17,6 @@ import com.fly.member.stadium.vo.StadiumVO;
 @RequestMapping(value="/rental")
 public class ClientRentalController {
 	
-	@Autowired
-	private ClientPlaceService clientPlaceService;
-	
-	@RequestMapping(value="/rentalList.do", method = RequestMethod.GET)
-	public String stadiumList(@ModelAttribute StadiumVO svo, Model model, @RequestParam(value="p_name", required = true, defaultValue = "null") String p_name) {
-		model.addAttribute("m_id", "aaa@naver.com");
-	    model.addAttribute("m_type", 0);
-	    
-	    List<StadiumVO> stadiumList = clientPlaceService.stadiumList(p_name);
-	      
-	    return "rental/rentalList";
-	}
+
 
 }
