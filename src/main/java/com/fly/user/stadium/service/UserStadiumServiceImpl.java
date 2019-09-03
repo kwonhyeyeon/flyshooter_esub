@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fly.member.stadium.vo.StadiumVO;
-import com.fly.user.stadium.dao.StadiumDao;
+import com.fly.user.stadium.dao.UserStadiumDao;
 
 @Service
-public class StadiumServiceImpl implements StadiumService {
+public class UserStadiumServiceImpl implements UserStadiumService {
 
 	@Autowired
-	private StadiumDao stadiumDao;
+	private UserStadiumDao stadiumDao;
 	
 	@Override
 	public List<StadiumVO> selectStadiumList(String p_num) {
