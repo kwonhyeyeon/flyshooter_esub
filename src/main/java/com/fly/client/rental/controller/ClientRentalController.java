@@ -10,18 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.fly.client.place.service.ClientPlaceService;
 import com.fly.member.rental.vo.RentalVO;
 
-@Controller(value="/client/rental")
+@Controller
+@RequestMapping(value="/client/rental")
 public class ClientRentalController {
 	
 	@Autowired
-	private ClientPlaceService placeService;
+	private ClientPlaceService cpService;
 	
-	@RequestMapping(value="/rental/rentalList.do")
+	@RequestMapping(value="/rentalList.do")
 	public String stadiumList(Model model) {
 		model.addAttribute("m_id", "aaa@naver.com");
-	     model.addAttribute("m_type", 0);
+	    model.addAttribute("m_type", 0);
 	      
-		return "rental/rentalList";
+	    return "rental/rentalList";
 	}
 
 }

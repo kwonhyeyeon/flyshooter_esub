@@ -7,17 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.fly.client.place.dao.ClientPlaceDao;
 import com.fly.member.rental.vo.RentalVO;
+import com.fly.member.stadium.vo.StadiumVO;
 
 @Service
 public class ClientPlaceServiceImpl implements ClientPlaceService {
 	
 	@Autowired
-	private ClientPlaceDao placeDao;
+	private ClientPlaceDao cpDao;
 
-	// 구장별 대관 예약 현황
+	// 구장별 경기장 리스트
 	@Override
-	public List<RentalVO> placeRentalList(String p_name) {
-		return placeDao.placeRentalList(p_name);
+	public List<StadiumVO> stadiumList(String p_name) {
+		return cpDao.stadiumList(p_name);
 	}
 
 }
