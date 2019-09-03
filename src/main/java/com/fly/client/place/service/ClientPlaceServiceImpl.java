@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fly.client.place.dao.PlaceDao;
+import com.fly.client.place.dao.ClientPlaceDao;
 import com.fly.member.rental.vo.RentalVO;
 
 @Service
-public class PlaceServiceImpl implements PlaceService {
+public class ClientPlaceServiceImpl implements ClientPlaceService {
 	
 	@Autowired
-	private PlaceDao placeDao;
+	private ClientPlaceDao placeDao;
 
 	// 구장별 대관 예약 현황
 	@Override

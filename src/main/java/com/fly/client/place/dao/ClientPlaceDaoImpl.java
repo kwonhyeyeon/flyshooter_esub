@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.fly.member.rental.vo.RentalVO;
 
 @Repository
-public class PlaceDaoImpl implements PlaceDao {
+public class ClientPlaceDaoImpl implements ClientPlaceDao {
 	
 	@Autowired
 	private SqlSession sqlSession;
