@@ -17,7 +17,7 @@ import com.fly.member.place.vo.PlaceVO;
 import com.fly.user.place.service.UserPlaceService;
 
 @Controller
-@RequestMapping(value = "/user/rental")
+@RequestMapping(value = "/rental")
 public class UserRentalController {
    
    @Autowired

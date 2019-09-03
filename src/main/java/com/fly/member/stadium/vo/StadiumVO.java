@@ -1,9 +1,5 @@
 package com.fly.member.stadium.vo;
 
-
-
-import java.sql.Timestamp;
-
 import com.fly.member.place.vo.PlaceVO;
 
 public class StadiumVO extends PlaceVO {

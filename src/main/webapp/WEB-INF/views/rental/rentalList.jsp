@@ -57,7 +57,7 @@
 					<c:choose>
 						<c:when test="${m_type==1}">
 						<ul>
-							<li><a href="/user/rental/location.do">대관 예약</a></li>
+							<li><a href="/rental/location.do">대관 예약</a></li>
 							<li><a href="/">대관 확인</a></li>
 						</ul>
 						<ul>
@@ -74,7 +74,7 @@
 					
 						<c:when test="${m_type==0}">
 						<ul class="member-menu">
-							<li><a href="/client/rental/rentalList.do">대관 예약 현황</a></li>
+							<li><a href="/rental/rentalList.do">대관 예약 현황</a></li>
 							<li><a href="/">대관 환불 현황</a></li>
 							<li><a href="/">오프라인 대관 관리</a></li>
 						</ul>
