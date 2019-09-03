@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fly.member.place.vo.PlaceVO;
 
-@Repository
+@Repository("placeDao")
 public class UserPlaceDaoImpl implements UserPlaceDao {
 	@Autowired
 	private SqlSession sqlSession;
