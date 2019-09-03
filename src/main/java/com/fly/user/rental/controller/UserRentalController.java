@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fly.member.place.vo.PlaceVO;
+import com.fly.member.stadium.vo.StadiumVO;
 import com.fly.user.place.service.UserPlaceService;
 import com.fly.user.stadium.service.UserStadiumService;
 
@@ -45,7 +46,6 @@ public class UserRentalController {
 	   log.info("============="+area);
       
       List<PlaceVO> searchPlaceList = placeService.searchPlaceList(area);
-      
       if(searchPlaceList.isEmpty()) {
          redirectAttr.addFlashAttribute("message", "[" + area + "]지역에는 등록된 구장이 없습니다.");
          return "redirect:/user/rental/location.do";
@@ -59,13 +59,25 @@ public class UserRentalController {
    
    // 대관 신청페이지
    @RequestMapping(value = "/rentalStadium.do", method = RequestMethod.POST)
-   public String rentalInsert(@ModelAttribute PlaceVO pvo, Model model, @RequestParam(value = "p_num") String p_num) {
+   public String rentalInfo(@ModelAttribute PlaceVO pvo,
+		   @ModelAttribute StadiumVO svo, Model model, @RequestParam(value = "p_num") String p_num, @RequestParam(value = "area", required = true, defaultValue = "null") String area, RedirectAttributes redirectAttr) {
 	  model.addAttribute("m_id", "aaa@naver.com");
       model.addAttribute("m_type", 1);
+
       pvo = placeService.selectPlace(p_num);
+      List<StadiumVO> stadiumList = userStadiumService.selectStadiumList(p_num);
       
-      System.out.println("=============" + pvo.toString());
+      // log
+      System.out.println(pvo.toString());
+      for(StadiumVO svo2 : stadiumList) {
+    	  System.out.println(svo2.toString());
+      }
+      System.out.println(stadiumList.size());
+      // end 
+      
       model.addAttribute("pvo", pvo);
+      model.addAttribute("stadiumList", stadiumList);
+      
       
       return "rental/rentalStadium";
    }
