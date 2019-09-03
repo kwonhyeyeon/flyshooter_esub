@@ -34,6 +34,7 @@ public class ClientRentalController {
 			@RequestParam(value = "m_id", required = true, defaultValue = "aaa@naver.com") String m_id,
 			@RequestParam(value = "p_num", required = true, defaultValue = "null") String p_num) {
 		
+		
 		System.out.println("구장 별 경기장 별 대관 예약 현황 호출");
 		
 		// 임시
@@ -44,6 +45,8 @@ public class ClientRentalController {
 		model.addAttribute("rvo", rvo);
 		model.addAttribute("svo", svo);
 		
+		p_num = svo.getP_num();
+		
 		// 구장 리스트 출력
 		List<PlaceVO> placeList = clientPlaceService.placeList(m_id);
 		
@@ -51,12 +54,13 @@ public class ClientRentalController {
 	    for(PlaceVO place : placeList) {
 	    	System.out.println("구장 리스트");
 	    	System.out.println(place.toString());
+	    	System.out.println(p_num);
 	    }
 	    
-		// 경기장 리스트 출력
+	    // 경기장 리스트 출력
 		if(p_num.equals("null")) { // 배열의 첫번째 값
 			
-			List<StadiumVO> stadiumList = clientPlaceService.stadiumList(p_num); // null 값
+		    List<StadiumVO> stadiumList = clientPlaceService.stadiumList(p_num); // null 값
 			
 			model.addAttribute("stadiumList", stadiumList);
 			for(StadiumVO stadium : stadiumList) {
