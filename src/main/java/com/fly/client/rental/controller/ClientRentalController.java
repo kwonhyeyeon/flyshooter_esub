@@ -2,6 +2,8 @@ package com.fly.client.rental.controller;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,21 @@ import com.fly.member.stadium.vo.StadiumVO;
 @RequestMapping(value="/rental")
 public class ClientRentalController {
 	
+<<<<<<< HEAD
 
+=======
+	@Resource(name = "clientPlaceService")
+	private ClientPlaceService clientPlaceService;
+	
+	@RequestMapping(value="/rentalList.do", method = RequestMethod.GET)
+	public String stadiumList(@ModelAttribute StadiumVO svo, Model model, @RequestParam(value="p_name", required = true, defaultValue = "null") String p_name) {
+		model.addAttribute("m_id", "aaa@naver.com");
+	    model.addAttribute("m_type", 0);
+	    
+	    List<StadiumVO> stadiumList = clientPlaceService.stadiumList(p_name);
+	      
+	    return "rental/rentalList";
+	}
+>>>>>>> b5ff937dba0246d60ba6f2498ba91027fc098244
 
 }
