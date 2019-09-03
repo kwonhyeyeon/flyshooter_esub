@@ -23,7 +23,6 @@ public class StadiumVO extends PlaceVO {
 		super();
 	}
 
-
 	public int getS_no() {
 		return s_no;
 	}

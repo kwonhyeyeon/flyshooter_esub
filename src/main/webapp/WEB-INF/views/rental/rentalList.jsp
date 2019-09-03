@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="/resources/css/reset.css" />
 <link rel="stylesheet" href="/resources/css/style.css" />
 <script src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="/resources/js/rentalList.js"></script>
 <script>
 	$(function() {
 		$("#gnb").hover(function() {
@@ -100,8 +101,49 @@
 		
 		<div class="sub-v"></div>
 		
-		<div>
-			구장별 대관 예약 현황
+		<div class="rentalList">
+			<!-- 구장명, 날짜 선택 -->
+			<div>
+				<c:choose>
+					<c:when test="${not empty placeList}">
+						<select name="placeName" class="placeName">
+							<c:forEach var="place" items="${placeList}" varStatus="status">
+								<option value="${place.p_name}">${place.p_name}</option>
+							</c:forEach>
+						</select>
+					</c:when>
+					
+					<c:otherwise>
+						<select name="placeName" class="placeName">
+							<option value="" selected>구장 없음</option>
+						</select>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<!-- 구장명, 날짜 선택 -->
+			
+			<!-- 경기장 리스트 -->
+			<div>
+				<c:choose>
+					<c:when test="${not empty stadiumList}">
+						<c:if test="${p_num == 'null'}">
+							<c:forEach var="stadium" items="${stadiumList}" varStatus="status">
+								<h2>${stadium.s_name}</h2>
+							</c:forEach>
+						</c:if>
+					</c:when>
+					
+					<c:otherwise>
+						<p>등록된 경기장이 없습니다<br>
+						경기장을 등록해주세요</p>
+						<c:forEach var="stadium" items="${stadiumList}" varStatus="status">
+							<h2>${stadium.s_name}</h2>
+						</c:forEach>
+						<input type="text" name="first" value="${stadium.p_num }" />
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<!-- 경기장 리스트 -->
 		</div>
 		
 	</div>
