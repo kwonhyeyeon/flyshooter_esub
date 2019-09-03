@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,10 +17,7 @@ import com.fly.member.stadium.vo.StadiumVO;
 @Controller
 @RequestMapping(value="/rental")
 public class ClientRentalController {
-	
-<<<<<<< HEAD
 
-=======
 	@Resource(name = "clientPlaceService")
 	private ClientPlaceService clientPlaceService;
 	
@@ -34,6 +30,5 @@ public class ClientRentalController {
 	      
 	    return "rental/rentalList";
 	}
->>>>>>> b5ff937dba0246d60ba6f2498ba91027fc098244
 
 }
