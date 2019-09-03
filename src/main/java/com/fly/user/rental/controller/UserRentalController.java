@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fly.member.place.vo.PlaceVO;
-import com.fly.user.place.service.PlaceService;
+import com.fly.user.place.service.UserPlaceService;
 
 @Controller
 @RequestMapping(value = "/user/rental")
 public class UserRentalController {
    
    @Autowired
-   private PlaceService placeService;
+   private UserPlaceService placeService;
    
    private static final Logger log = LoggerFactory.getLogger(UserRentalController.class);   
    

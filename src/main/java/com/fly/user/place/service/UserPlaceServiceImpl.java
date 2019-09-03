@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fly.member.place.vo.PlaceVO;
-import com.fly.user.place.dao.PlaceDao;
+import com.fly.user.place.dao.UserPlaceDao;
 
 
 @Service
-public class PlaceServiceImpl implements PlaceService {
+public class UserPlaceServiceImpl implements UserPlaceService {
 
 	@Autowired
-	private PlaceDao placeDao;
+	private UserPlaceDao placeDao;
 	
 	@Override
 	public List<PlaceVO> searchPlaceList(String area) {

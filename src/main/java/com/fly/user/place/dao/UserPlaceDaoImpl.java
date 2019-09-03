@@ -9,11 +9,11 @@ import org.springframework.stereotype.Repository;
 import com.fly.member.place.vo.PlaceVO;
 
 @Repository
-public class PlaceDaoImpl implements PlaceDao {
+public class UserPlaceDaoImpl implements UserPlaceDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private static final String NAME_SPACE = "com.fly.user.place.dao.PlaceDao";
+	private static final String NAME_SPACE = "com.fly.user.place.dao.UserPlaceDao";
 	
 	// 지역으로 검색한 구장리스트
 	@Override
