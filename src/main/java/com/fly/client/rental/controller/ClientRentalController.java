@@ -7,14 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.fly.client.place.service.PlaceService;
+import com.fly.client.place.service.ClientPlaceService;
 import com.fly.member.rental.vo.RentalVO;
 
 @Controller(value="/client/rental")
-public class RentalController {
+public class ClientRentalController {
 	
 	@Autowired
-	private PlaceService placeService;
+	private ClientPlaceService placeService;
 	
 	@RequestMapping(value="/rental/rentalList.do")
 	public String stadiumList(Model model) {
