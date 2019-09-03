@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,11 +32,28 @@
 				
 				<nav id="main-gnb">
 					<ul>
+						<li><a href="/client/rental/rentalList.do">대관</a></li>
+						<li><a href="/">매치</a></li>
+						<li><a href="/">용병</a></li>
+						<li><a href="/">마이페이지</a></li>
+					</ul>
+					<%-- <c:if test="${empty m_id && m_type==1}">
+					<ul>
 						<li><a href="/user/rental/location.do">대관</a></li>
 						<li><a href="/">매치</a></li>
 						<li><a href="/">용병</a></li>
 						<li><a href="/">마이페이지</a></li>
 					</ul>
+					</c:if>
+					
+					<c:if test="${m_type==0}">
+					<ul>
+						<li><a href="/client/rental/rentalList.do">대관</a></li>
+						<li><a href="/">매치</a></li>
+						<li><a href="/">용병</a></li>
+						<li><a href="/">마이페이지</a></li>
+					</ul>	
+					</c:if> --%>
 				</nav>
 			</header>
 		</div>

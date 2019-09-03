@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +74,7 @@
 					
 						<c:when test="${m_type==0}">
 						<ul class="member-menu">
-							<li><a href="/user/rental/rentalList.do">대관 예약 현황</a></li>
+							<li><a href="/client/rental/rentalList.do">대관 예약 현황</a></li>
 							<li><a href="/">대관 환불 현황</a></li>
 							<li><a href="/">오프라인 대관 관리</a></li>
 						</ul>

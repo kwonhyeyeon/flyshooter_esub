@@ -21,22 +21,21 @@ import com.fly.user.stadium.service.UserStadiumService;
 @Controller
 @RequestMapping(value = "/user/rental")
 public class UserRentalController {
-   
+	
 	@Resource(name="userPlaceService")
-   private UserPlaceService placeService;
+    private UserPlaceService placeService;
 	@Resource(name = "userStadiumService")
 	private UserStadiumService userStadiumService;
    
-   private static final Logger log = LoggerFactory.getLogger(UserRentalController.class);   
+	private static final Logger log = LoggerFactory.getLogger(UserRentalController.class);   
    
-   @RequestMapping(value = "/location.do")
-   public String searchLocation(Model model) {
-      model.addAttribute("m_id", "aaa@naver.com");
-      model.addAttribute("m_type", 1);
-      
-	   
-      return "rental/location";
-   }
+    @RequestMapping(value = "/location.do")
+    public String searchLocation(Model model) {
+       model.addAttribute("m_id", "aaa@naver.com");
+       model.addAttribute("m_type", 1);
+	    
+       return "rental/location";
+    }
    
    // 지역으로 검색한 구장리스트
    @RequestMapping(value = "/placeList.do", method = RequestMethod.GET)
