@@ -34,8 +34,12 @@ $(document).ready(function(){
 					,
 					beforeShowDay : disableSomeDay
 					
+					
 				});		
 					
+				function reset(){
+					$("#stadiumSelectBox").val("경기장선택");
+				}
 				// 휴업시작일과 영업재개일 사이 기간을(Date) 구하여 리턴함.
 				function dayCount(){
 					
@@ -82,6 +86,52 @@ $(document).ready(function(){
 					argu.setMonth( eval( argu.getMonth() + 1 ));
 					return argu.getFullYear() + "-" + argu.getMonth() + "-" + argu.getDate() ;
 				}
+				
+				$("#datepicker").change(function(){
+					$("#stadiumSelectBox").val("경기장선택");
+				});
+				
+				
+				$("#stadiumSelectBox").change(function(){
+					var selectDay = $("#datepicker").val();
+					$("#selectDay").val(selectDay);
+					var selectS_no = $("#stadiumSelectBox option:selected").val();
+					$("#selectS_no").val(selectS_no);
+					
+					if(!(selectDay)){
+						if(selectS_no != '경기장선택'){
+							$("#stadiumSelectBox").val("경기장선택");
+							alert("예약일을 선택하십시오");
+						}
+						return
+					}
+					if(selectS_no == '경기장선택'){
+						return
+					}
+					
+					var query = {
+							selectDay : selectDay,
+							selectS_no : selectS_no
+							};
+					
+					// 선택된 경기장의 시간조회 비동기 처리
+					$.ajax({
+						type:"post",
+						url:"/user/rental/searchTime.do",
+						data:query,
+						error: function() {
+							 alert("대관시간 조회에 실패하였습니다.\n다시 시도해주십시오.");
+						},
+						success:function(data){
+							$("#selectTime").html(data);
+							
+						}
+						
+					});
+					
+					
+				});
+				
 				
 });
 

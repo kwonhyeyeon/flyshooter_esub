@@ -238,3 +238,19 @@
 	margin:0 auto;
 }
 /* rentalList end */
+
+/* stadiumRental start */
+.stadiumRental {
+	clear:both;
+	width:1200px;
+	margin:235px auto 0;
+}
+.stadiumInfo {
+	width:600px;
+	float:left;
+}
+.stadiumCal {
+	width:600px;
+	float:left;
+}
+/* stadiumRental end */
