@@ -4,10 +4,34 @@
 
 $(document).ready(function(){
 	
-	// 구장명 선택시 값 변경
-	// 구장명의 첫번째 값
-	var firstOp = $(".placeName option:eq(0)").val();
+	var p_num = $(".placeName-op:selected").val();	
+	var s_no = $(".s_no").val();
 	
-	
+	// 구장명 값 변경 시 해당 경기장 리스트 가져오는 이벤트
+	$(".placeName").on("change", function(){
+		
+		var p_num = $(".placeName-op:selected").val();
+		
+		$.ajax({
+			type : "post",
+			url : "/client/rental/rentalList.do",
+			data : {
+				p_num : p_num,
+				s_no : s_no
+			},
+			error : function() {
+				alert("시스템 오류입니다. 관리자에게 문의하세요");
+			},
+			success : function(result) {
+				
+				// 해당 영역 리로드
+				$(".stadiumList").load(window.location.href + $(".stadiumList"));
+				$(".stadiumList").html(result);
+				
+			}
+			
+		});
+		
+	});
 	
 });
