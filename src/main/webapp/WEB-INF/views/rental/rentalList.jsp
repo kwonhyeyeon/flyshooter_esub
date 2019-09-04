@@ -101,50 +101,67 @@
 		
 		<div class="sub-v"></div>
 		
-		<div class="rentalList">
+		<article id="contents">
 			<!-- 구장명, 날짜 선택 -->
-			<div>
+			<div class="placeList">
 				<c:choose>
 					<c:when test="${not empty placeList}">
 						<select name="placeName" class="placeName">
 							<c:forEach var="place" items="${placeList}" varStatus="status">
-								<option value="${place.p_name}">${place.p_name}</option>
+								<option class="placeName-op" value="${place.p_num}">${place.p_name}</option>
 							</c:forEach>
 						</select>
 					</c:when>
 					
 					<c:otherwise>
 						<select name="placeName" class="placeName">
-							<option value="" selected>구장 없음</option>
+							<option class="placeName-op" selected>구장 없음</option>
 						</select>
 					</c:otherwise>
 				</c:choose>
+				
+				<input type="date" class="rentalDate" />
 			</div>
 			<!-- 구장명, 날짜 선택 -->
 			
-			<!-- 경기장 리스트 -->
-			<div>
-				<c:choose>
-					<c:when test="${not empty stadiumList}">
-						<c:if test="${p_num == 'null'}">
-							<c:forEach var="stadium" items="${stadiumList}" varStatus="status">
-								<h2>${stadium.s_name}</h2>
-							</c:forEach>
-						</c:if>
-					</c:when>
+			<!-- 경기장 별 대관 예약 리스트 -->
+			<div class="stadiumList">
+				<c:if test="${empty placeList}">
+					<p class="noPlace">등록된 구장이 없습니다<br>
+					구장을 등록해주세요</p>
+				</c:if>
+				
+				<c:forEach var="stadium" items="${stadiumList}" varStatus="status">
+					<input type="hidden" class="s_no" value="${stadium.s_no}" />
+					<h2 class="stadiumName">${stadium.s_name}</h2>
 					
-					<c:otherwise>
-						<p>등록된 경기장이 없습니다<br>
-						경기장을 등록해주세요</p>
-						<c:forEach var="stadium" items="${stadiumList}" varStatus="status">
-							<h2>${stadium.s_name}</h2>
-						</c:forEach>
-						<input type="text" name="first" value="${stadium.p_num }" />
-					</c:otherwise>
-				</c:choose>
+					<!-- 대관 예약 리스트 -->
+					<div class="rentalListArea">
+						<c:if test="${empty rentalList}">
+							<p class="noStadium">예약 현황이 없습니다</p>
+						</c:if>
+						<c:if test="${not empty rentalList}">
+							<table class="rentalListTbl">
+								<tr>
+									<th>예약자명</th>
+									<th>전화번호</th>
+									<th>예약 시간</th>
+									<th>용품 대여</th>
+								</tr>
+								<tr class="rentalList">
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						</c:if>
+					</div>
+					<!-- 대관 예약 리스트 -->
+				</c:forEach>
 			</div>
-			<!-- 경기장 리스트 -->
-		</div>
+			<!-- 경기장 별 대관 예약 리스트 -->
+		</article>
 		
 	</div>
 		

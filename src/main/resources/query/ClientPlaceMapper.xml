@@ -20,9 +20,9 @@
 
 	<!-- 대관 리스트 -->
 	<select id="rentalList" resultType="rental" parameterType="int">
-		select s.s_no, m.m_name, m.m_phone, (r.r_reserve_date + r.r_start + r.r_end), ir.r_no
+		select s.s_no, m.m_name, m.m_phone, (r.r_reserve_date + r.r_start + (r.r_start + s.s_hours)), ir.r_no
 		from stadium s, member m, rental r, items_rental ir
-		where s.s_no = #{s_no} and r.r_no = ir.r_no;
+		where s.s_no = #{s_no} or r.r_no = ir.r_no
 	</select>
 
 </mapper>
