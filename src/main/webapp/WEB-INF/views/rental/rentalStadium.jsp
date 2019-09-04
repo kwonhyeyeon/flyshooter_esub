@@ -100,21 +100,84 @@
 		</div>
 		
 		<div class="sub-v"></div>
-		<div style="width: 1200px; text-align: center;">
-			<div style="float:left; width: 450px;"></div>
 		
-			<div style="float:left; width: 450px;">
-					<form id="hidden" name="hidden">
-					<input type="text" value="${ pvo.p_holiday_start }" id="holiday_start"/>
-					<input type="text" value="${ pvo.p_holiday_end }" id="holiday_end"/>
-					<input type="text" value="${ pvo.p_holiday }" id="holiday"/>
-					</form>
+		<!-- 경기장 예약 -->
+		<div class="stadiumRental">
+			<div class="stadiumInfo">
+				
+				<div>
+					<!-- 사이트 로고이미지 출력 -->
+					<article id="stadiumImg">
+							<img src="/resources/img/default_img.jpg" />
+					</article>
+					<br />
+					<br />
+					<!-- 구장정보 -->
+					<article id="placeInfo">
+						[구장정보]
+						 <br />
+						 ${ pvo.p_name }
+						 <br />
+						 ${ pvo.p_address }
+						 
+						 <br />
+						 ${ pvo.p_phone }
+						 <br />
+						 [영업시간]
+						 <br />
+						 ${ pvo.p_open } ~ ${ pvo.p_close }(시)
+					</article>
+					
+					<br />
+					<br />
+					<!-- 이용약관 -->
+					<article id="termsOfService">
+						[환불규정및 이용약관 include예정]						
+					</article>
+				</div>				
+
+			</div>
+		
+			<div class="stadiumCal">
 			
-				<div class="location-wrap" style="margin-top: 300px">
-					<input type="text" id="datepicker" />
+				<form id="hidden_form">
+					<input type="hidden" value="${ pvo.p_holiday_start }" id="holiday_start"/>
+					<input type="hidden" value="${ pvo.p_holiday_end }" id="holiday_end"/>
+					<input type="hidden" value="${ pvo.p_holiday }" id="holiday"/>
+				</form>
+				
+				<form id="rentalStadiumInfo">
+					<input type="text" id="selectS_no" name="selectS_no" />
+					<input type="text" id="selectDay" name="selectDay" />
+				</form>
+					<input type="text" value="${ pvo.p_open }"/>
+					<table>
+						<tr>
+							<td><input type="text" id="datepicker" name="datepicker"/></td>
+						</tr>
+						<tr>
+							<td>
+								<select id="stadiumSelectBox" name="selectStadium" >
+								<option>경기장선택</option>
+									<c:forEach var="stadium" items="${ stadiumList }">
+										<option value="${ stadium.s_no }">${ stadium.s_name }</option>
+									</c:forEach>	
+								</select>			
+							</td>
+						</tr>		
+						<tr>
+							<td>예약가능시간</td>
+						</tr>			
+					</table>
+				
+				
+				<div id="selectTime">
+					
 				</div>
 			</div>
 		</div>
+		<!-- 경기장 예약 -->
+		
 	</div>
 </body>
 </html>

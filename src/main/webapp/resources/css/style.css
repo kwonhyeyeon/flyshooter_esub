@@ -249,6 +249,7 @@
 	justify-content:flex-end;
 	align-items:center;
 }
+<<<<<<< HEAD
 .stadiumName {
 	font-size:20px;
 	font-weight:bold;
@@ -276,3 +277,22 @@
 
 
 /* rentalList, stadiumList end */
+=======
+/* rentalList end */
+
+/* stadiumRental start */
+.stadiumRental {
+	clear:both;
+	width:1200px;
+	margin:235px auto 0;
+}
+.stadiumInfo {
+	width:600px;
+	float:left;
+}
+.stadiumCal {
+	width:600px;
+	float:left;
+}
+/* stadiumRental end */
+>>>>>>> 5ead8874aa40399d422357fdb39f320a7942038b

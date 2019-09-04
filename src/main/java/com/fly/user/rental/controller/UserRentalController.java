@@ -32,8 +32,6 @@ public class UserRentalController {
    
     @RequestMapping(value = "/location.do")
     public String searchLocation(Model model) {
-       model.addAttribute("m_id", "aaa@naver.com");
-       model.addAttribute("m_type", 1);
 	    
        return "rental/location";
     }
@@ -60,8 +58,6 @@ public class UserRentalController {
    @RequestMapping(value = "/rentalStadium.do", method = RequestMethod.POST)
    public String rentalInfo(@ModelAttribute PlaceVO pvo,
 		   @ModelAttribute StadiumVO svo, Model model, @RequestParam(value = "p_num") String p_num, @RequestParam(value = "area", required = true, defaultValue = "null") String area, RedirectAttributes redirectAttr) {
-	  model.addAttribute("m_id", "aaa@naver.com");
-      model.addAttribute("m_type", 1);
 
       pvo = placeService.selectPlace(p_num);
       List<StadiumVO> stadiumList = userStadiumService.selectStadiumList(p_num);
@@ -79,6 +75,13 @@ public class UserRentalController {
       
       
       return "rental/rentalStadium";
+   }
+   
+   @RequestMapping(value = "/searchTime.do", method = RequestMethod.POST)
+   public String searchTime(@RequestParam(value = "selectDay") String selectDay,
+		   @RequestParam(value = "selectS_no") int selectS_no
+		   ) {
+	   return "<h>휴.. 조회완료</h>";
    }
    
    }
