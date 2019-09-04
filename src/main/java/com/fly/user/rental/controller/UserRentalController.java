@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fly.member.place.vo.PlaceVO;
@@ -78,10 +79,15 @@ public class UserRentalController {
    }
    
    @RequestMapping(value = "/searchTime.do", method = RequestMethod.POST)
+   @ResponseBody
    public String searchTime(@RequestParam(value = "selectDay") String selectDay,
-		   @RequestParam(value = "selectS_no") int selectS_no
-		   ) {
-	   return "<h>휴.. 조회완료</h>";
+		   @RequestParam(value = "selectS_no") int selectS_no){
+	   
+	   String data = "<h>휴 .. 조회완료</h>";
+	   
+	   System.out.println("비동기 다녀감 ㅋ");
+	   
+	   return data;
    }
    
    }
