@@ -120,7 +120,6 @@ public class UserRentalController {
 		  }
 	  }
 	  
-	  
 	   return result;
    }
    

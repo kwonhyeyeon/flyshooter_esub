@@ -138,7 +138,14 @@ $(document).ready(function(){
 					
 				});
 				
+				$("input[name='reservationTime']:radio").change(function(){
+					alert("제발 한번에 와라");
+				});
 				
+
+				$(document).on("change","input[name='reservationTime']:radio",function(){  
+					alert("시발");
+				});
 });
 
 
