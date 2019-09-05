@@ -249,7 +249,6 @@
 	justify-content:flex-end;
 	align-items:center;
 }
-<<<<<<< HEAD
 .stadiumName {
 	font-size:20px;
 	font-weight:bold;
@@ -274,11 +273,7 @@
 	line-height:30px;
 	border-bottom:1px solid #dedede;
 }
-
-
-/* rentalList, stadiumList end */
-=======
-/* rentalList end */
+/* placeList, stadiumList end */
 
 /* stadiumRental start */
 .stadiumRental {
@@ -295,4 +290,3 @@
 	float:left;
 }
 /* stadiumRental end */
->>>>>>> 5ead8874aa40399d422357fdb39f320a7942038b
