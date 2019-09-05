@@ -1,8 +1,10 @@
 package com.fly.user.rental.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -102,13 +104,6 @@ public class UserRentalController {
 	  impossibleTime.add("15");
 	  impossibleTime.add("18");
 	  impossibleTime.add("19");
-	  
-		/*
-		 * for(int i = start; i+increase <= end; i+=increase) { result +=
-		 * "<article class='stadiumRentalTime' value='"+i+","+(i+increase)+"'";
-		 * if(impossibleTime.contains(i+"")) { result += " style='display:none' "; }
-		 * result += "><p>"+i+" ~ "+ (i + increase) + "(시)</p></article>"; }
-		 */
 	   
 	  for(int i = start; i+increase <= end; i+=increase) {
 		  result += "<label><input type='radio' name='reservationTime' value='"+i+","+(i+increase)+"'";
@@ -119,9 +114,48 @@ public class UserRentalController {
 			  result += "/>"+i+" ~ "+ (i + increase) + "(시)</label>";
 		  }
 	  }
-	  
+	  result += "<div id='geRental' style='display:none'>";
+	  result += "<p id='payment'></p><span> 원</span>"; 
+	  result += "<button id='goRentalBtn'>결제</button>";
+	  result += "</div>";
 	   return result;
    }
    
+   // 대관일, 경기장일련번호로 예약가능한 시간을 비동기로 조회하는 메소드
+   @RequestMapping(value = "/reservationCheck.do", method = RequestMethod.POST, produces= "text/html; charset=UTF-8")
+   @ResponseBody
+   public String reservationCheck(@RequestParam(value = "overlapKey") String overlapKey, HttpSession session){
+	  
+	   
+	   String overlap = (String)session.getAttribute("overlap");
+	  try {
+		  // session에 저장된 값이 없으면 오류를 낸다.
+		  overlap.length();
+		  
+		  if(overlapKey.equals(overlap)) {
+			  return "true";
+		  }else {
+			// over_key로 delete
+			  userRentalService.deleteReservation(overlap);
+			  
+			  String excep = null;
+			  excep.toString();
+		  }
+		  
+	  }catch(NullPointerException e) {
+		  System.out.println("null 오류");
+		  userRentalService.deleteReservation("null");
+		   try {
+		   userRentalService.reservationCheck(overlapKey);
+		   }catch(Exception ex) {
+			   return "해당 시간은 현재 예약이 진행중입니다.";
+		   }
+		   session.setAttribute("overlap", overlapKey);
+		   return "true";
+	   	}
+	  
+	  
+	  return "시스템 오류\n관리자한테 문의하십시오";
+	  }
    }
 

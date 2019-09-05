@@ -28,4 +28,34 @@ public class UserRentalServiceImpl implements UserRentalService {
 		return userRentalDao.searchReservationTime(map);
 	}
 
+	@Override
+	public int reservationCheck(String overlapKey) {
+		// TODO Auto-generated method stub
+		
+		
+		long time = System.currentTimeMillis(); 
+		long minutes = (time / (1000*60)); // 현재시간을 분으로 변환
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("overlapKey", overlapKey);
+		map.put("minutes", minutes);
+		
+		
+		return userRentalDao.reservationCheck(map);
+	}
+
+	@Override
+	public int deleteReservation(String overlap) {
+		// TODO Auto-generated method stub
+		
+		long time = System.currentTimeMillis(); 
+		long minutes = (time / (1000*60));
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("overlap", overlap);
+		map.put("minutes", minutes);
+	
+		return userRentalDao.deleteReservation(map);
+	}
+
 }

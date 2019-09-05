@@ -147,12 +147,16 @@
 				</form>
 				
 				<form id="rentalStadiumInfo">
-					<input type="text" id="selectS_info" name="selectS_info" />
-					<input type="text" id="selectDay" name="selectDay" />
-					<input type="text" id="p_open" value="${ pvo.p_open }" />
-					<input type="text" id="p_close" value="${ pvo.p_close }" />
+					<input type="hidden" id="p_open" value="${ pvo.p_open }" />
+					<input type="hidden" id="p_close" value="${ pvo.p_close }" />
 				</form>
-					<input type="text" value="${ pvo.p_open }"/>
+				
+				<form id="goPayment">
+					<input type="text" id="s_no"/>
+					<input type="text" id="r_reserve_date"/>
+					<input type="text" id="r_start"/>
+					<input type="text" id="r_total_pay"/>
+				</form>
 					<table>
 						<tr>
 							<td><input type="text" id="datepicker" name="datepicker"/></td>

@@ -14,6 +14,24 @@
 		ORDER BY
 				r_start asc
 	</select>
-
-
+	
+	<insert id="reservationCheck" parameterType="hashmap">
+		INSERT INTO rental_reservation
+		VALUES(
+			#{overlapKey}, 
+			#{minutes}
+			)
+	</insert>
+	
+	<delete id="deleteReservation" parameterType="hashmap">
+		DELETE 
+		FROM 
+			rental_reservation
+		WHERE 
+			to_number(#{minutes}) - to_number(reservation_minutes) <![CDATA[ >= ]]> 5 
+			<if test="overlap != 'null'">
+				or reservation_key = #{overlap}
+			</if>
+		
+	</delete>
 </mapper>
