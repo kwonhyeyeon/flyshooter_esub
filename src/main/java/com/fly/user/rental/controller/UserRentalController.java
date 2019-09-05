@@ -78,16 +78,18 @@ public class UserRentalController {
       return "rental/rentalStadium";
    }
    
-   @RequestMapping(value = "/searchTime.do", method = RequestMethod.POST)
+   // 대관일, 경기장일련번호로 예약가능한 시간을 비동기로 조회하는 메소드
+   @RequestMapping(value = "/searchTime.do", method = RequestMethod.POST, produces= "text/html; charset=UTF-8")
    @ResponseBody
-   public String searchTime(@RequestParam(value = "selectDay") String selectDay,
-		   @RequestParam(value = "selectS_no") int selectS_no){
+   public String searchTime(@ModelAttribute StadiumVO svo,
+		   @RequestParam(value = "selectDay") String selectDay){
 	   
-	   String data = "<h>휴 .. 조회완료</h>";
+	   String result = "<h>휴 .. 조회완료</h>";
 	   
-	   System.out.println("비동기 다녀감 ㅋ");
+	  
 	   
-	   return data;
+	   
+	   return result;
    }
    
    }
