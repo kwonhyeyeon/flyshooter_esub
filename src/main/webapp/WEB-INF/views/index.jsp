@@ -32,19 +32,19 @@
 				
 				<nav id="main-gnb">
 				
-				<ul>
+					<!-- <ul>
 						<li><a href="/user/rental/location.do">대관</a></li>
 						<li><a href="/">매치</a></li>
 						<li><a href="/">용병</a></li>
 						<li><a href="/">마이페이지</a></li>
-					</ul>
+					</ul> -->
 					
-					<!-- <ul>
+					<ul>
 						<li><a href="/client/rental/rentalList.do">대관</a></li>
 						<li><a href="/">매치</a></li>
 						<li><a href="/">용병</a></li>
 						<li><a href="/">마이페이지</a></li>
-					</ul> -->
+					</ul>
 					<%-- <c:if test="${empty m_id && m_type==1}">
 					<ul>
 						<li><a href="/user/rental/location.do">대관</a></li>

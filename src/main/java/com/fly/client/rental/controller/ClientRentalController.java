@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fly.client.place.service.ClientPlaceService;
 import com.fly.member.itemsrental.vo.ItemsRentalVO;
@@ -28,48 +29,62 @@ public class ClientRentalController {
 	
 	// 구장 별 경기장 별 대관 예약 현황(첫 로드)
 	@RequestMapping(value = "/rentalList.do", method = RequestMethod.GET)
-	public String rentalListByStadiumByPlace(
-			Model model,
+	public ModelAndView rentalListByStadiumByPlace(
 			@ModelAttribute PlaceVO pvo,
-			@RequestParam(value = "m_id", required = true, defaultValue = "bbb@naver.com") String m_id) {
+			@RequestParam(value = "m_id", required = true, defaultValue = "ddd@naver.com") String m_id) {
 		
+		ModelAndView mav = new ModelAndView();
 		System.out.println("구장 별 경기장 별 대관 예약 현황 호출");
+		System.out.println(m_id);
 		
 		// 구장 리스트 출력
 		List<PlaceVO> placeList = clientPlaceService.placeList(m_id);
-		if(placeList.isEmpty()) { // 구장이 없을 때
-			return "rental/rentalList";
-		}
 		
-		model.addAttribute("placeList", placeList);
-		for(PlaceVO place : placeList) {
-			System.out.println("구장 리스트");
-		   	System.out.println(place.toString());
+		if(placeList.isEmpty()) { // 구장이 없을 때
+			mav.addObject("placeList", placeList);
+			mav.setViewName("rental/rentalList");
+			return mav;
+		} else {
+			mav.addObject("placeList", placeList);
+			mav.setViewName("rental/rentalList");
+			
+			for(PlaceVO place : placeList) {
+				System.out.println("구장 리스트");
+			   	System.out.println(placeList);
+			   	System.out.println(place.toString());
+			}
 		}
 		
 		// 경기장 리스트 출력
 		String p_num = placeList.get(0).getP_num();
 		
 		List<StadiumVO> stadiumList = clientPlaceService.stadiumList(p_num);
-		
-		model.addAttribute("stadiumList", stadiumList);
+		if(stadiumList.isEmpty()) {
+			System.out.println(stadiumList);
+			mav.addObject(stadiumList);
+		}
+		mav.addObject("stadiumList", stadiumList);
+		mav.setViewName("rental/rentalList");
 		for(StadiumVO stadium : stadiumList) {
 			System.out.println("경기장 리스트");
+			System.out.println(stadiumList);
 		   	System.out.println(stadium.toString());
 		}
 		
-		// 경기장 별 대관 예약 리스트
-		int s_no = stadiumList.get(0).getS_no();
 		
-		List<RentalVO> rentalList = clientPlaceService.rentalList(s_no);
-		model.addAttribute("rentalList", rentalList);
-		for(RentalVO rental : rentalList) {
-			System.out.println("대관 현황 리스트");
-			System.out.println(rental.toString());
+		
+		// 경기장 별 대관 예약 리스트
+//		int s_no = stadiumList.get(0).getS_no();
+//		
+//		List<RentalVO> rentalList = clientPlaceService.rentalList(s_no);
+//		model.addAttribute("rentalList", rentalList);
+//		for(RentalVO rental : rentalList) {
+//			System.out.println("대관 현황 리스트");
+//			System.out.println(rental.toString());
+//
+//		}
 
-		}
-
-		return "rental/rentalList";
+		return mav;
 	}
 	
 	// 구장 별 경기장 별 대관 예약 현황(선택 값이 변경될 때)
