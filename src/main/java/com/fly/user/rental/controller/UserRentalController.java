@@ -91,17 +91,36 @@ public class UserRentalController {
 	   
 	  List<String> impossibleTime = userRentalService.searchReservationTime(selectDay, svo.getS_no());
 	  
-	  System.out.println(svo.getS_hours());
+	  System.out.println("증가========"+svo.getS_hours());
 	  System.out.println(svo.getS_no());
-	  System.out.println(svo.getP_close());
-	  System.out.println(svo.getP_open());
+	  System.out.println("마감========"+svo.getP_close());
+	  System.out.println("시작========"+svo.getP_open());
 	  int start = Integer.parseInt(svo.getP_open());
 	  int end = Integer.parseInt(svo.getP_close());
+	  int increase = svo.getS_hours();
+	  impossibleTime.add("10");
+	  impossibleTime.add("15");
+	  impossibleTime.add("18");
+	  impossibleTime.add("19");
 	  
-	  for(int i = start; i < end; i = i + svo.getS_hours()) {
-		  
-	  }
+		/*
+		 * for(int i = start; i+increase <= end; i+=increase) { result +=
+		 * "<article class='stadiumRentalTime' value='"+i+","+(i+increase)+"'";
+		 * if(impossibleTime.contains(i+"")) { result += " style='display:none' "; }
+		 * result += "><p>"+i+" ~ "+ (i + increase) + "(시)</p></article>"; }
+		 */
 	   
+	  for(int i = start; i+increase <= end; i+=increase) {
+		  result += "<label><input type='radio' name='reservationTime' value='"+i+","+(i+increase)+"'";
+		 
+			  if(impossibleTime.contains(i+"")) {
+				  result += " style='display:none' /></label>";
+			  }else {
+			  result += "/>"+i+" ~ "+ (i + increase) + "(시)</label>";
+		  }
+	  }
+	  
+	  
 	   return result;
    }
    
