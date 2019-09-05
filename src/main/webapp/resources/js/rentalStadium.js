@@ -94,24 +94,30 @@ $(document).ready(function(){
 				
 				$("#stadiumSelectBox").change(function(){
 					var selectDay = $("#datepicker").val();
+					var selectS_info = $("#stadiumSelectBox option:selected").val();
+					$("#selectS_info").val(selectS_info);
 					$("#selectDay").val(selectDay);
-					var selectS_no = $("#stadiumSelectBox option:selected").val();
-					$("#selectS_no").val(selectS_no);
+					var p_open = $("#p_open").val();
+					var p_close = $("#p_close").val();
+					var param = selectS_info.split(",");
 					
 					if(!(selectDay)){
-						if(selectS_no != '경기장선택'){
+						if(param[0] != '경기장선택'){
 							$("#stadiumSelectBox").val("경기장선택");
 							alert("예약일을 선택하십시오");
 						}
 						return
 					}
-					if(selectS_no == '경기장선택'){
+					if(param[0] == '경기장선택'){
 						return
 					}
 					
 					var query = {
 							selectDay : selectDay,
-							selectS_no : selectS_no
+							s_no : param[0],
+							s_hours : param[1],
+							p_open : p_open,
+							p_close : p_close
 							};
 					
 					// 선택된 경기장의 시간조회 비동기 처리
@@ -122,8 +128,8 @@ $(document).ready(function(){
 						error: function() {
 							 alert("대관시간 조회에 실패하였습니다.\n다시 시도해주십시오.");
 						},
-						success:function(data){
-							$("#selectTime").html(data);
+						success:function(result){
+							$("#selectTime").html(result);
 							
 						}
 						
