@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fly.member.place.vo.PlaceVO;
 import com.fly.member.stadium.vo.StadiumVO;
 import com.fly.user.place.service.UserPlaceService;
+import com.fly.user.rental.service.UserRentalService;
 import com.fly.user.stadium.service.UserStadiumService;
 
 @Controller
@@ -28,6 +29,8 @@ public class UserRentalController {
     private UserPlaceService placeService;
 	@Resource(name = "userStadiumService")
 	private UserStadiumService userStadiumService;
+	@Resource(name = "userRentalService")
+	private UserRentalService userRentalService;
    
 	private static final Logger log = LoggerFactory.getLogger(UserRentalController.class);   
    
@@ -84,10 +87,20 @@ public class UserRentalController {
    public String searchTime(@ModelAttribute StadiumVO svo,
 		   @RequestParam(value = "selectDay") String selectDay){
 	   
-	   String result = "<h>휴 .. 조회완료</h>";
+	   String result = "";
 	   
+	  List<String> impossibleTime = userRentalService.searchReservationTime(selectDay, svo.getS_no());
 	  
-	   
+	  System.out.println(svo.getS_hours());
+	  System.out.println(svo.getS_no());
+	  System.out.println(svo.getP_close());
+	  System.out.println(svo.getP_open());
+	  int start = Integer.parseInt(svo.getP_open());
+	  int end = Integer.parseInt(svo.getP_close());
+	  
+	  for(int i = start; i < end; i = i + svo.getS_hours()) {
+		  
+	  }
 	   
 	   return result;
    }

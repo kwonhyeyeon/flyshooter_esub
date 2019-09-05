@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fly.user.rental.dao.UserRentalDAO">
+
+	<select id="searchReservationTime" parameterType="hashmap" resultType="String">
+		SELECT 
+				r_start
+		FROM
+				rental
+		WHERE 
+				to_char(r_reserve_date, 'yyyy-MM-dd') = #{selectDay} and
+				to_char(s_no) = #{s_no}
+				and r_pay_status <![CDATA[ < ]]> -1 
+		ORDER BY
+				r_start asc
+	</select>
+
+
+</mapper>
