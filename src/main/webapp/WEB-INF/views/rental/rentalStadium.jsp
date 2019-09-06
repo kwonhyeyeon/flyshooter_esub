@@ -9,7 +9,7 @@
 <link rel="stylesheet"  href="/resources/css/reset.css" />
 <link rel="stylesheet"  href="/resources/css/style.css" />
 <!-- datepicker를 사용하기 위한 css, js -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
 <script src="//code.jquery.com/jquery-1.12.4.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- end datepicker -->
 <script type="text/javascript" src="/resources/js/rentalStadium.js"></script>
@@ -151,12 +151,6 @@
 					<input type="hidden" id="p_close" value="${ pvo.p_close }" />
 				</form>
 				
-				<form id="goPayment">
-					<input type="text" id="s_no"/>
-					<input type="text" id="r_reserve_date"/>
-					<input type="text" id="r_start"/>
-					<input type="text" id="r_total_pay"/>
-				</form>
 					<table>
 						<tr>
 							<td><input type="text" id="datepicker" name="datepicker"/></td>
@@ -185,5 +179,63 @@
 		<!-- 경기장 예약 -->
 		
 	</div>
+	
+	<div id="dialog" title="결제창" style="display: none">
+		<form id="insertRental">
+			<input type="hidden" id="r_reserve_date" />
+			<input type="hidden" id="s_no" />
+			<input type="hidden" id="r_start" />
+			<input type="hidden" id="r_total_pay" />
+				<h1>결제</h1>
+				<hr />
+				<input type="radio" name="r_pay_type" value="계좌이체"/>계좌이체
+				<input type="radio" name="r_pay_type" value="카드결제"/>카드결제		
+				<p>총 결제금액 <span id="total_money"></span> 원</p> 			
+				<div id="account" style="display:none">
+						<table border="1">
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>	    	
+				</div>
+				<div id="creditCard" style="display:none">
+				    	<table border="1"></table>	
+				</div>
+		</form>	    
+	</div>
+	
 </body>
 </html>

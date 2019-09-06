@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fly.member.place.vo.PlaceVO;
+import com.fly.client.place.vo.PlaceVO;
 import com.fly.member.stadium.vo.StadiumVO;
 import com.fly.user.place.service.UserPlaceService;
 import com.fly.user.rental.service.UserRentalService;
@@ -57,7 +57,7 @@ public class UserRentalController {
          for(PlaceVO list : searchPlaceList) {
         	 log.info(list.toString());
          }
-      return "rental/placeList";
+      return "rental/rentalPlaceList";
    }
    
    // 대관 신청페이지
@@ -93,17 +93,9 @@ public class UserRentalController {
 	   
 	  List<String> impossibleTime = userRentalService.searchReservationTime(selectDay, svo.getS_no());
 	  
-	  System.out.println("증가========"+svo.getS_hours());
-	  System.out.println(svo.getS_no());
-	  System.out.println("마감========"+svo.getP_close());
-	  System.out.println("시작========"+svo.getP_open());
 	  int start = Integer.parseInt(svo.getP_open());
 	  int end = Integer.parseInt(svo.getP_close());
 	  int increase = svo.getS_hours();
-	  impossibleTime.add("10");
-	  impossibleTime.add("15");
-	  impossibleTime.add("18");
-	  impossibleTime.add("19");
 	   
 	  for(int i = start; i+increase <= end; i+=increase) {
 		  result += "<label><input type='radio' name='reservationTime' value='"+i+","+(i+increase)+"'";
@@ -138,8 +130,9 @@ public class UserRentalController {
 			// over_key로 delete
 			  userRentalService.deleteReservation(overlap);
 			  
-			  String excep = null;
-			  excep.toString();
+			  // 해당 overlap값 DB에서 삭제후 catch로 보낸다.
+			  String nullPointer = null;
+			  nullPointer.toString();
 		  }
 		  
 	  }catch(NullPointerException e) {
@@ -157,5 +150,14 @@ public class UserRentalController {
 	  
 	  return "시스템 오류\n관리자한테 문의하십시오";
 	  }
+   
+// 대관일, 경기장일련번호로 예약가능한 시간을 비동기로 조회하는 메소드
+   @RequestMapping(value = "/setdialog.do", method = RequestMethod.POST, produces= "text/html; charset=UTF-8")
+   @ResponseBody
+   public String setDialog(@RequestParam(value = "param") String param){
+	   String result = "";
+	   	return result;
+	  }
+   
    }
 

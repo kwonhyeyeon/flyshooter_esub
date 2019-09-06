@@ -7,6 +7,8 @@ $(document).ready(function(){
 	var p_holiday = $('#holiday').val();
 	var arr = holiDay();
 	
+	
+	
 				$("#datepicker").datepicker({
 	               dateFormat : 'yy-mm-dd',
 	               prevText : '이전 달',
@@ -152,7 +154,6 @@ $(document).ready(function(){
 					
 					// 예약중인 대관테이블에 저장될 key값
 					var param = s_no[0]+""+selectDay+""+time[0];
-					alert(param);
 					
 					// 선택된 시간대가 현재 예약이 진행중인지 확인하는 비동기처리
 					$.ajax({
@@ -166,6 +167,7 @@ $(document).ready(function(){
 							alert(result);
 							if(result == 'true'){
 								formSetting();
+								openDialog();
 							}
 							
 						}
@@ -174,7 +176,43 @@ $(document).ready(function(){
 					
 					
 				});
+				// 결제창 모달창
+				function openDialog(){
+					
+					$("#dialog").dialog({
+						title : 'fly_shooter 결제창',
+						model : true,
+						width : '700',
+						height : '500',
+						resizeable : false,
+						show : {
+							effect : "blind",
+							duration : 1000
+						},
+						hide : {
+							effect : "explode",
+							duration : 1000
+						}
+					});
+				}
+				// 결제 모달창에서 결제 유형 변경시 이벤트
+				$(document).on("change","input[name='r_pay_type']:radio",function(){
+					var type = $("input:radio[name='r_pay_type']:checked").val();
+					
+					if(type == '계좌이체'){
+						$("#creditCard").hide();
+						$("#account").show();
+						
+					}else{
+						$("#account").hide();
+						$("#creditCard").show();
+					}
+					
+				});
+				
 });
+		
+
 
 		function formSetting(){
 			var s_no = stadiumInfoSplit();
@@ -184,6 +222,7 @@ $(document).ready(function(){
 			$("#s_no").val(s_no[0]);
 			$("#r_start").val(r_start[0]);
 			$("#r_total_pay").val(r_total_pay);
+			$("#total_money").text(r_total_pay);
 		}
 				
 		// 주말,평일설정
