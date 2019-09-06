@@ -1,5 +1,6 @@
 package com.fly.client.place.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.fly.member.place.vo.PlaceVO;
@@ -13,6 +14,6 @@ public interface ClientPlaceDao {
 	// 경기장 리스트
 	public List<StadiumVO> stadiumList(String p_num);
 	// 대관 예약 리스트
-	public List<RentalVO> rentalList(int s_no);
+	public List<RentalVO> rentalList(HashMap<String, Object> map);
 	
 }

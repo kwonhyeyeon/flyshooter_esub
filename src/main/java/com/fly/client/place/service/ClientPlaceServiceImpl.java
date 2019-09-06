@@ -1,5 +1,6 @@
 package com.fly.client.place.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +39,11 @@ public class ClientPlaceServiceImpl implements ClientPlaceService {
 
 	// 대관 예약 리스트
 	@Override
-	public List<RentalVO> rentalList(int s_no) {
-		List<RentalVO> rentalList = null;
-		rentalList = clientPlaceDao.rentalList(s_no);
-		
-		return rentalList;
-	}	
-
+	public List<RentalVO> rentalList(int s_no, String r_reserve_date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("s_no", s_no);
+		map.put("r_reserve_date", r_reserve_date);
+		return clientPlaceDao.rentalList(map);
+	}
+	
 }

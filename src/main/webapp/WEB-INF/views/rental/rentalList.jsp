@@ -12,6 +12,10 @@
 <link rel="stylesheet" href="/resources/css/reset.css" />
 <link rel="stylesheet" href="/resources/css/style.css" />
 <script src="http://code.jquery.com/jquery.min.js"></script>
+<!-- datepicker -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- datepicker -->
 <script type="text/javascript" src="/resources/js/rentalList.js"></script>
 <script>
 	$(function() {
@@ -120,20 +124,20 @@
 					</c:otherwise>
 				</c:choose>
 				
-				<input type="date" class="rentalDate" />
+				<input type="text" id="datepicker" />
 			</div>
 			<!-- 구장명, 날짜 선택 -->
 			
 			<!-- 경기장 별 대관 예약 리스트 -->
 			<div class="stadiumList">
+				<c:if test="${empty stadiumList}">
+					<p class="noStadium">경기장이 없습니다. 경기장을 등록해주세요</p>
+				</c:if>
+				
 				<c:forEach var="stadium" items="${stadiumList}" varStatus="status">
 					<input type="hidden" class="s_no" value="${stadium.s_no}" />
 
 					<h2 class="stadiumName">${stadium.s_name}</h2>
-					
-					<c:if test="${stadiumList}">
-						<p class="noStadium">경기장이 없습니다. 경기장을 등록해주세요</p>
-					</c:if>
 					
 					<!-- 대관 예약 리스트 -->
 					<div class="rentalListArea">
@@ -148,12 +152,14 @@
 									<th>예약 시간</th>
 									<th>용품 대여</th>
 								</tr>
-								<tr class="rentalList">
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
+								<c:forEach var="rental" items="rentalList" varStatus="status">
+									<tr>
+										<td>${m_name}</td>
+										<td>${m_phone}</td>
+										<td>${r_reserve_date}</td>
+										<td>s</td>
+									</tr>
+								</c:forEach>
 							</table>
 						</c:if>
 					</div>
