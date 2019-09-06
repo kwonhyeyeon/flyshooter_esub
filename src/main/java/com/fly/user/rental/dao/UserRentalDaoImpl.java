@@ -20,6 +20,18 @@ public class UserRentalDaoImpl implements UserRentalDao {
 		return sqlSession.selectList(NAME_SPACE + ".searchReservationTime", map);
 	}
 
+	@Override
+	public int reservationCheck(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(NAME_SPACE + ".reservationCheck", map);
+	}
+
+	@Override
+	public int deleteReservation(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(NAME_SPACE + ".deleteReservation", map);
+	}
+
 }
 
 

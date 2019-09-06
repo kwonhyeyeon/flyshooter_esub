@@ -147,12 +147,16 @@
 				</form>
 				
 				<form id="rentalStadiumInfo">
-					<input type="text" id="selectS_info" name="selectS_info" />
-					<input type="text" id="selectDay" name="selectDay" />
-					<input type="text" id="p_open" value="${ pvo.p_open }" />
-					<input type="text" id="p_close" value="${ pvo.p_close }" />
+					<input type="hidden" id="p_open" value="${ pvo.p_open }" />
+					<input type="hidden" id="p_close" value="${ pvo.p_close }" />
 				</form>
-					<input type="text" value="${ pvo.p_open }"/>
+				
+				<form id="goPayment">
+					<input type="text" id="s_no"/>
+					<input type="text" id="r_reserve_date"/>
+					<input type="text" id="r_start"/>
+					<input type="text" id="r_total_pay"/>
+				</form>
 					<table>
 						<tr>
 							<td><input type="text" id="datepicker" name="datepicker"/></td>
@@ -162,7 +166,7 @@
 								<select id="stadiumSelectBox" name="selectStadium" >
 								<option>경기장선택</option>
 									<c:forEach var="stadium" items="${ stadiumList }">
-										<option value="${ stadium.s_no },${ stadium.s_hours}">${ stadium.s_name }</option>
+										<option value="${ stadium.s_no },${ stadium.s_hours},${stadium.s_n_fee },${stadium.s_d_fee },${stadium.s_n_fee_w },${stadium.s_d_fee_w }">${ stadium.s_name }</option>
 									</c:forEach>	
 								</select>			
 							</td>
