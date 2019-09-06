@@ -1,5 +1,6 @@
 package com.fly.client.place.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -33,8 +34,8 @@ public class ClientPlaceDaoImpl implements ClientPlaceDao {
 	
 	// 대관 예약 리스트
 	@Override
-	public List<RentalVO> rentalList(int s_no) {
-		return session.selectList("rentalList", s_no);
+	public List<RentalVO> rentalList(HashMap<String, Object> map) {
+		return session.selectList("rentalList", map);
 	}
 
 }
