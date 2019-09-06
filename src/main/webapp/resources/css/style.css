@@ -289,4 +289,9 @@
 	width:600px;
 	float:left;
 }
+/* 모달창에서 X버튼 제거 */
+.ui-dialog-titlebar-close {
+	display:none;
+}
+
 /* stadiumRental end */

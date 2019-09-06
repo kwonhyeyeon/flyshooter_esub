@@ -188,53 +188,70 @@
 			<input type="hidden" id="r_total_pay" />
 				<h1>결제</h1>
 				<hr />
-				<input type="radio" name="r_pay_type" value="계좌이체"/>계좌이체
-				<input type="radio" name="r_pay_type" value="카드결제"/>카드결제		
+				<label><input type="radio" name="r_pay_type" value="계좌이체" checked="checked"/>계좌이체</label>
+				<label><input type="radio" name="r_pay_type" value="카드결제"/>카드결제</label>
 				<p>총 결제금액 <span id="total_money"></span> 원</p> 			
-				<div id="account" style="display:none">
+				<div id="accountTransfer">
 						<table border="1">
 							<tr>
-								<td></td>
-								<td></td>
+								<td>은행</td>
+								<td>
+									<label><input type="radio" name="bank"/>신한</label>
+									<label><input type="radio" name="bank"/>우리</label>
+									<label><input type="radio" name="bank"/>농협</label>
+								</td>
 							</tr>
 							<tr>
-								<td></td>
-								<td></td>
+								<td>출금계좌</td>
+								<td><input type="text" /></td>
 							</tr>
 							<tr>
-								<td></td>
-								<td></td>
+								<td>비밀번호</td>
+								<td><input type="password" /></td>
 							</tr>
 							<tr>
-								<td></td>
-								<td></td>
+								<td>예금주</td>
+								<td><input type="text" /></td>
 							</tr>
 							<tr>
-								<td></td>
-								<td></td>
+								<td colspan="2">환불</td>
 							</tr>
 							<tr>
-								<td></td>
-								<td></td>
+								<td>은행</td>
+								<td>
+									<label><input type="radio" name="r_bank"/>신한</label>
+									<label><input type="radio" name="r_bank"/>우리</label>
+									<label><input type="radio" name="r_bank"/>농협</label>
+								</td>
 							</tr>
 							<tr>
-								<td></td>
-								<td></td>
+								<td>환불계좌</td>
+								<td><input type="text" id="r_account_num" name="r_account_num"/></td>
 							</tr>
 							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
+								<td>예금주</td>
+								<td><input type="text" id="r_account" name="r_account" /></td>
 							</tr>
 						</table>	    	
 				</div>
 				<div id="creditCard" style="display:none">
-				    	<table border="1"></table>	
+				    <table border="1">
+				    <tr>
+					    <td>
+					    	<select>
+					    		<option value="선택하세요" >선택하세요</option>
+					    		<option value="BC카드">BC카드</option>
+					    		<option value="국민카드">국민카드</option>
+					    		<option value="신한카드">신한카드</option>
+				    		</select>
+				    	</td>
+					    <td>
+					    	<input type="text" class="cardnum" /> - <input type="text" class="cardnum" /> - <input type="text" class="cardnum" /> - <input type="text" class="cardnum" />
+				  		</td>
+				    </tr>
+				    </table>	
 				</div>
-		</form>	    
+		</form>	
 	</div>
 	
 </body>

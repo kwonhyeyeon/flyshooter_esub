@@ -184,6 +184,10 @@ $(document).ready(function(){
 						model : true,
 						width : '700',
 						height : '500',
+						closeOnEscape:false,
+						open:function(event, ui){
+							$(".ui-dialog-titlebar-close", $(this).parent()).hide();
+						},
 						resizeable : false,
 						show : {
 							effect : "blind",
@@ -192,7 +196,23 @@ $(document).ready(function(){
 						hide : {
 							effect : "explode",
 							duration : 1000
-						}
+						},
+						buttons:[
+							{
+								// 버튼 텍스트
+								text:'취소',
+								click:function(){
+									$(this).dialog("close");
+									alert("취소 호출 성공");
+								}
+							},
+							{
+								text:'결제',
+								click:function(){
+									alert("결제 호출..");
+								}
+							}
+						]
 					});
 				}
 				// 결제 모달창에서 결제 유형 변경시 이벤트
@@ -201,18 +221,16 @@ $(document).ready(function(){
 					
 					if(type == '계좌이체'){
 						$("#creditCard").hide();
-						$("#account").show();
+						$("#accountTransfer").show();
 						
 					}else{
-						$("#account").hide();
+						$("#accountTransfer").hide();
 						$("#creditCard").show();
 					}
 					
 				});
 				
 });
-		
-
 
 		function formSetting(){
 			var s_no = stadiumInfoSplit();
