@@ -18,7 +18,7 @@ public class ClientPlaceDaoImpl implements ClientPlaceDao {
 	@Autowired
 	private SqlSession session;
 	
-	private static final String NAME_SPACE = "com.fly.client.place.dao.ClientPlaceDao";
+	private String NAME_SPACE = "com.fly.client.place.dao.ClientPlaceDao";
 
 	// 구장 리스트
 	@Override

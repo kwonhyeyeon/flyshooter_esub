@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fly.member.join.vo.MemberVO;
 
-@Repository
+@Repository("memberDao")
 public class MemberDAOImpl implements MemberDAO {
 	@Autowired
 	private SqlSession session;

@@ -38,5 +38,10 @@ public class ItemsRentalVO {
 	public void setIr_rental_ea(int ir_rental_ea) {
 		this.ir_rental_ea = ir_rental_ea;
 	}
+	@Override
+	public String toString() {
+		return "ItemsRentalVO [getIr_no()=" + getIr_no() + ", getI_no()=" + getI_no() + ", getR_no()=" + getR_no()
+				+ ", getIr_return_status()=" + getIr_return_status() + ", getIr_rental_ea()=" + getIr_rental_ea() + "]";
+	}
 	
 }

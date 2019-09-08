@@ -7,8 +7,6 @@ $(document).ready(function(){
 	var p_holiday = $('#holiday').val();
 	var arr = holiDay();
 	
-	
-	
 				$("#datepicker").datepicker({
 	               dateFormat : 'yy-mm-dd',
 	               prevText : '이전 달',
@@ -90,10 +88,12 @@ $(document).ready(function(){
 				$("#datepicker").change(function(){
 					$("#stadiumSelectBox").val("경기장선택");
 					$("#selectTime").html("");
+					$("#goRental").hide();
 				});
 				
 				// 경기장을 선택할경우 비동기로 예약가능한 시간을 조회하는 함수
 				$("#stadiumSelectBox").change(function(){
+					$("#goRental").hide();
 					var selectDay = selectedDay();
 					var p_open = $("#p_open").val();
 					var p_close = $("#p_close").val();
@@ -138,47 +138,44 @@ $(document).ready(function(){
 				
 				// 예약시간을 선택할경우 동적으로 결제금액을 계산해서 넣어주는 함수
 				$(document).on("change","input[name='reservationTime']:radio",function(){  
-					$("#geRental").hide();
+					$("#goRental").hide();
 					// 8,2,20000,10000,30000,20000
-					var result = setDay();
-					$("#payment").text(result);
-					$("#geRental").show(1500);
+					var r_money = setDay();
+					var i_money = setTotalMoney();
+					$("#payment").text(r_money);
+					$("#totalMoney").text(eval(r_money) + eval(i_money));
+					$("#goRental").show();
 				});
 				
 				// 다음단계 이동전 해당시간대가 예약중인지 비동기로 확인하는 함수
 				$(document).on("click","#goRentalBtn",function(){  
-					
-					var selectDay = selectedDay();
-					var time = radioSplit();
-					var s_no = stadiumInfoSplit();
-					
-					// 예약중인 대관테이블에 저장될 key값
-					var param = s_no[0]+""+selectDay+""+time[0];
-					
-					// 선택된 시간대가 현재 예약이 진행중인지 확인하는 비동기처리
-					$.ajax({
-						type:"post",
-						url:"/user/rental/reservationCheck.do",
-						data:{overlapKey : param},
-						error: function() {
-							alert("비동기 실패");
-						},
-						success:function(result){
-							alert(result);
-							if(result == 'true'){
-								formSetting();
-								openDialog();
+						$("#goRental").hide();
+						param = makeOverlapKey();
+						// 선택된 시간대가 현재 예약이 진행중인지 확인하는 비동기처리
+						$.ajax({
+							type:"post",
+							url:"/user/rental/reservationCheck.do",
+							data:{overlapKey : param},
+							error: function() {
+								alert("비동기 실패");
+							},
+							success:function(result){
+								if(eval(result)){
+									formSetting();
+									openDialog();
+								}else{
+									alert("해당 시간에는 이미 대관이 진행중입니다.");
+								}
+								
+								
 							}
 							
-						}
+						});
 						
-					});
-					
 					
 				});
 				// 결제창 모달창
 				function openDialog(){
-					
 					$("#dialog").dialog({
 						title : 'fly_shooter 결제창',
 						model : true,
@@ -203,13 +200,37 @@ $(document).ready(function(){
 								text:'취소',
 								click:function(){
 									$(this).dialog("close");
-									alert("취소 호출 성공");
+									$("#insertRentalForm").find("input[type='text']").val("");
+									resetDialog();
+									// 결제 취소시 해당 시간대 예약중테이블에서 삭제
+									$.ajax({
+										type:"post",
+										url:"/user/rental/removeReservation.do",
+										error: function() {
+										},
+										success:function(result){
+											alert("대관이 취소되었습니다.");
+										}
+										
+									});
+									
 								}
 							},
 							{
 								text:'결제',
 								click:function(){
-									alert("결제 호출..");
+									//$(this).dialog("close");
+									setInsertRentalForm();	
+									resetDialog();
+									
+									$("#insertRentalForm").attr({
+										"method":"post",
+										"action":"/user/rental/insertRental.do"
+									});
+									if(confirm("대관하시겠습니까?")){
+										$("#insertRentalForm").submit();
+										$("#insertRentalForm").find("input[type='text']").val("");
+									}
 								}
 							}
 						]
@@ -219,7 +240,8 @@ $(document).ready(function(){
 				$(document).on("change","input[name='r_pay_type']:radio",function(){
 					var type = $("input:radio[name='r_pay_type']:checked").val();
 					
-					if(type == '계좌이체'){
+					// type = 2 (계좌이체), 1 (카드결제)
+					if(type == '2'){
 						$("#creditCard").hide();
 						$("#accountTransfer").show();
 						
@@ -230,12 +252,112 @@ $(document).ready(function(){
 					
 				});
 				
-});
+				// 용품별 가격설정
+				$(".r_ec").change(function(){
+					var price = $(this).parent("tr").attr("data-num");
+					var ec = $(this).children().val();
+					$(this).next().next().children('span').text( eval(ec*price)+"원");
+					
+					var i_price = setTotalMoney();
+					var r_pay = $("#payment").text();
+					$("#itemsPrice").text(i_price);
+					var result = 0;
+					if(r_pay){
+						 result = eval(i_price)+eval(r_pay);
+						$("#totalMoney").text(result);
+					}else{
+						$("#totalMoney").text(i_price);
+					}
+					
+				});
+				
+				$("#showItems").click(function(){
+					$("#showItems").hide();
+					$("#items").show();
+				});
+				
+				$("#hideItems").click(function(){
+					$("#items").hide();
+					$("#showItems").show();
+				});
+				
+});		
+		// 용품일련번호, 대여수량 구해오기
+		function setInsertItems(){
+			var length = $(".i_ea").length;
+			
+			var i_no = [];
+			var i_ea = [];
+			
+			for(var i=0; i<length; i++) {
+				if($('.i_ea').eq(i).val() && $('.i_ea').eq(i).val() > 0){
+					i_ea.push( $(".i_ea").eq(i).val() );
+					i_no.push( $(".i_no").eq(i).text() );
+				}
+			}
+			$("#items_no").val(i_no);
+			$("#items_ea").val(i_ea);
+		}
+
+		function replaceAll(str, searchStr, replaceStr){
+			return str.split(searchStr).join(replaceStr);
+		}
+
+		function setTotalMoney(){
+			/*
+			 * price의 값 전체를 한줄로 받아옴
+			 * 받아온 값에서 '원'을 +로 치환
+			 * 마지막 문자 자르고 계산하면 가격총액이 나옴 
+			 */
+			var arr = $(".price").text();
+			var arrStr = replaceAll(arr,"원","+");
+			var str = arrStr.slice(0,-1);
+			
+			var result = eval(str);
+			
+			return result;
+		}
+
+		function resetDialog(){
+			$(".input").val("");
+			$("#selectCard").val("선택하세요");
+			$("input:radio[name='bank']:radio[value='신한']").prop('checked', true); 
+			$("input:radio[name='r_bank']:radio[value='신한']").prop('checked', true); 
+			
+		}
+	
+		function setInsertRentalForm(){
+			var type = $("input:radio[name='r_pay_type']:checked").val();
+			$("#r_pay_type").val(type);
+			// type = 2 (계좌이체), 1 (카드결제)
+			if(type == "2"){
+				$("#r_bank").val($("input:radio[name='r_bank']:checked").val());
+				$("#r_account_num").val($("#r_ac_num").val());
+				$("#r_account").val($("#r_ac").val());
+			}else{
+				$("#r_bank").val("");
+				$("#r_account_num").val("");
+				$("#r_account").val("");
+			}
+		}
+		function makeOverlapKey(){
+			var selectDay = selectedDay();
+			var time = radioSplit();
+			var s_no = stadiumInfoSplit();
+			
+			// 예약중인 대관테이블에 저장될 key값
+			var param = s_no[0]+""+selectDay+""+time[0];
+			
+			return param;
+		}
 
 		function formSetting(){
+			setInsertItems();
 			var s_no = stadiumInfoSplit();
 			var r_start = radioSplit();
 			var r_total_pay = $("#payment").text();
+			var i_money = setTotalMoney();
+			r_total_pay = eval(r_total_pay) + eval(i_money);
 			$("#r_reserve_date").val(selectedDay());
 			$("#s_no").val(s_no[0]);
 			$("#r_start").val(r_start[0]);
@@ -254,7 +376,7 @@ $(document).ready(function(){
 			// 주말요금 
 			if(day == 0 || day == 6){
 					return setFee(fee[1], time[0], fee[4], fee[5]);
-			}else{
+			}else{	// 평일요금
 					return setFee(fee[1], time[0], fee[2], fee[3]);
 			}
 			return 0;
@@ -262,7 +384,6 @@ $(document).ready(function(){
 		
 		// 결제금액 계산
 		function setFee(param, param2, param3, param4){
-			
 			// 최소이용시간이 1시간인경우
 			if(param == 1){
 				// 시작시간이 20시 이후인경우 야간요금으로 계산
@@ -283,6 +404,7 @@ $(document).ready(function(){
 			}
 			return 0;
 		}
+		
 		
 		
 		

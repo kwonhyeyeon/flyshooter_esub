@@ -1,5 +1,6 @@
 package com.fly.member.join.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -21,7 +22,7 @@ import com.fly.member.login.vo.LoginVO;
 @RequestMapping(value = "/member")
 public class MemberController {
 
-	@Autowired
+	@Resource(name = "memberService")
 	private MemberService memberService;
 
 	@Autowired

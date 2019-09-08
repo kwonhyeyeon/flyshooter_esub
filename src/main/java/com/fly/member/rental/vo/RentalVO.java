@@ -1,13 +1,12 @@
 package com.fly.member.rental.vo;
 
-import java.util.Date;
 
 public class RentalVO {
 
 	private int r_no; // 대관 일련번호
 	private int s_no; // 경기장 일련번호
 	private String m_id; // 회원 ID
-	private Date r_reserve_date; // 예약일자
+	private String r_reserve_date; // 예약일자
 	private String r_start; // 예약 시작 시간
 	private int r_total_pay; // 총 결제 금액
 	private int r_pay_type; // 결제 유형
@@ -15,10 +14,17 @@ public class RentalVO {
 	private String r_account; // 환불 예금주명
 	private String r_account_num; // 환불 계좌번호
 	private int r_pay_status; // 결제 상태
-	private Date r_regdate; // 대관 신청 시간
-	private Date r_recall_time; // 환불 신청 이랒
+	private String r_regdate; // 대관 신청 시간
+	private String r_recall_time; // 환불 신청 이랒
 	private int refund; // 환불 금액
 	private int cal_status; // 환불 지급 상태
+	
+	
+	
+	
+	public RentalVO() {
+		super();
+	}
 	
 	public int getR_no() {
 		return r_no;
@@ -38,10 +44,10 @@ public class RentalVO {
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
 	}
-	public Date getR_reserve_date() {
+	public String getR_reserve_date() {
 		return r_reserve_date;
 	}
-	public void setR_reserve_date(Date r_reserve_date) {
+	public void setR_reserve_date(String r_reserve_date) {
 		this.r_reserve_date = r_reserve_date;
 	}
 	public String getR_start() {
@@ -86,16 +92,16 @@ public class RentalVO {
 	public void setR_pay_status(int r_pay_status) {
 		this.r_pay_status = r_pay_status;
 	}
-	public Date getR_regdate() {
+	public String getR_regdate() {
 		return r_regdate;
 	}
-	public void setR_regdate(Date r_regdate) {
+	public void setR_regdate(String r_regdate) {
 		this.r_regdate = r_regdate;
 	}
-	public Date getR_recall_time() {
+	public String getR_recall_time() {
 		return r_recall_time;
 	}
-	public void setR_recall_time(Date r_recall_time) {
+	public void setR_recall_time(String r_recall_time) {
 		this.r_recall_time = r_recall_time;
 	}
 	public int getRefund() {
@@ -110,5 +116,16 @@ public class RentalVO {
 	public void setCal_status(int cal_status) {
 		this.cal_status = cal_status;
 	}
+	@Override
+	public String toString() {
+		return "RentalVO [getR_no()=" + getR_no() + ", getS_no()=" + getS_no() + ", getM_id()=" + getM_id()
+				+ ", getR_reserve_date()=" + getR_reserve_date() + ", getR_start()=" + getR_start()
+				+ ", getR_total_pay()=" + getR_total_pay() + ", getR_pay_type()=" + getR_pay_type() + ", getR_bank()="
+				+ getR_bank() + ", getR_account()=" + getR_account() + ", getR_account_num()=" + getR_account_num()
+				+ ", getR_pay_status()=" + getR_pay_status() + ", getR_regdate()=" + getR_regdate()
+				+ ", getR_recall_time()=" + getR_recall_time() + ", getRefund()=" + getRefund() + ", getCal_status()="
+				+ getCal_status() + "]";
+	}
+	
 	
 }

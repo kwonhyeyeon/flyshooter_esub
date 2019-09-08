@@ -1,20 +1,19 @@
 package com.fly.member.join.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.fly.common.util.OpenCrypt;
 import com.fly.common.util.Util;
 import com.fly.member.join.dao.MemberDAO;
 import com.fly.member.join.vo.MemberVO;
 
-@Service
-@Transactional
+@Service("memberService")
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
+	@Qualifier("memberDao")
 	private MemberDAO memberDAO;
 
 	@Override

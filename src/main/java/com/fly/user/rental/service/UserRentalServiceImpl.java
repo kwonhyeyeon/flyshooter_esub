@@ -6,15 +6,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.fly.member.itemsrental.dao.ItemsRentalDao;
+import com.fly.member.itemsrental.vo.ItemsRentalVO;
+import com.fly.member.rental.vo.RentalVO;
 import com.fly.user.rental.dao.UserRentalDao;
-
+@Transactional
 @Service("userRentalService")
 public class UserRentalServiceImpl implements UserRentalService {
 
 	@Autowired
 	@Qualifier("userRentalDao")
 	private UserRentalDao userRentalDao;
+	@Autowired
+	@Qualifier("itemsRentalDao")
+	private ItemsRentalDao itemsRentalDao;
 	
 	@Override
 	public List<String> searchReservationTime(String selectDay, int s_no) {
@@ -56,6 +63,32 @@ public class UserRentalServiceImpl implements UserRentalService {
 		map.put("minutes", minutes);
 	
 		return userRentalDao.deleteReservation(map);
+	}
+
+	@Override
+	@Transactional
+	public int insertRental(RentalVO rvo, String items_no, String items_ea) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		// 입력받은 items정보를 ","단위로 자르고 반복하여 isnert해준다.
+		String item_no[] = items_no.split(",");
+		String item_ea[] = items_ea.split(",");
+		userRentalDao.insertRental(rvo);
+		
+		ItemsRentalVO irvo = new ItemsRentalVO();
+		irvo.setR_no(rvo.getR_no());
+		
+		for(int i = 0; i < item_no.length; i++) {
+			irvo.setI_no(Integer.parseInt(item_no[i]));
+			irvo.setIr_rental_ea(Integer.parseInt(item_ea[i]));
+			// item_rental insert
+			if(i == 4) {
+				irvo.setR_no(15);
+			}
+			result = itemsRentalDao.itemsRentalInsert(irvo);
+			System.out.println("insert cnt ==== " + i);
+		}
+		return result;
 	}
 
 }

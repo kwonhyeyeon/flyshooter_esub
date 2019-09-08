@@ -4,18 +4,19 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fly.member.join.service.MemberService;
 import com.fly.member.login.service.LoginService;
 import com.fly.member.login.vo.LoginVO;
 
@@ -26,8 +27,11 @@ import com.fly.member.login.vo.LoginVO;
 public class LoginController {
 
 	private Logger log = LoggerFactory.getLogger(LoginController.class);
-	@Autowired
+	@Resource(name = "loginService")
 	private LoginService loginService;
+	@Resource(name = "memberService")
+	private MemberService memberService;
+	
 	//로그인 화면 보여주기 위한 메서드
 		@RequestMapping(value="/login.do", method= RequestMethod.GET)
 		public String login() {
@@ -70,34 +74,24 @@ public class LoginController {
 						}
 					}
 					
-					LoginVO loginCheckResult = loginService.loginSelect(lvo.getM_id(), lvo.getM_pw());
-					
-					//로그인이 틀리면 , 로그인 시도횟수를 1증가 시키고,
-					//로그인 실패 시간을 DB에 업데이트 한다.
-					if(loginCheckResult == null) {
-						vo.setRetry(vo.getRetry()+1);
-						vo.setLastFail(new Date().getTime());
-						loginService.loginHistoryUpdate(vo);
-						
-						mav.addObject("retry", vo.getRetry());
-						mav.addObject("errCode", 1);
-						mav.setViewName("member/login");
-						return mav;
-					}
-					//로그인이 성공하면 , 로그인 시도 횟수 0으로 초기화
-					//마지막으로 로그인 실패 시간 0으로 reset,
-					//성공한 클라이언트 IP를 DB에 업데이트,로그인 성공시간 DB에 업데이트
-					else {
-						vo.setRetry(0);
-						vo.setLastFail(0);
-						vo.setLastPass(new Date().getTime());
-						vo.setClientIp(request.getRemoteAddr());
-						loginService.loginHistoryUpdate(vo);
-						
-						session.setAttribute("login", loginCheckResult);
-						mav.setViewName("member/login");
-						return mav;
-					}
+			/*
+			 * LoginVO loginCheckResult = loginService.loginSelect(lvo.getM_id(),
+			 * lvo.getM_pw());
+			 * 
+			 * //로그인이 틀리면 , 로그인 시도횟수를 1증가 시키고, //로그인 실패 시간을 DB에 업데이트 한다. if(loginCheckResult
+			 * == null) { vo.setRetry(vo.getRetry()+1); vo.setLastFail(new
+			 * Date().getTime()); loginService.loginHistoryUpdate(vo);
+			 * 
+			 * mav.addObject("retry", vo.getRetry()); mav.addObject("errCode", 1);
+			 * mav.setViewName("member/login"); return mav; } //로그인이 성공하면 , 로그인 시도 횟수 0으로
+			 * 초기화 //마지막으로 로그인 실패 시간 0으로 reset, //성공한 클라이언트 IP를 DB에 업데이트,로그인 성공시간 DB에 업데이트
+			 * else { vo.setRetry(0); vo.setLastFail(0); vo.setLastPass(new
+			 * Date().getTime()); vo.setClientIp(request.getRemoteAddr());
+			 * loginService.loginHistoryUpdate(vo);
+			 * 
+			 * session.setAttribute("login", loginCheckResult);
+			 * mav.setViewName("member/login"); return mav; }
+			 */
 				}
 				
 				mav.setViewName("member/login");

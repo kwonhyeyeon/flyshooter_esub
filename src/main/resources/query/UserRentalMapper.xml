@@ -10,7 +10,7 @@
 		WHERE 
 				to_char(r_reserve_date, 'yyyy-MM-dd') = #{selectDay} and
 				to_char(s_no) = #{s_no}
-				and r_pay_status <![CDATA[ < ]]> -1 
+				and r_pay_status <![CDATA[ > ]]> -1 
 		ORDER BY
 				r_start asc
 	</select>
@@ -34,4 +34,49 @@
 			</if>
 		
 	</delete>
+	
+	<insert id="insertRental" parameterType="rental">
+		<selectKey keyProperty="r_no" resultType="int" order="BEFORE">
+			SELECT rental_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO rental(
+			r_no,
+			s_no,
+			m_id,
+			r_reserve_date,
+			r_start,
+			r_total_pay,
+			r_pay_type,
+			r_bank,
+			r_account,
+			r_account_num,
+			r_pay_status,
+			r_regdate,
+			r_recall_time,
+			refund
+		)
+		values(
+			#{r_no},
+			#{s_no},
+			#{m_id},
+			#{r_reserve_date},
+			#{r_start},
+			#{r_total_pay},
+			#{r_pay_type},
+			<if test="r_pay_type == 2">
+			#{r_bank},
+			#{r_account},
+			#{r_account_num},			
+			</if>
+			<if test="r_pay_type == 1">
+			'카드결제',
+			'카드결제',
+			'카드결제',
+			</if>
+			1,
+			sysdate,
+			sysdate,
+			0
+		)
+	</insert>
 </mapper>
