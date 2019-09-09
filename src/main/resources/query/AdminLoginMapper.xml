@@ -52,7 +52,7 @@
 	</select>
 	
 	<!-- 용병 게시판 등록 수 -->
-	<select id="matchCnt" parameterType="String" resultType="int">
+	<select id="supportCnt" parameterType="String" resultType="int">
 		select count(*)
 		from match_board
 		<if test='date == "일"'>

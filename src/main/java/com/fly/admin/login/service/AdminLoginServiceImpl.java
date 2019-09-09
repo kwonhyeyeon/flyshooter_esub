@@ -1,6 +1,7 @@
 package com.fly.admin.login.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.fly.admin.login.dao.AdminLoginDao;
@@ -9,6 +10,7 @@ import com.fly.admin.login.dao.AdminLoginDao;
 public class AdminLoginServiceImpl implements AdminLoginService {
 	
 	@Autowired
+	@Qualifier("adminLoginDao")
 	private AdminLoginDao adminLoginDao;
 
 	@Override
