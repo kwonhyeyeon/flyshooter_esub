@@ -46,7 +46,7 @@ public class AdminController {
 		if (loginPass) {
 			session.setAttribute("adminId", adminId);
 			
-			return "admin/main";
+			return "redirect:/admin/main.do";
 		}
 
 		return "admin/login";

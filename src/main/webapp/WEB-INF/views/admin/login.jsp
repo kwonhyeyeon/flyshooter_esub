@@ -37,7 +37,7 @@
 			<div id="container">
 				<article class="loginArea">
 					<c:if test="${empty adminId}">
-					    <form action="/admin/main.do" method="post">
+					    <form action="/admin/login.do" method="post">
 					        <fieldset>
 					            <h2 class="login-title">로그인</h2>
 					            
