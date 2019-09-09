@@ -53,6 +53,16 @@
 	
 	<!-- 용병 게시판 등록 수 -->
 	<select id="supportCnt" parameterType="String" resultType="int">
+<<<<<<< HEAD
+		select 
+			(select count(*) 
+			from support 
+			where to_char(hs_regdate, 'yy/MM/dd') = to_char(sysdate, 'yy/MM/dd')) + 
+			(select count(*) 
+			from recruit 
+			where to_char(hr_regdate, 'yy/MM/dd') = to_char(sysdate, 'yy/MM/dd'))
+		from dual
+=======
 		select count(*)
 		from match_board
 		<if test='date == "일"'>
@@ -61,6 +71,7 @@
 		<if test='date == "월"'>
 			where to_char(mb_regdate, 'yy/MM') = to_char(sysdate, 'yy/MM')
 		</if>
+>>>>>>> ba2e6cb36b8205136210280cd234de563b39e162
 	</select>
 
 </mapper>

@@ -50,7 +50,7 @@
             <div id="container">
 			   <article id="contents" style="padding-top:50px;">
 		   
-			   		<table class="table-style">
+			   		<table class="table-style mainCnt">
 			           <tr>
 			               <th width="200">항목</th>
 			               <th width="100">오늘</th>
@@ -83,9 +83,9 @@
 			           </tr>
 			           <tr>
 			               <td>용병 게시판 등록 수</td>
-			               <td></td>
-			               <td></td>
-			               <td class="total"></td>
+			               <td>${supportDayCnt }</td>
+			               <td>${supportMonthCnt }</td>
+			               <td class="total">${supportTotalCnt }</td>
 			           </tr>
 			       </table>
 			   </article><!-- contents -->
