@@ -281,6 +281,8 @@ $(document).ready(function(){
 					$("#showItems").show();
 				});
 				
+				
+				
 });		
 		// 용품일련번호, 대여수량 구해오기
 		function setInsertItems(){

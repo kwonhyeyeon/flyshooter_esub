@@ -289,5 +289,9 @@
 	width:600px;
 	float:left;
 }
+#map {
+	height: 400px;
+	width: 400px;
+}
 
 /* stadiumRental end */

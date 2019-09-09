@@ -26,7 +26,7 @@
         
         <div id="content-wrap">
             <aside id="subNavi">
-                <a href="/">회원관리</a>
+                <a href="/admin/member/memberList.do">회원관리</a>
 
                 <a class="depth1">구장 관리</a>
                 <a href="/" class="sub">구장 관리</a>
