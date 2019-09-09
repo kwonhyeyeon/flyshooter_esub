@@ -82,11 +82,7 @@ public class UserRentalServiceImpl implements UserRentalService {
 			irvo.setI_no(Integer.parseInt(item_no[i]));
 			irvo.setIr_rental_ea(Integer.parseInt(item_ea[i]));
 			// item_rental insert
-			if(i == 4) {
-				irvo.setR_no(15);
-			}
 			result = itemsRentalDao.itemsRentalInsert(irvo);
-			System.out.println("insert cnt ==== " + i);
 		}
 		return result;
 	}

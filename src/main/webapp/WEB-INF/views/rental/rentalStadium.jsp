@@ -14,6 +14,7 @@
 <script src="//code.jquery.com/jquery-1.12.4.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- end datepicker -->
 <script type="text/javascript" src="/resources/js/rentalStadium.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtzXWTJTZ4tnfXjE2yVo3YjQndGozENJQ&callback=initMap"></script>
 <script>
 	$(function() {
 		$("#gnb").hover(function() {
@@ -131,6 +132,24 @@
 					
 					<br />
 					<br />
+					<article id="map"> 
+					 <script>
+					 	
+					      function initMap() {
+					        var uluru = {lat: -25.363, lng: 131.044};
+					        var map = new google.maps.Map(document.getElementById('map'), {
+					          zoom: 4,
+					          center: uluru
+					        });
+					        var marker = new google.maps.Marker({
+					          position: uluru,
+					          map: map
+					        });
+					      }
+				    </script>
+					
+					</article>
+					
 					<!-- 이용약관 -->
 					<article id="termsOfService">
 						[환불규정및 이용약관 include예정]						
