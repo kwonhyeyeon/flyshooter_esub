@@ -29,7 +29,9 @@ public class AdminController {
 
 	// 실행시 adminlogin.jsp로 연결시켜주는 맵핑 (test를 위하여 만듬)
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public String adminlogin() {
+	public String adminlogin(HttpSession session, HttpServletRequest request) {
+		
+		
 		return "admin/login";
 	}
 
@@ -41,7 +43,6 @@ public class AdminController {
 		boolean loginPass;
 		
 		loginPass = loginCheck(adminId, adminPw);
-		
 		if (loginPass) {
 			session.setAttribute("adminId", adminId);
 			
