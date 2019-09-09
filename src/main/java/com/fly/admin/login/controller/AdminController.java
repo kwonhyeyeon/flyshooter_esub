@@ -109,6 +109,15 @@ public class AdminController {
 		model.addAttribute("matchDayCnt", matchDayCnt);
 		model.addAttribute("matchMonthCnt", matchMonthCnt);
 		model.addAttribute("matchTotalCnt", matchTotalCnt);
+		
+		// 매치 게시판 등록 수
+		int supportDayCnt = adminLoginService.supportCnt("일");
+		int supportMonthCnt = adminLoginService.supportCnt("월");
+		int supportTotalCnt = adminLoginService.supportCnt("");
+		
+		model.addAttribute("supportDayCnt", supportDayCnt);
+		model.addAttribute("supportMonthCnt", supportMonthCnt);
+		model.addAttribute("supportTotalCnt", supportTotalCnt);
 
 		return "admin/main";
 	}

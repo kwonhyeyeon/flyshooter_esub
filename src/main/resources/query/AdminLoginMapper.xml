@@ -52,15 +52,15 @@
 	</select>
 	
 	<!-- 용병 게시판 등록 수 -->
-	<select id="matchCnt" parameterType="String" resultType="int">
-		select count(*)
-		from match_board
-		<if test='date == "일"'>
-			where to_char(mb_regdate, 'yy/MM/dd') = to_char(sysdate, 'yy/MM/dd')
-		</if>
-		<if test='date == "월"'>
-			where to_char(mb_regdate, 'yy/MM') = to_char(sysdate, 'yy/MM')
-		</if>
+	<select id="supportCnt" parameterType="String" resultType="int">
+		select 
+			(select count(*) 
+			from support 
+			where to_char(hs_regdate, 'yy/MM/dd') = to_char(sysdate, 'yy/MM/dd')) + 
+			(select count(*) 
+			from recruit 
+			where to_char(hr_regdate, 'yy/MM/dd') = to_char(sysdate, 'yy/MM/dd'))
+		from dual
 	</select>
 
 </mapper>

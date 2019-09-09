@@ -119,6 +119,11 @@
 	margin-left:219.5px;
 	padding:0 20px;
 	/* background:url("/resources/img/line.png") repeat-y left; */
+	/* position:absolute;
+	margin:0 auto;
+	margin-left:219.5px;
+	left:50%;
+	transform:translateX(-50%); */
 }
 
 h2.con-subject {
