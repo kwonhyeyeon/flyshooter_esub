@@ -133,6 +133,7 @@ h2.con-subject {
 	line-height:50px;
 	margin-bottom:30px;
 	color:#222;
+	font-size:25px;
 }
 
 /* login */
@@ -298,7 +299,9 @@ p.error-msg {
 	text-align:center;
 	padding:10px 0 0 0;	
 }
-
+table.table-style {
+	width:100%;
+}
 table.table-style tr.top-btn-area td {
 	border-bottom:1px solid #ebebeb;
 	text-align:left;
@@ -327,6 +330,10 @@ table.table-style2 tr.btn-area td {
 table.table-style2 tr.btn-area td.positive,
 table.table-style2 tr.top-btn-area td.positive {
 	padding-left:20px;
+}
+table.mainCnt th:first-child
+table.mainCnt td:first-child {
+	text-align:left !important;
 }
 
 a.top-add {
@@ -416,17 +423,20 @@ a.save {
 .search {
 	text-align:center;	
 	margin-top:100px;
+	display:flex;
+	justify-content:center;
 }
 .search input.search-field {
 	width:250px;
-	height:30px;
+	height:35px;
 	padding:0 10px;
 	border:1px solid #e3e3e3;
+	margin-right:10px;
 }
 .search button.search-btn {
 	width:60px;
-	height:30px;
-	line-height:30px;
+	height:35px;
+	line-height:35px;
 	background:#FFF;
 	border:1px solid #e3e3e3;
 	text-align:center;
@@ -457,7 +467,7 @@ h3.sub-tit {
 	font-size:13px;
 	color:#4e4e4e;
 	border-radius:0;
-	background:url(../images/select-arrow.png) no-repeat 95%;
+	background:url(/resources/img/select-arrow.png) no-repeat 95%;
 	height:38px;
 	line-height:38px;
 	border:1px solid #ebebeb;
@@ -713,7 +723,7 @@ select#category {
 	font-size:13px;
 	color:#4e4e4e;
 	border-radius:0;
-	background:url(../images/select-arrow.png) no-repeat 95%;
+	background:url(/resources/img/select-arrow.png) no-repeat 95%;
 	height:40px;
 	line-height:40px;
 	border:1px solid #ebebeb;
