@@ -206,6 +206,9 @@ table.table-style td.total {
 	font-weight:500;
 	color:#2b2b2b;
 }
+table.table-style td.empty {
+	text-align:center;
+}
 table.table-style td a.table-delete {
 	display:block;
 	width:70px;
@@ -330,10 +333,6 @@ table.table-style2 tr.btn-area td {
 table.table-style2 tr.btn-area td.positive,
 table.table-style2 tr.top-btn-area td.positive {
 	padding-left:20px;
-}
-table.mainCnt th:first-child
-table.mainCnt td:first-child {
-	text-align:left !important;
 }
 
 a.top-add {

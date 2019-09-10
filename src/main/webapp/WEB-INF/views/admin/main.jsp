@@ -32,11 +32,11 @@
             <div id="container">
 			   <article id="contents" style="padding-top:50px;">
 		   
-			   		<table class="table-style mainCnt">
+			   		<table class="table-style">
 			           <tr>
-			               <th width="200">항목</th>
-			               <th width="100">오늘</th>
-			               <th width="100">이번달</th>
+			               <th width="70%">항목</th>
+			               <th width="120px">오늘</th>
+			               <th width="120px">이번달</th>
 			               <th>누적</th>
 			           </tr>
 			           <tr>
