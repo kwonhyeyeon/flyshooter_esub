@@ -29,7 +29,7 @@
 	
 	<beans:bean id="adminLog" class="com.fly.admin.logadvice.LoggingAdvice"></beans:bean>
 	<aop:config>
-		<aop:pointcut expression="execution(* com.fly.admin..*Controller.*(..))" id="adminPointcut"/>
+		<aop:pointcut expression="execution(* com.fly.admin..*Controller.*Log(..))" id="adminPointcut"/>
 		<aop:aspect ref="adminLog">
 			<aop:before method="beforeAdvice" pointcut-ref="adminPointcut"/>
 		</aop:aspect>
