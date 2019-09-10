@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="/resources/css/adminStyle.css" />
 <script src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="/resources/js/adminMember.js"></script>
 </head>
 <body>
 
@@ -33,12 +34,15 @@
             		<h2 class="con-subject">회원 관리</h2>
             		
             		<!-- 셀렉트 박스 영역 -->
-				    <div class="select-area">				
-				        <select name="status">
-				            <option value="">회원 전체</option>
-				            <option value="01">일반</option>
-				            <option value="02">사업자</option>
-				        </select>
+				    <div class="select-area">	
+				    	<p id="p_status" style="display:none">${status }</p>
+					    <form id="such_status">			
+					        <select name="status" id="status">
+					            <option value="null">회원 전체</option>
+					            <option value="1">일반</option>
+					            <option value="0">사업자</option>
+					        </select>
+				        </form>
 				    </div>
 				    <!-- 셀렉트 박스 영역 -->
 				    
@@ -81,9 +85,9 @@
 				        </c:forEach>
 				        </c:if>
 				        <c:if test="${empty memberList }">
-				        	<script>
-				        		alert("검색된 회원이 없습니다");
-				        	</script>
+					        <tr class="list-hover">
+	                           <td class="empty" colspan="7">조회된 구장이 없습니다</td>
+	                   		 </tr>
 				        </c:if>
 				    </table>
 				    <!-- 점포 리스트 -->

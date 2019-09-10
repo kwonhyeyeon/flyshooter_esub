@@ -115,6 +115,7 @@ public class UserRentalController {
 		  // session에 저장된 값이 없으면 오류를 낸다.
 		  overlap.length();
 		  
+		  
 		  if(overlapKey.equals(overlap)) {
 			  return "true";
 		  }else {

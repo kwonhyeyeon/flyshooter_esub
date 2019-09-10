@@ -24,7 +24,8 @@ public class AdminMemberController {
 			 @RequestParam(value = "name", required = true, defaultValue = "null") String name) {
 		
 		model.addAttribute("memberList", adminMemberService.getMemberList(status, name));
-		
+		model.addAttribute("status", status);
+		model.addAttribute("name", name);
 		
 		return "admin/member/memberList";
 	}
