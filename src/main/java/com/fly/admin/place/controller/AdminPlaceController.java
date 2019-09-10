@@ -12,13 +12,13 @@ import com.fly.admin.place.service.AdminPlaceService;
 @RequestMapping(value = "/admin/place")
 public class AdminPlaceController {
 	
-	@Resource(name = "adminPlaceService")
-	private AdminPlaceService adminPlaceService;
+//	@Resource(name = "adminPlaceService")
+//	private AdminPlaceService adminPlaceService;
 	
 	// 구장 관리 리스트
 	@RequestMapping(value = "/placeList.do", method = RequestMethod.GET)
 	public String adminPlaceList() {
-		
+		System.out.println("adminPlaceList 호출성공");
 		return "place/placeList";
 	}
 	

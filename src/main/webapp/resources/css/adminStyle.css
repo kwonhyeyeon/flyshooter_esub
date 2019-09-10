@@ -53,7 +53,6 @@
 	height:100%;
 	margin:0 auto;
 	min-width:1210px;
-	padding-top:50px;
 }
 
 /* subNavi */
@@ -118,7 +117,7 @@
 #contents {
 	height:100%;
 	margin-left:219.5px;
-	padding:0 20px;
+	padding:50px 20px 0;
 	/* background:url("/resources/img/line.png") repeat-y left; */
 	/* position:absolute;
 	margin:0 auto;
