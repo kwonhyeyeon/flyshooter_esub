@@ -18,9 +18,7 @@
 		<div id="header-wrap">
             <div id="header">
                 <h1 id="logo"><a href="/admin/main.do">FLY SHOOTER 관리자</a></h1>
-                <c:if test="${not empty adminId}">
                 	<a href="/admin/logout.do" class="logout">로그아웃</a>
-                </c:if>
             </div><!-- header -->
         </div><!-- header-wrap -->
         
@@ -51,17 +49,42 @@
 				    		<th>회원 ID</th>
 				    		<th>회원명</th>
 				    		<th>회원 구분</th>
+				    		<th>회원상태</th>
 				    		<th>회원 가입일</th>
 				    		<th>마지막 로그인</th>
 				    	</tr>
+				    	
+				    	<c:if test="${ not empty memberList }">
+				    	<c:forEach var="member" items="${ memberList }" varStatus="status">
 				        <tr class="list-hover">
-				        	<td></td>
-				        	<td></td>
-				        	<td></td>
-				        	<td></td>
-				        	<td></td>
-				        	<td></td>
+				        	<td>${	status.index+1 }</td>
+				        	<td>${ member.m_id }</td>
+				        	<td>${ member.m_name }</td>
+				        	<td>
+					        	<c:choose>
+									<c:when test="${member.m_type == '1'}">일반회원</c:when>
+									<c:when test="${member.m_type == '0'}">사업자</c:when>
+									<c:otherwise> ... </c:otherwise>
+								</c:choose>
+							</td>
+				        	<td>
+					        	<c:choose>
+									<c:when test="${member.m_status == '1'}">활성</c:when>
+									<c:when test="${member.m_status == '0'}">비활성</c:when>
+									<c:when test="${member.m_status == '-1'}">탈퇴</c:when>
+									<c:otherwise> ... </c:otherwise>
+								</c:choose>
+							</td>
+				        	<td>${ member.m_regdate }</td>
+				        	<td>${ member.m_phone }</td>
 				        </tr>
+				        </c:forEach>
+				        </c:if>
+				        <c:if test="${empty memberList }">
+				        	<script>
+				        		alert("검색된 회원이 없습니다");
+				        	</script>
+				        </c:if>
 				    </table>
 				    <!-- 점포 리스트 -->
 				    
