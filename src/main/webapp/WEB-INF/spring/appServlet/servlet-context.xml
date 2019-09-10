@@ -29,7 +29,7 @@
 	
 	<beans:bean id="adminLog" class="com.fly.admin.logadvice.LoggingAdvice"></beans:bean>
 	<aop:config>
-		<aop:pointcut expression="execution(* com.fly.admin..*Controller.*Log(..))" id="adminLoginChk"/>
+		<aop:pointcut expression="execution(* com.fly.admin..*Controller.*Chk(..))" id="adminLoginChk"/>
 		<aop:aspect ref="adminLog">
 			<aop:around method="sessionChk" pointcut-ref="adminLoginChk"/>
 		</aop:aspect>

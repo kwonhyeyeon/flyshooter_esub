@@ -11,21 +11,21 @@ public class LoggingAdvice {
 		public Object sessionChk(ProceedingJoinPoint pjp) throws Throwable {
 			System.out.println("admin login chk");
 			HttpServletRequest request = null;
-			Model m = null;
+			Model model = null;
 			
-			for(Object o : pjp.getArgs()) {
-				if(o instanceof HttpServletRequest) {
-					request = (HttpServletRequest) o;
-				}else if(o instanceof Model) {
-					m = (Model) o;
+			for(Object obj : pjp.getArgs()) {
+				if(obj instanceof HttpServletRequest) {
+					request = (HttpServletRequest) obj;
+				}else if(obj instanceof Model) {
+					model = (Model) obj;
 				}
 			}
 			
 			if(request != null) {
 				HttpSession session = request.getSession();
-				String set = (String) session.getAttribute("adminId");
+				String adminId = (String) session.getAttribute("adminId");
 				
-				if(set == null) {
+				if(adminId == null) {
 					return "redirect:/admin/login.do";
 				}
 			}

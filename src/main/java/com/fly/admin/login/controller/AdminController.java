@@ -70,7 +70,7 @@ public class AdminController {
 	
 	// 로그인 시 이동 페이지, 메인화면 누적 통계
 	@RequestMapping(value = "/main.do", method = {RequestMethod.GET})
-	public String mainLog(HttpSession session, HttpServletRequest request,Model model) {
+	public String mainChk(HttpSession session, HttpServletRequest request,Model model) {
 		
 		// 회원가입 수
 		int registDayCnt = adminLoginService.registCnt("일");
