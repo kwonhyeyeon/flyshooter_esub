@@ -1,6 +1,8 @@
 package com.fly.admin.member.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +21,7 @@ public class AdminMemberController {
 
 	// 회원 리스트를 보여준다.
 	@RequestMapping(value = "/memberList.do", method = RequestMethod.GET)
-	public String showMemberListChk(Model model,
+	public String showMemberListChk(Model model, HttpServletRequest request,
 			 @RequestParam(value = "status", required = true, defaultValue = "null") String status,
 			 @RequestParam(value = "name", required = true, defaultValue = "null") String name) {
 		

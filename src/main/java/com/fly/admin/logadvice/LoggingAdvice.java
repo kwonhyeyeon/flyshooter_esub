@@ -23,13 +23,15 @@ public class LoggingAdvice {
 			
 			if(request != null) {
 				HttpSession session = request.getSession();
+				
 				String adminId = (String) session.getAttribute("adminId");
 				
-				if(adminId == null) {
+				try {
+					System.out.println(adminId.length());
+				}catch(NullPointerException e) {
 					return "redirect:/admin/login.do";
 				}
 			}
-			
 			Object returnObj = pjp.proceed();
 			
 			
