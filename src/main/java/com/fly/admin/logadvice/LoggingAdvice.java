@@ -1,8 +1,38 @@
 package com.fly.admin.logadvice;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.springframework.ui.Model;
+
 public class LoggingAdvice {
 
-		public void beforeAdvice() {
-			System.out.println("메소드 실행전에 로그를 출렵합니다 ##################33");
+		public Object sessionChk(ProceedingJoinPoint pjp) throws Throwable {
+			System.out.println("admin login chk");
+			HttpServletRequest request = null;
+			Model m = null;
+			
+			for(Object o : pjp.getArgs()) {
+				if(o instanceof HttpServletRequest) {
+					request = (HttpServletRequest) o;
+				}else if(o instanceof Model) {
+					m = (Model) o;
+				}
+			}
+			
+			if(request != null) {
+				HttpSession session = request.getSession();
+				String set = (String) session.getAttribute("adminId");
+				
+				if(set == null) {
+					return "redirect:/admin/login.do";
+				}
+			}
+			
+			Object returnObj = pjp.proceed();
+			
+			
+			return returnObj;
 		}
 }
