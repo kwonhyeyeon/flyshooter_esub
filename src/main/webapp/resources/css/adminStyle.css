@@ -61,7 +61,7 @@
 	width:220px;
 	height:100%;
 	padding-bottom:80px;
-	background:url("/resources/img/line.png") repeat-y right;
+	/* background:url("/resources/img/line.png") repeat-y right; */
 }
 #subNavi a {
 	display:block;
@@ -74,10 +74,10 @@
 	font-weight:bold;
 }
 #subNavi a:hover {
-	background:url("/resources/img/line.png") repeat-y right #fafafa;
+	background:#eee;
 }
 #subNavi a:active {
-	background:url("/resources/img/line.png") repeat-y right #fafafa;
+	background:#eee;
 }
 
 #subNavi a.depth1 {
@@ -97,15 +97,15 @@
 	width:179px;
 }
 #subNavi a.sub:hover {
-	background:url("/resources/img/line.png") repeat-y right #fafafa;
+	background:#eee;
 }
 #subNavi a.sub:active {
-	background:url("/resources/img/line.png") repeat-y right #fafafa;
+	background:#eee;
 }
 
 #subNavi a.on,
 #subNavi a.sub.on {
-	background:url("/resources/img/line.png") repeat-y right #fafafa;
+	background:#eee;
 }
 
 /* article */
@@ -115,10 +115,10 @@
 	width:100%;
 }
 #contents {
-	height:100%;
+	height:100vh;
 	margin-left:219.5px;
 	padding:50px 20px 0;
-	/* background:url("/resources/img/line.png") repeat-y left; */
+	background:url("/resources/img/line.png") repeat-y left;
 	/* position:absolute;
 	margin:0 auto;
 	margin-left:219.5px;
@@ -227,6 +227,7 @@ table.table-style td a.table-delete:hover {
 
 table.table-style2 {
 	border-top:1px solid #e3e3e3;
+	width:100%;
 }
 table.table-style2 td {
 	border-bottom:1px solid #ebebeb;
@@ -236,7 +237,7 @@ table.table-style2 td {
 table.table-style2 td.subject {
 	border-right:1px solid #ebebeb;
 	font-weight:500;
-	width:200px;
+	width:300px;
 	color:#888;
 	background:#f7f7f7;
 }
@@ -445,7 +446,7 @@ a.save {
 
 h3.sub-tit {
 	margin:50px 0 20px 0;
-	border-left:3px solid #ff9c00;
+	border-left:3px solid #6aa2fd;
 	padding-left:10px;
 }
 
