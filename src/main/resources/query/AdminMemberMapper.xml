@@ -5,10 +5,10 @@
 	
 	<select id="memberList" parameterType="HashMap" resultType="member">
 		SELECT 
-			m.m_id, m.m_name, m.m_type, m.m_status, to_char(m.m_regdate, 'yyyy-MM-dd') m_regdate, 
+			m.m_id, m.m_name, m.m_phone, m.m_type, m.m_status, to_char(m.m_regdate, 'yyyy-MM-dd') m_regdate, 
 			(select to_char(lastsuccessedlogin, 'yyyy-MM-dd') 
 			from login_history 
-			where m_id = m.m_id) m_phone
+			where m_id = m.m_id) email_comfirm
      	FROM 
      		member m
      		
@@ -17,7 +17,7 @@
 		m.m_type = to_number(#{status})		
 		</if>
 		<if test="name != 'null'">
-		m.m_name = #{name}
+		and m.m_name LIKE '%'|| #{name} ||'%'
 		</if>
 		</where>
 		
@@ -25,5 +25,10 @@
 			m.m_status desc, m.m_regdate desc
 	</select>
 	
+	<update id="userUpdate">
+	
+	
+	
+	</update>
 	
 </mapper>

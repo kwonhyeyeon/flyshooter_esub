@@ -27,8 +27,9 @@ public class LoggingAdvice {
 				String adminId = (String) session.getAttribute("adminId");
 				
 				try {
-					System.out.println(adminId.length());
+					adminId.length();
 				}catch(NullPointerException e) {
+					System.out.println("로그인이 안되어 있습니다. 로그인후 이용하시오");
 					return "redirect:/admin/login.do";
 				}
 			}
