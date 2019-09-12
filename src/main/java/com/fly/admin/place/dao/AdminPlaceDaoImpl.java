@@ -23,8 +23,8 @@ public class AdminPlaceDaoImpl implements AdminPlaceDao {
 	}
 
 	@Override
-	public int stadiumCnt(String p_num) {
-		return sqlSession.selectOne(NAME_SPACE + ".stadiumCnt", p_num);
+	public PlaceVO adminPlaceDetail(String num) {
+		return (PlaceVO)sqlSession.selectOne(NAME_SPACE + ".adminPlaceDetail", num);
 	}
 
 }

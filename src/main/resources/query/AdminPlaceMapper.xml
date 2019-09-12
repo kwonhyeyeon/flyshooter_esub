@@ -6,27 +6,31 @@
 	<!-- 구장 리스트 -->
 	<!-- 폐업 -2, 임시휴업 -1, 운영전 0, 운영중 1, 전체 2 -->
 	<!-- 구장명 검색 -->
-	<select id="adminPlaceList" parameterType="HashMap" resultType="place">
-		select m_id, p_ceo, p_name, p_ok, to_char(p_regdate, 'yyyy/MM/dd') p_regdate, p_num
-		from place		
-		<where>
-			<if test='status != "2"'>
-				p_status = #{status}
-			</if>
-		</where>
-		<where>
-			<if test='name != "null"'>
-				<![CDATA[
-				p_name like '%'||#{name}||'%'
-				]]>
-			</if>
-		</where>
+	<select id="adminPlaceList" parameterType="HashMap" resultType="place">		
+		select m.m_id, p.p_ceo, p.p_name, p.p_ok, to_char(p.p_regdate, 'yyyy/MM/dd') p_regdate, p_num,
+			(select count(*) 
+			from stadium s 
+			where s.p_num = p.p_num and s.s_status = 0) p_holiday
+		from place p, member m
+		where m.m_id = p.m_id
+		
+		<if test='status != "2"'>
+			and	p.p_status = #{status}
+		</if>
+		
+		<if test='name != "null"'>
+			and
+			<![CDATA[
+			p.p_name like '%'||#{name}||'%'
+			]]>
+		</if>
 	</select>
 	
-	<select id="stadiumCnt" resultType="int" parameterType="String">
-		select count(*)
-		from stadium
-		where p_num = #{p_num} and s_status = 0
+	<!-- 구장 상세 정보 -->
+	<select id="adminPlaceDetail" parameterType="String" resultType="place">
+		select *
+		from place
+		where p_num = #{p_num}
 	</select>
 	
 </mapper>

@@ -27,8 +27,8 @@ public class AdminPlaceServiceImpl implements AdminPlaceService {
 	}
 
 	@Override
-	public int stadiumCnt(String p_num) {
-		return adminPlaceDao.stadiumCnt(p_num);
+	public PlaceVO adminPlaceDetail(String num) {
+		return adminPlaceDao.adminPlaceDetail(num);
 	}
 
 }

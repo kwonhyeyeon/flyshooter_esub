@@ -8,8 +8,8 @@ public interface AdminPlaceService {
 
 	// 구장 리스트 출력
 	public List<PlaceVO> adminPlaceList(int status, String name);
-
-	// 미승인 경기장 수 출력
-	public int stadiumCnt(String p_num);
+	
+	// 구장 상세 정보 출력
+	public PlaceVO adminPlaceDetail(String num);
 	
 }

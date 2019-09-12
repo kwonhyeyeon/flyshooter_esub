@@ -40,7 +40,7 @@
 				    <div class="select-area">
 				    	<form id="placeStatusForm">
 					        <select name="status" class="placeStatus">
-					            <option>구장 상태 전체</option>
+					            <option value="2">구장 상태 전체</option>
 					            <option value="1">운영중</option>
 					            <option value="0">운영전</option>
 					            <option value="-1">임시휴업</option>
@@ -50,7 +50,11 @@
 				    </div>
 				    <!-- 셀렉트 박스 영역 -->
 				    
-				    <!-- 점포 리스트 -->
+				    <!-- 상세페이지 이동을 위한 폼 -->
+				    <form name="detailForm" id="detailForm">
+				    	<input type="hidden" name="num" id="p_num" />
+				    </form>
+				    <!-- 구장 리스트 -->
 				    <table class="table-style">
 				    	<tr>
 				    		<th width="100">번호</th>
@@ -63,8 +67,8 @@
 				    	</tr>
 				    	<c:if test="${not empty adminPlaceList}">
 				    		<c:forEach var="place" items="${adminPlaceList}" varStatus="status">
-						    	<tr class="list-hover">
-								   	<td>${fn:length(adminPlaceList)-status.count+1}</td>
+							   	<tr class="list-hover" data-num="${place.p_num}">
+								   	<td>${fn:length(adminPlaceList)-status.count+1}, ${place.p_num}</td>
 								   	<td>${place.m_id}</td>
 								   	<td>${place.p_ceo}</td>
 								   	<td>${place.p_name}</td>
@@ -74,7 +78,7 @@
 								   	<c:if test="${place.p_ok == 0}">
 								   		<td>N</td>
 								   	</c:if>
-								   	<td>${stadiumCnt}</td>
+								   	<td>${place.p_holiday}</td>
 								   	<td>${place.p_regdate}</td>
 								</tr>
 							</c:forEach>
@@ -85,12 +89,12 @@
 							</tr>
 						</c:if>
 				    </table>
-				    <!-- 점포 리스트 -->
+				    <!-- 구장 리스트 -->
 				    
 				    <!-- 검색 -->
 				    <div class="search">
 				    	<form action="placeList.do" method="get">
-					        <input type="search" name="search" class="search-field" placeholder="구장명" />
+					        <input type="search" name="name" class="search-field" placeholder="구장명" />
 					        <button type="submit" class="search-btn">찾기</button>
 				        </form>
 				    </div>
@@ -104,4 +108,8 @@
 	</div>
 
 </body>
+<script>
+	$(".placeStatus").val("${status}");
+	$("${status}").text();
+</script>
 </html>
