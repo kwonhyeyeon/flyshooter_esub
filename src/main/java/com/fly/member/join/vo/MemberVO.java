@@ -1,13 +1,15 @@
 package com.fly.member.join.vo;
 
+import com.fly.paging.vo.PagingVO;
+
 //memberVO
-public class MemberVO {
+public class MemberVO extends PagingVO {
 	private String m_id;// 아이디
 	private String m_pw;// 비밀번호
 	private String m_phone;// 휴대전화
 	private String m_name;// 회원명
 	private String m_regdate;
-	private int m_type;// 회원 유형
+	private int m_type = 3;// 회원 유형
 	private String email_comfirm;// 이메일 인증 상태
 	private String m_status;
 	public String getM_id() {

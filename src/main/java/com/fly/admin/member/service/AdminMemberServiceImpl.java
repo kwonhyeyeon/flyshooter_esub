@@ -18,14 +18,36 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 	private AdminMemberDao adminMemberDao;
 
 	@Override
-	public List<MemberVO> getMemberList(String status, String name) {
+	public List<MemberVO> getMemberList(MemberVO mvo) {
 		// TODO Auto-generated method stub
-		HashMap<String, String> map = new HashMap();
-		map.put("status", status);
-		map.put("name", name);
 		
-		return adminMemberDao.getMemberList(map);
+		return adminMemberDao.getMemberList(mvo);
 	}
+	@Override
+	public int getTotalSize(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		
+		return adminMemberDao.getTotalSize(mvo);
+	}
+
+	@Override
+	public int searchUserReservedCnt(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return adminMemberDao.searchUserReservedCnt(mvo);
+	}
+
+	@Override
+	public void updateMember(MemberVO mvo) {
+		adminMemberDao.updateMember(mvo);
+		
+	}
+
+	@Override
+	public int searchClientPlaceCnt(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return adminMemberDao.searchClientPlaceCnt(mvo);
+	}
+
 	
 	
 	

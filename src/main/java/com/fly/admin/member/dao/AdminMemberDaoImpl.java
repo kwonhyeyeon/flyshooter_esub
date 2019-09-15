@@ -16,9 +16,34 @@ public class AdminMemberDaoImpl implements AdminMemberDao {
 	private String NAME_SPACE = "com.fly.admin.member.dao.AdminMemberDao";
 	
 	@Override
-	public List<MemberVO> getMemberList(HashMap<String, String> map) {
+	public List<MemberVO> getMemberList(MemberVO mvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAME_SPACE + ".memberList", map);
+		return sqlSession.selectList(NAME_SPACE + ".selectMemberList", mvo);
+	}
+
+	@Override
+	public int searchUserReservedCnt(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAME_SPACE + ".searchUserReservedCnt", mvo);
+	}
+
+	@Override
+	public void updateMember(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		sqlSession.update(NAME_SPACE + ".updateMember", mvo);
+		
+	}
+
+	@Override
+	public int searchClientPlaceCnt(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAME_SPACE + ".searchClientPlaceCnt", mvo);
+	}
+
+	@Override
+	public int getTotalSize(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAME_SPACE + ".getListSize", mvo);
 	}
 
 }

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="tag" uri="/WEB-INF/tld/custom_tag.tld" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,10 +36,10 @@
             		
             		<!-- 셀렉트 박스 영역 -->
 				    <div class="select-area">	
-				    	<p id="p_status" style="display:none">${ status }</p>
-					    <form id="such_status">			
-					        <select name="status" id="status">
-					            <option value="null">회원 전체</option>
+				    	<p id="p_status" style="display:none">${ data.m_type }</p>
+					    <form id="search_status">			
+					        <select name="m_type" id="status">
+					            <option value="3">회원 전체</option>
 					            <option value="1">일반</option>
 					            <option value="0">사업자</option>
 					        </select>
@@ -61,9 +62,9 @@
 				    	</tr>
 				    	
 				    	<c:if test="${ not empty memberList }">
-				    	<c:forEach var="member" items="${ memberList }" varStatus="status">
+				    	<c:forEach var="member" items="${memberList }" varStatus="status">
 				        <tr class="list-hover">
-				        	<td>${	status.index+1 }</td>
+				        	<td>${ count - status.index }</td>
 				        	<td class="m_id">${ member.m_id }</td>
 				        	<td>${ member.m_name }</td>
 				        	<td>${ member.m_phone }</td>
@@ -85,10 +86,10 @@
 									</c:choose>
 								</span>
 								
-								<select name="status" class="m_status" style="display: none">
-									<option value="1">활성</option>
-									<option value="0">비활성</option>
-									<option value="-1">탈퇴</option>
+								<select name="m_status" class="m_status" style="display: none">
+									<option value="1" <c:if test="${member.m_status == '1'}"> selected </c:if>>활성</option>
+									<option value="0" <c:if test="${member.m_status == '0'}"> selected </c:if>>비활성</option>
+									<option value="-1" <c:if test="${member.m_status == '-1'}"> selected </c:if>>탈퇴</option>
 								</select>
 							</td>
 							<td>
@@ -99,9 +100,9 @@
 				        </c:forEach>
 				        
 				        <form id="memberUpdate">
-				        <input type="text" name="m_id" id="m_id" />
-				        <input type="text" name="m_type" id="m_type" />
-				        <input type="text" name="m_status" id="m_status" style="display: inline-block"/>
+					        <input type="hidden" name="m_id" id="m_id" />
+					        <input type="hidden" name="m_type" id="m_type" />
+					        <input type="hidden" name="m_status" id="m_status" style="display: inline-block"/>
 				        </form>
 				        
 				        </c:if>
@@ -114,10 +115,27 @@
 				    
 				    <!-- 점포 리스트 -->
 				    
+				   <!--  paging view -->    
+        			 <div id="boardSearch">
+        				<form id="f_search" name="f_search">
+        					<c:if test="${data.m_type != 3}">
+        						<input type="hidden" name="m_type" value="${data.m_type }" />
+        					</c:if>
+        					<c:if test="${not empty data.m_name }">
+        						<input type="hidden" name="m_name" value="${data.m_name }"/>
+        					</c:if>
+        					<input type="hidden" id="page" name="page" value="${data.page }"/>
+        				</form>
+        			</div>
+        			
+        			<div id="boardPage">
+        				<tag:paging page="${param.page }" total="${total }" list_size="${data.pageSize }" />
+        			</div> 
+				    
 				    <!-- 검색 -->
 				    <div class="search">
 					    <form action="/admin/member/memberList.do" method="get">
-					        <input type="search" name="such_m_name" class="search-field" placeholder="회원명" />
+					        <input type="search" name="m_name" class="search-field" placeholder="회원명" />
 					        <button type="submit" class="search-btn">찾기</button>
 					     </form> 
 				    </div>
