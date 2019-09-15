@@ -43,6 +43,18 @@ public class UserRentalDaoImpl implements UserRentalDao {
 		return (int)sqlSession.insert(NAME_SPACE + ".insertRental", rvo);
 	}
 
+	@Override
+	public List<RentalVO> selectMyRentalList(RentalVO rvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(NAME_SPACE + ".selectMyRentalList", rvo);
+	}
+
+	@Override
+	public int myRentalListCnt(String m_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAME_SPACE + ".myRentalListCnt", m_id);
+	}
+
 
 }
 

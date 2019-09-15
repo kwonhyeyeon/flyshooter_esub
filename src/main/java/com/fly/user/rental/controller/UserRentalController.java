@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fly.client.items.service.ItemsService;
@@ -22,6 +23,8 @@ import com.fly.client.items.vo.ItemsVO;
 import com.fly.client.place.vo.PlaceVO;
 import com.fly.member.rental.vo.RentalVO;
 import com.fly.member.stadium.vo.StadiumVO;
+import com.fly.paging.util.Paging;
+import com.fly.paging.util.Util;
 import com.fly.user.place.service.UserPlaceService;
 import com.fly.user.rental.service.UserRentalService;
 import com.fly.user.stadium.service.UserStadiumService;
@@ -166,10 +169,36 @@ public class UserRentalController {
 	   result = userRentalService.insertRental(rvo, items_no, items_ea);
 	   }catch(Exception e) {
 		   System.out.println("대관실패.. 관리자한테 문의하십시오");
+		   e.printStackTrace();
 	   }
 	   System.out.println(result);
 	   return "rental/location";
    }
+   
+   @RequestMapping(value = "/myRentalList.do", method = RequestMethod.GET)
+   public String myRentalList(@ModelAttribute RentalVO rvo, Model model, HttpSession session) {
+	  
+	   //String m_id = (String)session.getAttribute("m_id");
+	   Paging.setPage(rvo, 5);
+	   rvo.setM_id("esub17@naver.com");
+	   
+	   int total = userRentalService.myRentalListCnt(rvo.getM_id());
+	   int count = total - (Util.nvl(rvo.getPage()) -1 ) * Util.nvl(rvo.getPageSize());
+	   model.addAttribute("myList", userRentalService.selectMyRentalList(rvo));
+	   model.addAttribute("count", count);
+	   model.addAttribute("total", total);
+	   model.addAttribute("data", rvo);
+	   
+	   return "rental/myRentalList";
+   }
+   
+   
+   @RequestMapping(value = "/rentalDetail.do", method = RequestMethod.POST)
+   public String rentalDetail(Model model, @RequestParam("r_no") String r_no) {
+	   
+	   return "rental/rentalDetail";
+   }
+   
    
    }
 

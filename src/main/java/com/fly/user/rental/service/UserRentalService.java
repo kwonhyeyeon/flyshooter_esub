@@ -19,4 +19,10 @@ public interface UserRentalService {
 	@Transactional
 	// 대관정보 insert
 	public int insertRental(RentalVO rvo, String items_no, String items_ea);
+	
+	// myRentalList (selectList)
+	public List<RentalVO> selectMyRentalList(RentalVO rvo);
+	
+	// myRentalList 글갯수
+	public int myRentalListCnt(String m_id);
 }

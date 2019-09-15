@@ -1,6 +1,5 @@
 package com.fly.paging.vo;
 
-import com.fly.paging.util.Util;
 
 public class PagingVO {
 	private String page;

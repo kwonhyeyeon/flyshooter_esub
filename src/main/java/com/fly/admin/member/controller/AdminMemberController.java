@@ -30,23 +30,13 @@ public class AdminMemberController {
 	public String showMemberListChk(@ModelAttribute MemberVO mvo, Model model, HttpServletRequest request) {
 
 		// 페이지 세팅
-		Paging.setPage(mvo);
-		System.out.println(mvo.toString());
-		System.out.println("page : "+mvo.getPage());
-		System.out.println("pageSize : "+mvo.getPageSize());
-		System.out.println("start_row : "+ mvo.getStart_row());
-		System.out.println("end_row : " + mvo.getEnd_row());
-		
+		Paging.setPage(mvo, 15);
 		// 전체 레코드수
 		int total = adminMemberService.getTotalSize(mvo);
-		System.out.println("total : " + total);
 		// 글번호 재설정
 		int count = total - (Util.nvl(mvo.getPage()) -1 ) * Util.nvl(mvo.getPageSize());
-		try {
+		
 		model.addAttribute("memberList", adminMemberService.getMemberList(mvo));
-		}catch(Exception e) {
-			System.out.println("????");
-		}
 		//paging.setTotal( adminMemberService.getTotalSize(status, name) );
 		model.addAttribute("count", count);
 		model.addAttribute("total", total);

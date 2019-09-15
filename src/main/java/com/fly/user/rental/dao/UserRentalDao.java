@@ -17,4 +17,10 @@ public interface UserRentalDao {
 	
 	// 대관 데이터 insert
 	public int insertRental(RentalVO rvo);
+	
+	// myRentalList (selectList)
+	public List<RentalVO> selectMyRentalList(RentalVO rvo);
+	
+	// myRentalList 글갯수
+	public int myRentalListCnt(String m_id);
 }

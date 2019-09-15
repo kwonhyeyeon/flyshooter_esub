@@ -72,50 +72,48 @@ public class AdminController {
 	@RequestMapping(value = "/main.do", method = {RequestMethod.GET})
 	public String mainChk(HttpSession session, HttpServletRequest request,Model model) {
 		
-		// 회원가입 수
-		int registDayCnt = adminLoginService.registCnt("일");
-		int registMonthCnt = adminLoginService.registCnt("월");
-		int registTotalCnt = adminLoginService.registCnt("");
-		
-		model.addAttribute("registDayCnt", registDayCnt);
-		model.addAttribute("registMonthCnt", registMonthCnt);
-		model.addAttribute("registTotalCnt", registTotalCnt);
-		
-		// 구장 등록 수
-		int placeDayCnt = adminLoginService.placeCnt("일");
-		int placeMonthCnt = adminLoginService.placeCnt("월");
-		int placeTotalCnt = adminLoginService.placeCnt("");
-		
-		model.addAttribute("placeDayCnt", placeDayCnt);
-		model.addAttribute("placeMonthCnt", placeMonthCnt);
-		model.addAttribute("placeTotalCnt", placeTotalCnt);
-		
-		// 경기장 예약 수
-		int rentalDayCnt = adminLoginService.rentalCnt("일");
-		int rentalMonthCnt = adminLoginService.rentalCnt("월");
-		int rentalTotalCnt = adminLoginService.rentalCnt("");
-		
-		model.addAttribute("rentalDayCnt", rentalDayCnt);
-		model.addAttribute("rentalMonthCnt", rentalMonthCnt);
-		model.addAttribute("rentalTotalCnt", rentalTotalCnt);
-		
-		// 매치 게시판 등록 수
-		int matchDayCnt = adminLoginService.matchCnt("일");
-		int matchMonthCnt = adminLoginService.matchCnt("월");
-		int matchTotalCnt = adminLoginService.matchCnt("");
-		
-		model.addAttribute("matchDayCnt", matchDayCnt);
-		model.addAttribute("matchMonthCnt", matchMonthCnt);
-		model.addAttribute("matchTotalCnt", matchTotalCnt);
-		
-		// 매치 게시판 등록 수
-		int supportDayCnt = adminLoginService.supportCnt("일");
-		int supportMonthCnt = adminLoginService.supportCnt("월");
-		int supportTotalCnt = adminLoginService.supportCnt("");
-		
-		model.addAttribute("supportDayCnt", supportDayCnt);
-		model.addAttribute("supportMonthCnt", supportMonthCnt);
-		model.addAttribute("supportTotalCnt", supportTotalCnt);
+		/*
+		 * // 회원가입 수 int registDayCnt = adminLoginService.registCnt("일"); int
+		 * registMonthCnt = adminLoginService.registCnt("월"); int registTotalCnt =
+		 * adminLoginService.registCnt("");
+		 * 
+		 * model.addAttribute("registDayCnt", registDayCnt);
+		 * model.addAttribute("registMonthCnt", registMonthCnt);
+		 * model.addAttribute("registTotalCnt", registTotalCnt);
+		 * 
+		 * // 구장 등록 수 int placeDayCnt = adminLoginService.placeCnt("일"); int
+		 * placeMonthCnt = adminLoginService.placeCnt("월"); int placeTotalCnt =
+		 * adminLoginService.placeCnt("");
+		 * 
+		 * model.addAttribute("placeDayCnt", placeDayCnt);
+		 * model.addAttribute("placeMonthCnt", placeMonthCnt);
+		 * model.addAttribute("placeTotalCnt", placeTotalCnt);
+		 * 
+		 * // 경기장 예약 수 int rentalDayCnt = adminLoginService.rentalCnt("일"); int
+		 * rentalMonthCnt = adminLoginService.rentalCnt("월"); int rentalTotalCnt =
+		 * adminLoginService.rentalCnt("");
+		 * 
+		 * model.addAttribute("rentalDayCnt", rentalDayCnt);
+		 * model.addAttribute("rentalMonthCnt", rentalMonthCnt);
+		 * model.addAttribute("rentalTotalCnt", rentalTotalCnt);
+		 * 
+		 * // 매치 게시판 등록 수 int matchDayCnt = adminLoginService.matchCnt("일"); int
+		 * matchMonthCnt = adminLoginService.matchCnt("월"); int matchTotalCnt =
+		 * adminLoginService.matchCnt("");
+		 * 
+		 * model.addAttribute("matchDayCnt", matchDayCnt);
+		 * model.addAttribute("matchMonthCnt", matchMonthCnt);
+		 * model.addAttribute("matchTotalCnt", matchTotalCnt);
+		 * 
+		 * // 매치 게시판 등록 수 int supportDayCnt = adminLoginService.supportCnt("일"); int
+		 * supportMonthCnt = adminLoginService.supportCnt("월"); int supportTotalCnt =
+		 * adminLoginService.supportCnt("");
+		 * 
+		 * model.addAttribute("supportDayCnt", supportDayCnt);
+		 * model.addAttribute("supportMonthCnt", supportMonthCnt);
+		 * model.addAttribute("supportTotalCnt", supportTotalCnt);
+		 */
+		model.addAttribute("stt", adminLoginService.getStatistics());
 
 		return "admin/main";
 	}

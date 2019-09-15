@@ -41,33 +41,33 @@
 			           </tr>
 			           <tr>
 			               <td>회원가입</td>
-			               <td>${registDayCnt }</td>
-			               <td>${registMonthCnt }</td>
-			               <td class="total">${registTotalCnt }</td>
+			               <td>${stt[0].today }</td>
+			               <td>${stt[0].month }</td>
+			               <td class="total">${stt[0].total }</td>
 			           </tr>
 			           <tr>
 			               <td>구장 등록 수</td>
-			               <td>${placeDayCnt }</td>
-			               <td>${placeMonthCnt }</td>
-			               <td class="total">${placeTotalCnt }</td>
+			               <td>${stt[1].today }</td>
+			               <td>${stt[1].month }</td>
+			               <td class="total">${stt[1].total }</td>
 			           </tr>
 			           <tr>
 			               <td>경기장 예약 수</td>
-			               <td>${rentalDayCnt }</td>
-			               <td>${rentalMonthCnt }</td>
-			               <td class="total">${rentalTotalCnt }</td>
+			               <td>${stt[2].today }</td>
+			               <td>${stt[2].month }</td>
+			               <td class="total">${stt[2].total }</td>
 			           </tr>
 			           <tr>
 			               <td>매치 게시판 등록 수</td>
-			               <td>${matchDayCnt }</td>
-			               <td>${matchMonthCnt }</td>
-			               <td class="total">${matchTotalCnt }</td>
+			               <td>${stt[3].today }</td>
+			               <td>${stt[3].month }</td>
+			               <td class="total">${stt[3].total }</td>
 			           </tr>
 			           <tr>
 			               <td>용병 게시판 등록 수</td>
-			               <td>${supportDayCnt }</td>
-			               <td>${supportMonthCnt }</td>
-			               <td class="total">${supportTotalCnt }</td>
+			               <td>${stt[4].today }</td>
+			               <td>${stt[4].month }</td>
+			               <td class="total">${stt[4].total }</td>
 			           </tr>
 			       </table>
 			   </article><!-- contents -->
