@@ -1,6 +1,5 @@
 package com.fly.user.rental.controller;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,16 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fly.client.items.service.ItemsService;
 import com.fly.client.items.vo.ItemsVO;
-import com.fly.client.place.vo.PlaceVO;
+import com.fly.member.place.vo.PlaceVO;
 import com.fly.member.rental.vo.RentalVO;
 import com.fly.member.stadium.vo.StadiumVO;
 import com.fly.paging.util.Paging;
 import com.fly.paging.util.Util;
+import com.fly.rental.detail.vo.RentalDetailVO;
 import com.fly.user.place.service.UserPlaceService;
 import com.fly.user.rental.service.UserRentalService;
 import com.fly.user.stadium.service.UserStadiumService;
@@ -194,7 +193,16 @@ public class UserRentalController {
    
    
    @RequestMapping(value = "/rentalDetail.do", method = RequestMethod.POST)
-   public String rentalDetail(Model model, @RequestParam("r_no") String r_no) {
+   public String rentalDetail(Model model, @RequestParam("r_no") String r_no, @RequestParam("page") String page) {
+	   // 확인후 삭제할것 
+	   RentalDetailVO rdvo = new RentalDetailVO();
+	   rdvo = userRentalService.showDetail(r_no);
+	   System.out.println(rdvo.toString());
+	   System.out.println(page);
+	   // 삭제할것
+	   
+	   model.addAttribute("data", userRentalService.showDetail(r_no));
+	   model.addAttribute("page", page);
 	   
 	   return "rental/rentalDetail";
    }

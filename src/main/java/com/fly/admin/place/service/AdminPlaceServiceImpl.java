@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.fly.admin.place.dao.AdminPlaceDao;
-import com.fly.client.place.vo.PlaceVO;
+import com.fly.member.place.vo.PlaceVO;
 
 @Service("adminPlaceService")
 public class AdminPlaceServiceImpl implements AdminPlaceService {

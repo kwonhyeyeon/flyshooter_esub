@@ -76,7 +76,7 @@
 								</c:choose>
 							</td>
 				        	<td>${ member.m_regdate }</td>
-				        	<td>${ member.email_comfirm }</td>
+				        	<td>${ member.email_confirm }</td>
 				        	<td>
 				        		<span class="statusText">
 						        	<c:choose>

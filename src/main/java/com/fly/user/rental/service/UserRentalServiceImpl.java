@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fly.member.itemsrental.dao.ItemsRentalDao;
 import com.fly.member.itemsrental.vo.ItemsRentalVO;
 import com.fly.member.rental.vo.RentalVO;
+import com.fly.rental.detail.vo.RentalDetailVO;
 import com.fly.user.rental.dao.UserRentalDao;
 @Transactional
 @Service("userRentalService")
@@ -99,6 +100,12 @@ public class UserRentalServiceImpl implements UserRentalService {
 	public int myRentalListCnt(String m_id) {
 		// TODO Auto-generated method stub
 		return userRentalDao.myRentalListCnt(m_id);
+	}
+
+	@Override
+	public RentalDetailVO showDetail(String r_no) {
+		// TODO Auto-generated method stub
+		return userRentalDao.showDetail(r_no);
 	}
 
 }

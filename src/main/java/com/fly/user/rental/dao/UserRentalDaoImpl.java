@@ -9,13 +9,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fly.member.rental.vo.RentalVO;
+import com.fly.rental.detail.vo.RentalDetailVO;
 @Repository("userRentalDao")
 public class UserRentalDaoImpl implements UserRentalDao {
 
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private String NAME_SPACE = "com.fly.user.rental.dao.UserRentalDAO";
+	private String NAME_SPACE = "com.fly.user.rental.dao.UserRentalDao";
 	
 	@Override
 	public List<String> searchReservationTime(HashMap<String, Object> map) {
@@ -53,6 +54,12 @@ public class UserRentalDaoImpl implements UserRentalDao {
 	public int myRentalListCnt(String m_id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(NAME_SPACE + ".myRentalListCnt", m_id);
+	}
+
+	@Override
+	public RentalDetailVO showDetail(String r_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAME_SPACE + ".showRentalDetail", r_no);
 	}
 
 

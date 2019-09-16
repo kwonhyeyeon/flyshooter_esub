@@ -2,7 +2,7 @@ package com.fly.admin.place.service;
 
 import java.util.List;
 
-import com.fly.client.place.vo.PlaceVO;
+import com.fly.member.place.vo.PlaceVO;
 
 public interface AdminPlaceService {
 

@@ -116,6 +116,7 @@
 			<h2>나의 예약정보</h2>
 			<hr />
 			<form id="goDetail" style="display: none">
+				<input type="hidden" name="page" value="${data.page }" />
 				<input type="hidden" name="r_no" id="r_no"/>
 			</form>
 			<table>			

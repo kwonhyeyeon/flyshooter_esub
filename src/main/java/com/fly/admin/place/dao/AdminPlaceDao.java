@@ -3,7 +3,7 @@ package com.fly.admin.place.dao;
 import java.util.HashMap;
 import java.util.List;
 
-import com.fly.client.place.vo.PlaceVO;
+import com.fly.member.place.vo.PlaceVO;
 
 public interface AdminPlaceDao {
 

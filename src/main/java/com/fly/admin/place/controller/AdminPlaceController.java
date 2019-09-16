@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.method.annotation.ModelAttributeMethodProcessor;
 
 import com.fly.admin.place.service.AdminPlaceService;
-import com.fly.client.place.vo.PlaceVO;
+import com.fly.member.place.vo.PlaceVO;
 
 @Controller
 @RequestMapping(value = "/admin/place")
