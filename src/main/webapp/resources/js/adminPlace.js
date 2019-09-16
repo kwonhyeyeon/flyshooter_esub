@@ -30,4 +30,23 @@ $(document).ready(function() {
 		
 	});
 	
+	// 구장 승인 상태 변경 시 저장 버튼 변경
+	$("#acceptSelect").on("change", function() {
+		$(".save").attr("disabled", false);
+		
+		var accept = $("#acceptSelect option").val();
+		$("#dddd").val(accept);
+	});
+	
+	$(".save").click(function() {
+		
+		$("#saveForm").attr({
+			"method" : "post",
+			"action" : "/admin/place/updatePok.do"
+		});
+		
+		$("#saveForm").submit();
+		
+	});
+	
 });

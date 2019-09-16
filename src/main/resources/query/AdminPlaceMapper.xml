@@ -28,9 +28,28 @@
 	
 	<!-- 구장 상세 정보 -->
 	<select id="adminPlaceDetail" parameterType="String" resultType="place">
-		select *
+		select p_num, m_id, p_name, p_ceo, p_phone, p_address,
+	      p_bank, p_account,
+	      p_account_num, p_open, p_close, p_file,
+	      p_register, p_account_copy,p_property,
+	      p_status, to_char(p_holiday_start, 'yyyy/MM/dd') p_holiday_start, 
+	      to_char(p_holiday_end, 'yyyy/MM/dd') p_holiday_end, 
+	      p_ok, to_char(p_ok_date, 'yyyy/MM/dd') p_ok_date, p_intro, to_char(p_regdate, 'yyyy/MM/dd') p_regdate, p_holiday
 		from place
 		where p_num = #{p_num}
 	</select>
+	
+	<!-- 폐업으로 변경 시 변경된 날짜 가져옴 -->
+	<select id="getCloseDate" resultType="String" parameterType="String">
+		SELECT to_char(SCN_TO_TIMESTAMP(ORA_ROWSCN), 'yyyy/MM/dd') TM
+		FROM place
+		WHERE p_status = -2 and p_num = #{p_num}
+	</select>
+	
+	<update id="updatePok" parameterType="place">
+		UPDATE place
+		SET p_ok = #{p_ok}
+		WHERE p_num = #{p_num}
+	</update>
 	
 </mapper>

@@ -318,7 +318,9 @@ table.table-style tr.btn-area td {
 }
 table.table-style tr.btn-area td.positive,
 table.table-style tr.top-btn-area td.positive {
-	padding-left:20px;
+	/* padding-left:20px; */
+	padding-right:20px;
+	text-align:right;
 }
 
 table.table-style2 tr.top-btn-area td {
@@ -333,7 +335,9 @@ table.table-style2 tr.btn-area td {
 }
 table.table-style2 tr.btn-area td.positive,
 table.table-style2 tr.top-btn-area td.positive {
-	padding-left:20px;
+	/* padding-left:20px; */
+	padding-right:20px;
+	text-align:right;
 }
 
 a.top-add {
@@ -350,7 +354,8 @@ a.top-add {
   cursor:pointer;
 }
 
-a.delete {
+a.delete,
+button.delete {
 	display:inline-block;
 	height:38px;
 	line-height:38px;
@@ -358,8 +363,10 @@ a.delete {
 	border:1px solid #ED3324;
 	color:#ED3324;
 	text-align:center;
+	background:#FFF;
 }
-a.cancle {
+a.cancle,
+button.cancle {
 	display:inline-block;
 	height:38px;
 	line-height:39px;
@@ -368,7 +375,8 @@ a.cancle {
 	color:#1976D2;
 	text-align:center;
 }
-a.add {
+a.add
+button.add {
 	display:inline-block;
 	padding:5px 30px;
 	background:#1976D2;
@@ -377,14 +385,20 @@ a.add {
 	color:#fff;
 	text-align:center;
 }
-a.save {
+a.save,
+button.save {
 	display:inline-block;
-	height:40px;
-	line-height:40px;
+	height:38px;
+	line-height:38px;
 	padding:0 30px;
 	background:#1976D2;
 	color:#fff;
 	text-align:center;
+	border:none;
+}
+button.save:disabled {
+	background:#bfbfbf;
+	cursor:default;
 }
 
 /* account_system */
@@ -808,7 +822,7 @@ table.chat-table tr.chat td button.save {
 	padding:7px 20px;	
 	cursor:pointer;
 }
-button.save {
+/* button.save {
 	border:none;
 	background:#1976D2;
 	color:#FFF;
@@ -816,7 +830,7 @@ button.save {
 	cursor:pointer;
 	vertical-align:middle;
 	margin-left:5px;
-}
+} */
 
 /* popup */
 .alert {

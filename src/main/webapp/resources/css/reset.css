@@ -116,3 +116,6 @@ input {
 label {
 	display:block;
 }
+button {
+	cursor:pointer;
+}

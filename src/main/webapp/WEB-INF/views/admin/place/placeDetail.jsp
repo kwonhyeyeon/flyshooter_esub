@@ -80,6 +80,7 @@
                             <td>${pvo.p_account_num}</td>
                         </tr>
 						<!-- 파일첨부 1, 팩스 2, 등기 3, 메일 4 -->
+						<!-- 파일 클릭 시 다운로드 될 수 있도록 구현 -->
 						<c:if test="${pvo.p_file == '1'}">
 	                        <tr>
 	                            <td class="subject">서류 첨부 유형</td>
@@ -100,12 +101,8 @@
                         </c:if>
 
                         <tr>
-                            <td class="subject">구장 오픈 시간</td>
-                            <td>${pvo.p_open}</td>
-                        </tr>
-                        <tr>
-                            <td class="subject">구장 마감 시간</td>
-                            <td>${pvo.p_close}</td>
+                            <td class="subject">구장 운영 시간</td>
+                            <td>${pvo.p_open}시 - ${pvo.p_close}시</td>
                         </tr>
                         <tr>
                             <td class="subject">구장 정기 휴일</td>
@@ -146,16 +143,16 @@
                         <c:if test="${pvo.p_status == -2}">
                         	<tr>
 	                            <td class="subject">폐업 등록일</td>
-	                            <td>-----</td>
+	                            <td>${closeDate}</td>
 	                        </tr>
                         </c:if>
                         <tr>
                             <td class="subject">구장 승인 상태</td>
                             <td>
-                            	<c:choose>
-                            		<c:when test="${pvo.p_ok == 1}">승인</c:when>
-                            		<c:when test="${pvo.p_ok == 0}">미승인</c:when>
-                            	</c:choose>
+                            	<select name="p_ok" id="acceptSelect">
+                            		<option value="1">승인</option>
+                            		<option value="0">미승인</option>
+                            	</select>
                             </td>
                         </tr>
                         <c:if test="${pvo.p_ok == 1}">
@@ -169,10 +166,23 @@
                             <td class="subject">소개글</td>
                             <td>${pvo.p_intro}</td>
                         </tr>
+                        
+                        <!-- 구장 승인 상태 변경을 위한 폼 -->
+                        <form name="saveForm" id="saveForm">
+                        	<input type="hidden" name="p_num" id="p_num" value="${pvo.p_num}" />
+                        	<input type="hidden" name="p_ok" id="ok" value="${pvo.p_ok}" />
+                        </form>
+					    	
+                        <tr class="btn-area">
+		                    <td><a class="cancle" href="javascript:history.back();">취소</a></td>
+		                    <td class="positive">
+		                    	<input type="text" id="dddd" value="${pvo.p_ok}" />
+		                    	<button class="delete">폐업 등록</button>
+		                        <button class="save" disabled>저장</button>
+		                    </td>
+		                </tr>
                     </table>
                     <!-- 구장 상세 정보 -->
-
-                    <div>취소, 저장, 폐업 등록</div>
 
                     <h3 class="sub-tit">용품</h3>
 
@@ -222,8 +232,8 @@
 
 </body>
 <script>
-    $(".placeStatus").val("${status}");
-    $("${status}").text();
+    $("#p_ok").val("${pvo.p_ok}");
+    $("${pvo.p_ok}").text();
 </script>
 
 </html>

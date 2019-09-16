@@ -31,4 +31,14 @@ public class AdminPlaceServiceImpl implements AdminPlaceService {
 		return adminPlaceDao.adminPlaceDetail(num);
 	}
 
+	@Override
+	public String getCloseDate(String p_num) {
+		return adminPlaceDao.getCloseDate(p_num);
+	}
+
+	@Override
+	public void updatePok(PlaceVO pvo) {
+		adminPlaceDao.updatePok(pvo);;
+	}
+
 }
