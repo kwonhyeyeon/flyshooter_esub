@@ -68,7 +68,7 @@
 				    	</tr>
 				    	<c:if test="${not empty adminPlaceList}">
 				    		<c:forEach var="place" items="${adminPlaceList}" varStatus="status">
-							   	<tr class="list-hover" id="placeDetail" data-num="${place.p_num}">
+							   	<tr class="list-hover placeDetail" data-num="${place.p_num}">
 								   	<%-- <td>${fn:length(adminPlaceList)-status.count+1}</td> --%>
 								   	<td>${count-status.index}</td>
 								   	<td>${place.m_id}</td>

@@ -234,12 +234,12 @@
                     
                     <!-- 경기장 상세 정보 페이지로 가기 위한 폼 -->
                     <form name="stdmDetailForm" id="stdmDetailForm">
-                    	<input type="hidden" name="s_no" id="s_no" value="${svo.s_no}" />
+                    	<input type="hidden" name="s_no" id="s_no" />
                     </form>
                     <table class="table-style">
                     	<c:if test="${not empty stadiumList}">
                     		<c:forEach var="stdm" items="${stadiumList}" varStatus="status">
-			                    <tr id="stadiumDetail" class="list-hover">
+			                    <tr class="list-hover stadiumDetail" data-num="${stdm.s_no}">
 			                    	<td width="100">${fn:length(stadiumList)-status.count+1}</td>
 			                    	<td width="900">${stdm.s_name}</td>
 			                    	<c:if test="${stdm.s_status == 0}">

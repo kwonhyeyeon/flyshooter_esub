@@ -20,5 +20,10 @@ public class AdminStadiumDaoImpl implements AdminStadiumDao {
 	public List<StadiumVO> getStadiumList(StadiumVO svo) {
 		return sqlsession.selectList(NAME_SPACE + ".getStadiumList", svo);
 	}
+
+	@Override
+	public StadiumVO getStadiumDetail(int s_no) {
+		return sqlsession.selectOne(NAME_SPACE + ".getStadiumDetail", s_no);
+	}
 	
 }

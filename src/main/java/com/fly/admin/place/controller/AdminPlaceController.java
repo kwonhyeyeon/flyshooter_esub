@@ -82,7 +82,7 @@ public class AdminPlaceController {
 		
 		// 경기장 리스트 출력
 		List<StadiumVO> stadiumList = adminStadiumService.getStadiumList(svo);
-		model.addAttribute("svo", svo);
+		model.addAttribute("s_no", svo.getS_no());
 		model.addAttribute("stadiumList", stadiumList);
 		
 		return "admin/place/placeDetail";

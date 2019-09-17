@@ -16,7 +16,7 @@ $(document).ready(function() {
 	});
 	
 	// 구장 상세페이지 링크 이동
-	$("#placeDetail").click(function() {
+	$(".placeDetail").click(function() {
 		
 		var num = $(this).attr("data-num");
 		$("#p_num").val(num);
@@ -66,10 +66,13 @@ $(document).ready(function() {
 	});
 	
 	// 경기장 상세 페이지로 이동
-	$("#stadiumDetail").click(function() {
+	$(".stadiumDetail").click(function() {
+		
+		var sno = $(this).attr("data-num");
+		$("#s_no").val(sno);
 		
 		$("#stdmDetailForm").attr({
-			"method" : "post",
+			"method" : "get",
 			"action" : "/admin/stadium/stadiumDetail.do"
 		});
 		

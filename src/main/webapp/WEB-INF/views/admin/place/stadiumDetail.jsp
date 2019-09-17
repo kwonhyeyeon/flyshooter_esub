@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,153 +35,83 @@
 
             <div id="container">
                 <article id="contents">
-                    <h2 class="con-subject">경기장 상세 정보</h2>
+                    <h2 class="con-subject">${svo.s_name} 경기장 상세 정보</h2>
 
 					<!-- 구장 승인 상태 변경을 위한 폼 -->
-	                <form name="saveForm" id="saveForm">
+	                <%-- <form name="saveForm" id="saveForm">
 	                  	<input type="hidden" name="p_num" id="p_num" value="${pvo.p_num}" />
 	                   	<input type="hidden" name="p_ok" id="ok" />
-	                </form>
+	                </form> --%>
 	                        
                     <!-- 경기장 정보 -->
                     <table class="table-style2">
                         <tr>
-                            <td class="subject">회원 ID</td>
-                            <td>${pvo.m_id}</td>
-                        </tr>
-                        <tr>
-                            <td class="subject">대표자명</td>
-                            <td>${pvo.p_ceo}</td>
+                            <td class="subject">경기장명</td>
+                            <td>${svo.s_name}</td>
                         </tr>
                         <tr>
                             <td class="subject">사업자번호</td>
-                            <td>${pvo.p_num}</td>
+                            <td>${svo.p_num}</td>
                         </tr>
                         <tr>
-                            <td class="subject">구장명</td>
-                            <td>${pvo.p_name}</td>
+                            <td class="subject">경기장 등록일</td>
+                            <td>${svo.s_regdate}</td>
                         </tr>
                         <tr>
-                            <td class="subject">구장 전화번호</td>
-                            <td>${pvo.p_phone}</td>
+                            <td class="subject">경기장 크기</td>
+                            <td>${svo.s_size}</td>
                         </tr>
                         <tr>
-                            <td class="subject">구장 주소</td>
-                            <td>${pvo.p_address}</td>
+                            <td class="subject">수용 인원</td>
+                            <td>${svo.s_people} 명</td>
+                        </tr>
+                        <tr>
+                            <td class="subject">경기장 실내/외</td>
+                            <c:if test="${svo.s_in_out == 1}">
+                            	<td>실내</td>
+                            </c:if>
+                            <c:if test="${svo.s_in_out == 2}">
+                            	<td>실외</td>
+                            </c:if>
+                        </tr>
+                        <tr>
+                            <td class="subject">경기장 상태</td>
+                            <c:if test="${svo.s_status == 0}">
+                            	<td>미승인</td>
+                            </c:if>
+                            <c:if test="${svo.s_status == 1}">
+                            	<td>승인</td>
+                            </c:if>
                         </tr>
 
                         <tr>
-                            <td class="subject">은행명</td>
-                            <td>${pvo.p_bank}</td>
+                            <td class="subject">경기장 최소 이용 시간</td>
+                            <td>${svo.s_hours} 시간</td>
                         </tr>
                         <tr>
-                            <td class="subject">예금주명</td>
-                            <td>${pvo.p_account}</td>
+                            <td class="subject">경기장 평일 주간 요금</td>
+                            <td><fmt:formatNumber value="${svo.s_d_fee}" pattern="#,###"/> 원</td>
                         </tr>
                         <tr>
-                            <td class="subject">입금 계좌번호</td>
-                            <td>${pvo.p_account_num}</td>
-                        </tr>
-						<!-- 파일첨부 1, 팩스 2, 등기 3, 메일 4 -->
-						<!-- 파일 클릭 시 다운로드 될 수 있도록 구현 -->
-						<c:if test="${pvo.p_file == '1'}">
-	                        <tr>
-	                            <td class="subject">서류 첨부 유형</td>
-	                            <td>${pvo.p_file}</td>
-	                        </tr>
-	                        <tr>
-	                            <td class="subject">사업자 등록증</td>
-	                            <td>${pvo.p_register}</td>
-	                        </tr>
-	                        <tr>
-	                            <td class="subject">통장 사본</td>
-	                            <td>${pvo.p_account_copy}</td>
-	                        </tr>
-	                        <tr>
-	                            <td class="subject">부동산 종합 공부</td>
-	                            <td>${pvo.p_property}</td>
-	                        </tr>
-                        </c:if>
-
-                        <tr>
-                            <td class="subject">구장 운영 시간</td>
-                            <td>${pvo.p_open}시 - ${pvo.p_close}시</td>
+                            <td class="subject">경기장 평일 야간 요금</td>
+                            <td><fmt:formatNumber value="${svo.s_n_fee}" pattern="#,###"/> 원</td>
                         </tr>
                         <tr>
-                            <td class="subject">구장 정기 휴일</td>
-                            <td>
-                            	<c:choose>
-                            		<c:when test="${pvo.p_holiday == 0}">일요일</c:when>
-                            		<c:when test="${pvo.p_holiday == 1}">월요일</c:when>
-                            		<c:when test="${pvo.p_holiday == 2}">화요일</c:when>
-                            		<c:when test="${pvo.p_holiday == 3}">수요일</c:when>
-                            		<c:when test="${pvo.p_holiday == 4}">목요일</c:when>
-                            		<c:when test="${pvo.p_holiday == 5}">금요일</c:when>
-                            		<c:when test="${pvo.p_holiday == 6}">토요일</c:when>
-                            		<c:when test="${pvo.p_holiday == 7}">연중무휴</c:when>
-                            	</c:choose>
-                            </td>
+                            <td class="subject">경기장 주말 주간 요금</td>
+                            <td><fmt:formatNumber value="${svo.s_d_fee_w}" pattern="#,###"/> 원</td>
                         </tr>
                         <tr>
-                            <td class="subject">구장 상태</td>
-                            <td>
-                            	<c:choose>
-                            		<c:when test="${pvo.p_status == 1}">운영중</c:when>
-                            		<c:when test="${pvo.p_status == 0}">운영전</c:when>
-                            		<c:when test="${pvo.p_status == -1}">임시휴업</c:when>
-                            		<c:when test="${pvo.p_status == -2}">폐업</c:when>
-                            	</c:choose>
-                            </td>
-                        </tr>
-                        <c:if test="${pvo.p_status == -1}">
-                        	<tr>
-	                            <td class="subject">임시 휴업 시작일</td>
-	                            <td>${pvo.p_holiday_start}</td>
-	                        </tr>
-	                        <tr>
-	                            <td class="subject">영업 재개일</td>
-	                            <td>${pvo.p_holiday_end}</td>
-	                        </tr>
-                        </c:if>
-                        <c:if test="${pvo.p_status == -2}">
-                        	<tr>
-	                            <td class="subject">폐업 등록일</td>
-	                            <td>${pvo.p_holiday_start}</td>
-	                        </tr>
-                        </c:if>
-                        <c:if test="${pvo.p_status != -2 }">
-                        	<tr>
-	                            <td class="subject">구장 승인 상태</td>
-	                            <td>
-	                            	<select id="acceptSelect" class="tbl-select">
-	                            		<option value="1">승인</option>
-	                            		<option value="0">미승인</option>
-	                            	</select>
-	                            </td>
-	                        </tr>
-	                        <c:if test="${pvo.p_ok == 1}">
-		                        <tr>
-		                            <td class="subject">구장 승인일</td>
-		                            <td>${pvo.p_ok_date}</td>
-		                        </tr>
-	                        </c:if>
-                        </c:if>
-
-                        <tr>
-                            <td class="subject">소개글</td>
-                            <td>${pvo.p_intro}</td>
+                            <td class="subject">경기장 주말 야간 요금</td>
+                            <td><fmt:formatNumber value="${svo.s_n_fee_w}" pattern="#,###"/> 원</td>
                         </tr>
 					    	
                         <tr class="btn-area">
 		                    <td><a class="cancle" href="javascript:history.back();">취소</a></td>
 		                    <td class="positive">
-		                    	<c:if test="${pvo.p_status != -2 }">
-		                    		<button class="delete ml">폐업 등록</button>
+		                    	<c:if test="${svo.s_status == 0}">
+		                    		<button class="add ml">경기장 승인</button>
 		                    	</c:if>
-		                    	<c:if test="${pvo.p_status == -2 }">
-		                    		<button class="delete ml" disabled>폐업 등록</button>
-		                    	</c:if>
-		                        <button class="save ml" disabled>저장</button>
+		                        <!-- <button class="save ml" disabled>저장</button> -->
 		                    </td>
 		                </tr>
                     </table>
