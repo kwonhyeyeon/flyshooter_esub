@@ -27,4 +27,14 @@ public class AdminPlaceDaoImpl implements AdminPlaceDao {
 		return (PlaceVO)sqlSession.selectOne(NAME_SPACE + ".adminPlaceDetail", num);
 	}
 
+	@Override
+	public String getCloseDate(String p_num) {
+		return sqlSession.selectOne(NAME_SPACE + ".getCloseDate", p_num);
+	}
+
+	@Override
+	public void updatePok(PlaceVO pvo) {
+		sqlSession.update(NAME_SPACE + ".updatePok", pvo);
+	}
+
 }

@@ -2,97 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.fly.admin.login.dao.AdminLoginDao">
-
-	<!-- 회원 가입 수 -->
-	<select id="registCnt" parameterType="String" resultType="int">
-		select count(*) 
-		from member 
-		<if test='date == "일"'>
-			where to_char(m_regdate, 'yy/MM/dd') = to_char(sysdate, 'yy/MM/dd')
-		</if>
-		<if test='date == "월"'>
-			where to_char(m_regdate, 'yy/MM') = to_char(sysdate, 'yy/MM')
-		</if>
-	</select>
-	
-	<!-- 구장 등록 수 -->
-	<select id="placeCnt" parameterType="String" resultType="int">
-		select count(*)
-		from place
-		<if test='date == "일"'>
-			where to_char(p_regdate, 'yy/MM/dd') = to_char(sysdate, 'yy/MM/dd')
-		</if>
-		<if test='date == "월"'>
-			where to_char(p_regdate, 'yy/MM') = to_char(sysdate, 'yy/MM')
-		</if>
-	</select>
-	
-	<!-- 경기장 예약 수 -->
-	<select id="rentalCnt" parameterType="String" resultType="int">
-		select count(*)
-		from rental
-		<if test='date == "일"'>
-			where to_char(r_regdate, 'yy/MM/dd') = to_char(sysdate, 'yy/MM/dd')
-		</if>
-		<if test='date == "월"'>
-			where to_char(r_regdate, 'yy/MM') = to_char(sysdate, 'yy/MM')
-		</if>
-	</select>
-	
-	<!-- 매치 게시판 등록 수 -->
-	<select id="matchCnt" parameterType="String" resultType="int">
-		select count(*)
-		from match_board
-		<if test='date == "일"'>
-			where to_char(mb_regdate, 'yy/MM/dd') = to_char(sysdate, 'yy/MM/dd')
-		</if>
-		<if test='date == "월"'>
-			where to_char(mb_regdate, 'yy/MM') = to_char(sysdate, 'yy/MM')
-		</if>
-	</select>
-	
-	<!-- 용병 게시판 등록 수 -->
-	<select id="supportCnt" parameterType="String" resultType="int">
-        select 
-            (
-            select count(*) 
-            from support
-            <if test='date == "일"'>
-            	where to_char(hs_regdate, 'yy/MM/dd') = to_char(sysdate, 'yy/MM/dd')
-            </if>
-            <if test='date == "월"'>
-            	where to_char(hs_regdate, 'yy/MM') = to_char(sysdate, 'yy/MM')
-            </if>
-            ) + 
-            (
-            select count(*) 
-            from recruit
-            <if test='date == "일"'>
-            	where to_char(hr_regdate, 'yy/MM/dd') = to_char(sysdate, 'yy/MM/dd')
-            </if>
-            <if test='date == "월"'>
-            	where to_char(hr_regdate, 'yy/MM') = to_char(sysdate, 'yy/MM')
-            </if>
-            )
-        from dual
-    </select>
     
     <select id="getSttst" resultType="statistics">
     
- 	select a.*
-	from (select (select count(*) from member where to_char(m_regdate, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')) today, (select count(*) from member where to_char(m_regdate, 'yyyy-MM') = to_char(sysdate, 'yyyy-MM')) month, (select count(*) from member) total from dual) a
-	union all
-	select b.*
-	from (select (select count(*) from place where to_char(p_regdate, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')), (select count(*) from place where to_char(p_regdate, 'yyyy-MM') = to_char(sysdate, 'yyyy-MM')), (select count(*) from place) from dual) b
-	union all
-	select c.*
-	from (select (select count(*) from rental where to_char(r_regdate, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')), (select count(*) from rental where to_char(r_regdate, 'yyyy-MM') = to_char(sysdate, 'yyyy-MM')), (select count(*) from rental) from dual) c
-	union all
-	select d.*
-	from (select (select count(*) from match_board where to_char(mb_regdate, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')), (select count(*) from match_board where to_char(mb_regdate, 'yyyy-MM') = to_char(sysdate, 'yyyy-MM')), (select count(*) from match_board) from dual) d
-	union all
-	select e.*
-	from (select (select count(*) from support where to_char(hs_regdate, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')), (select count(*) from support where to_char(hs_regdate, 'yyyy-MM') = to_char(sysdate, 'yyyy-MM')), (select count(*) from support) from dual) e
+	 	select a.*
+		from (select (select count(*) from member where to_char(m_regdate, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')) today, (select count(*) from member where to_char(m_regdate, 'yyyy-MM') = to_char(sysdate, 'yyyy-MM')) month, (select count(*) from member) total from dual) a
+		union all
+		select b.*
+		from (select (select count(*) from place where to_char(p_regdate, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')), (select count(*) from place where to_char(p_regdate, 'yyyy-MM') = to_char(sysdate, 'yyyy-MM')), (select count(*) from place) from dual) b
+		union all
+		select c.*
+		from (select (select count(*) from rental where to_char(r_regdate, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')), (select count(*) from rental where to_char(r_regdate, 'yyyy-MM') = to_char(sysdate, 'yyyy-MM')), (select count(*) from rental) from dual) c
+		union all
+		select d.*
+		from (select (select count(*) from match_board where to_char(mb_regdate, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')), (select count(*) from match_board where to_char(mb_regdate, 'yyyy-MM') = to_char(sysdate, 'yyyy-MM')), (select count(*) from match_board) from dual) d
+		union all
+		select e.*
+		from (select (select count(*) from support where to_char(hs_regdate, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')), (select count(*) from support where to_char(hs_regdate, 'yyyy-MM') = to_char(sysdate, 'yyyy-MM')), (select count(*) from support) from dual) e
     
     </select>
 
