@@ -18,12 +18,8 @@ public class AdminPlaceServiceImpl implements AdminPlaceService {
 	private AdminPlaceDao adminPlaceDao;
 
 	@Override
-	public List<PlaceVO> adminPlaceList(int status, String name) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-	    map.put("status", status);
-	    map.put("name", name);
-	      
-		return adminPlaceDao.adminPlaceList(map);
+	public List<PlaceVO> adminPlaceList(PlaceVO pvo) {      
+		return adminPlaceDao.adminPlaceList(pvo);
 	}
 
 	@Override
@@ -32,13 +28,23 @@ public class AdminPlaceServiceImpl implements AdminPlaceService {
 	}
 
 	@Override
-	public String getCloseDate(String p_num) {
-		return adminPlaceDao.getCloseDate(p_num);
+	public void getCloseDate(String p_num) {
+		adminPlaceDao.getCloseDate(p_num);
 	}
 
 	@Override
 	public void updatePok(PlaceVO pvo) {
-		adminPlaceDao.updatePok(pvo);;
+		adminPlaceDao.updatePok(pvo);
+	}
+
+	@Override
+	public int adminPlaceListCnt(PlaceVO pvo) {
+		return adminPlaceDao.adminPlaceListCnt(pvo);
+	}
+
+	@Override
+	public void updateClose(PlaceVO pvo) {
+		adminPlaceDao.updateClose(pvo);
 	}
 
 }

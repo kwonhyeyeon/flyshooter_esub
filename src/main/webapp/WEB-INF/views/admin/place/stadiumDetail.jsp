@@ -34,22 +34,15 @@
 
             <div id="container">
                 <article id="contents">
-                    <h2 class="con-subject">구장 상세 정보</h2>
-
-                    <h3 class="sub-tit">구장 정보</h3>
+                    <h2 class="con-subject">경기장 상세 정보</h2>
 
 					<!-- 구장 승인 상태 변경을 위한 폼 -->
 	                <form name="saveForm" id="saveForm">
 	                  	<input type="hidden" name="p_num" id="p_num" value="${pvo.p_num}" />
 	                   	<input type="hidden" name="p_ok" id="ok" />
 	                </form>
-	                
-	                <!-- 구장 폐업 등록을 위한 폼 -->
-	                <form name="closeForm" id="closeForm">
-	                	<input type="hidden" name="p_num" id="p_num" value="${pvo.p_num}" />
-	                </form>
 	                        
-                    <!-- 구장 정보 -->
+                    <!-- 경기장 정보 -->
                     <table class="table-style2">
                         <tr>
                             <td class="subject">회원 ID</td>
@@ -191,72 +184,8 @@
 		                    </td>
 		                </tr>
                     </table>
-                    <!-- 구장 상세 정보 -->
-					
-                    <h3 class="sub-tit">용품</h3>
+                    <!-- 경기장 상세 정보 -->
 
-                    <!-- 용품 정보 -->
-                    <table class="table-style">
-                        <tr>
-                            <th width="100">번호</th>
-                            <th width="600">용품명</th>
-                            <th width="200">대여료</th>
-                            <th width="200">용품 상태</th>
-                            <th width="100">대여 횟수</th>
-                            <th>용품 등록일</th>
-                        </tr>
-                        <c:if test="${not empty itemsList}">
-                            <c:forEach var="items" items="${itemsList}" varStatus="status">
-                                <tr>
-                                    <td>${fn:length(itemsList)-status.count+1}</td>
-                                    <td>${items.i_name}</td>
-                                    <td>${items.i_rental_fee}</td>
-                                    <c:if test="${items.i_status == 0}">
-                                    	<td>미게시</td>
-                                    </c:if>
-                                    <c:if test="${items.i_status == 1}">
-                                        <td>게시중</td>
-                                    </c:if>
-                                    <td>${items.i_use}</td>
-                                    <td>${items.i_regdate}</td>
-                                </tr>
-                            </c:forEach>
-                        </c:if>
-                        <c:if test="${empty itemsList}">
-                            <tr>
-                                <td class="empty" colspan="6">조회된 용품이 없습니다</td>
-                            </tr>
-                        </c:if>
-                    </table>
-                    <!-- 용품 정보 -->
-
-                    <h3 class="sub-tit">경기장</h3>
-                    
-                    <!-- 경기장 상세 정보 페이지로 가기 위한 폼 -->
-                    <form name="stdmDetailForm" id="stdmDetailForm">
-                    	<input type="hidden" name="s_no" id="s_no" value="${svo.s_no}" />
-                    </form>
-                    <table class="table-style">
-                    	<c:if test="${not empty stadiumList}">
-                    		<c:forEach var="stdm" items="${stadiumList}" varStatus="status">
-			                    <tr id="stadiumDetail" class="list-hover">
-			                    	<td width="100">${fn:length(stadiumList)-status.count+1}</td>
-			                    	<td width="900">${stdm.s_name}</td>
-			                    	<c:if test="${stdm.s_status == 0}">
-			                    		<td class="red right">미승인</td>
-			                    	</c:if>
-			                    	<c:if test="${stdm.s_status == 1}">
-			                    		<td class="right">승인</td>
-			                    	</c:if>
-			                    </tr>
-		                    </c:forEach>
-	                    </c:if>
-	                    <c:if test="${empty stadiumList}">
-	                   		<tr>
-	                   			<td class="empty" colspan="3">조회된 경기장이 없습니다</td>
-	                   		</tr>
-	                    </c:if>
-                    </table>
                 </article><!-- contents -->
             </div><!-- container -->
 

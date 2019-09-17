@@ -18,8 +18,8 @@ public class AdminPlaceDaoImpl implements AdminPlaceDao {
 	private String NAME_SPACE = "com.fly.admin.place.dao.AdminPlaceDao";
 
 	@Override
-	public List<PlaceVO> adminPlaceList(HashMap<String, Object> map) {
-		return sqlSession.selectList(NAME_SPACE + ".adminPlaceList", map);
+	public List<PlaceVO> adminPlaceList(PlaceVO pvo) {
+		return sqlSession.selectList(NAME_SPACE + ".adminPlaceList", pvo);
 	}
 
 	@Override
@@ -28,13 +28,23 @@ public class AdminPlaceDaoImpl implements AdminPlaceDao {
 	}
 
 	@Override
-	public String getCloseDate(String p_num) {
-		return sqlSession.selectOne(NAME_SPACE + ".getCloseDate", p_num);
+	public void getCloseDate(String p_num) {
+		sqlSession.update(NAME_SPACE + ".getCloseDate", p_num);
 	}
 
 	@Override
 	public void updatePok(PlaceVO pvo) {
 		sqlSession.update(NAME_SPACE + ".updatePok", pvo);
+	}
+
+	@Override
+	public int adminPlaceListCnt(PlaceVO pvo) {
+		return sqlSession.selectOne(NAME_SPACE + ".adminPlaceListCnt", pvo);
+	}
+
+	@Override
+	public void updateClose(PlaceVO pvo) {
+		sqlSession.update(NAME_SPACE + ".updateClose", pvo);
 	}
 
 }

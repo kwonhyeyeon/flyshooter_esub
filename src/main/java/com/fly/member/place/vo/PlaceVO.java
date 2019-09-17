@@ -2,7 +2,9 @@ package com.fly.member.place.vo;
 
 import java.util.Date;
 
-public class PlaceVO {
+import com.fly.paging.vo.PagingVO;
+
+public class PlaceVO extends PagingVO {
 
 	private String p_num; // 사업자번호
 	private String m_id; // ID
@@ -20,7 +22,7 @@ public class PlaceVO {
 	private String p_account_copy; // 통장사본
 	private String p_property; // 부동산종합공부
 	private int p_holiday; // 정기휴일
-	private int p_status; // 구장 상태
+	private int p_status = 2; // 구장 상태
 	private String p_holiday_start; // 구장 임시휴업시작일
 	private String p_holiday_end; // 구장 영업재개일
 	private int p_ok; // 구장 승인상태

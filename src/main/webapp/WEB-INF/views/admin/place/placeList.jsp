@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="tag" uri="/WEB-INF/tld/custom_tag.tld" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +40,7 @@
             		<!-- 셀렉트 박스 영역 -->
 				    <div class="select-area">
 				    	<form id="placeStatusForm">
-					        <select name="status" class="placeStatus">
+					        <select name="p_status" class="placeStatus">
 					            <option value="2">구장 상태 전체</option>
 					            <option value="1">운영중</option>
 					            <option value="0">운영전</option>
@@ -52,7 +53,7 @@
 				    
 				    <!-- 상세페이지 이동을 위한 폼 -->
 				    <form name="detailForm" id="detailForm">
-				    	<input type="hidden" name="num" id="p_num" />
+				    	<input type="hidden" name="p_num" id="p_num" />
 				    </form>
 				    <!-- 구장 리스트 -->
 				    <table class="table-style">
@@ -67,8 +68,9 @@
 				    	</tr>
 				    	<c:if test="${not empty adminPlaceList}">
 				    		<c:forEach var="place" items="${adminPlaceList}" varStatus="status">
-							   	<tr class="list-hover" data-num="${place.p_num}">
-								   	<td>${fn:length(adminPlaceList)-status.count+1}</td>
+							   	<tr class="list-hover" id="placeDetail" data-num="${place.p_num}">
+								   	<%-- <td>${fn:length(adminPlaceList)-status.count+1}</td> --%>
+								   	<td>${count-status.index}</td>
 								   	<td>${place.m_id}</td>
 								   	<td>${place.p_ceo}</td>
 								   	<td>${place.p_name}</td>
@@ -91,10 +93,22 @@
 				    </table>
 				    <!-- 구장 리스트 -->
 				    
+				    <!-- pagination -->
+				    <div id="boardSearch">
+			           <form id="f_search" name="f_search">
+			                 <input type="hidden" id="page" name="page" value="${data.page}"/>
+			           </form>
+			      	</div>
+			                 
+			        <div class="pagination">
+			           <tag:paging page="${param.page}" total="${total}" list_size="${data.pageSize}" />
+			        </div>
+				    <!-- pagination -->
+				    
 				    <!-- 검색 -->
 				    <div class="search">
 				    	<form action="placeList.do" method="get">
-					        <input type="search" name="name" class="search-field" placeholder="구장명" />
+					        <input type="search" name="p_name" class="search-field" placeholder="구장명" />
 					        <button type="submit" class="search-btn">찾기</button>
 				        </form>
 				    </div>
@@ -109,7 +123,18 @@
 
 </body>
 <script>
-	$(".placeStatus").val("${status}");
-	$("${status}").text();
+	$(".placeStatus").val("${data.p_status}");
+	$("${data.p_status}").text();
+
+	function goPage(page){
+	    $("#page").val(page);
+	    $("#f_search").attr({
+	       "method":"get",
+	       "action":"/admin/place/placeList.do"
+	    });
+	    
+	    $("#f_search").submit();
+	}
 </script>
+
 </html>
