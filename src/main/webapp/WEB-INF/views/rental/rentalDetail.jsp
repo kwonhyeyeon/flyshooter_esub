@@ -33,6 +33,10 @@
 		
 		$("#f_search").submit();
 	}
+	
+	function goBack(){
+		window.history.back();
+	}
 </script>
 </head>
 <body>
@@ -86,7 +90,7 @@
 					
 						<c:when test="${m_type==0}">
 						<ul class="member-menu">
-							<li><a href="/rental/rentalList.do">대관 예약 현황</a></li>
+							<li><a href="/user/rental/myRentalList.do">대관 예약 현황</a></li>
 							<li><a href="/">대관 환불 현황</a></li>
 							<li><a href="/">오프라인 대관 관리</a></li>
 						</ul>
@@ -117,70 +121,69 @@
 			<hr />
 			<table>
 				<tr>
-					<td></td>
-					<td></td>
-					<td colspan="2" rowspan="5"></td>
+					<td>구장명</td>
+					<td>${data.p_name }</td>
+					<td colspan="2" rowspan="5">경기장img</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
+					<td>구장 주소</td>
+					<td>${data.p_address }</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
+					<td>구장 P.H</td>
+					<td>${data.p_phone }</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
+					<td>결제금액</td>
+					<td>${data.r_total_pay }</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
+					<td>구장 소개</td>
+					<td>${data.p_intro }</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>환불 규정</td>
+					<td colspan="3">
+						이용 11일전 : 취소 수수료 없음<br />
+						이용 6 ~ 10일전 : 총 결제금액의 30% 차감 <br />
+						이용 2 ~ 5일전 : 총 결제금액의 40% 차감 <br />
+						이용 1일전 : 총 결제금액의 50% 차감<br />
+						이용 당일 : 취소 불가 
+					</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>신청자</td>
+					<td>${data.m_name }</td>
+					<td>연락처</td>
+					<td>${data.m_phone }</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>예약일자</td>
+					<td>${data.r_regdate }</td>
+					<td>예약시간</td>
+					<td>${data.r_reserve_date }(${data.r_start}~${data.s_hours + data.r_start }시)</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>경기장</td>
+					<td>${data.s_name }</td>
+					<td>대여용품</td>
+					<td>${data.itemsCnt }개</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td colspan="2">
+						<c:if test="${data.r_pay_status == 1 }">
+						<!-- 대관완료 -->
+						<button id="cancleRental">예약취소</button>
+						</c:if>
+					</td>
+					<td colspan="2"><button id="goList" onclick="goBack();">확인</button></td>
 				</tr>			
 			</table>
-			
+			<form action="goUpdate">
+				<input type="text" name="r_no" value="${data.r_no }"/>
+				<input type="text" id="r_reserve_date" value="${data.r_reserve_date }" />
+				<input type="text" id="r_total_pay" value="${data.r_total_pay }" />
+			</form>
 		</article>
 		
 	</div>

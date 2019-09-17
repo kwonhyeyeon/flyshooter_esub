@@ -7,6 +7,7 @@ public class RentalDetailVO extends RentalVO{
 	private String p_name;
 	private String p_address;
 	private String p_intro;
+	private String p_phone;
 	private String s_name;
 	private int s_hours;
 	private String s_img1;
@@ -82,16 +83,23 @@ public class RentalDetailVO extends RentalVO{
 	public void setItemsCnt(int itemsCnt) {
 		this.itemsCnt = itemsCnt;
 	}
-	
-	
+	public String getP_phone() {
+		return p_phone;
+	}
+	public void setP_phone(String p_phone) {
+		this.p_phone = p_phone;
+	}
 	@Override
 	public String toString() {
 		super.toString();
-		return  "RentalDetailVO [getP_name()=" + getP_name() + ", getP_address()=" + getP_address() + ", getP_intro()="
+		return "RentalDetailVO [getP_name()=" + getP_name() + ", getP_address()=" + getP_address() + ", getP_intro()="
 				+ getP_intro() + ", getS_name()=" + getS_name() + ", getS_hours()=" + getS_hours() + ", getS_img1()="
 				+ getS_img1() + ", getS_img2()=" + getS_img2() + ", getS_img3()=" + getS_img3() + ", getM_name()="
-				+ getM_name() + ", getM_phone()=" + getM_phone() + ", getItemsCnt()=" + getItemsCnt() + "]";
+				+ getM_name() + ", getM_phone()=" + getM_phone() + ", getItemsCnt()=" + getItemsCnt()
+				+ ", getP_phone()=" + getP_phone() + "]";
 	}
+	
+	
 	
 	
 	
