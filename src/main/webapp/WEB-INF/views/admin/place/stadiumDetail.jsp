@@ -37,11 +37,12 @@
                 <article id="contents">
                     <h2 class="con-subject">${svo.s_name} 경기장 상세 정보</h2>
 
-					<!-- 구장 승인 상태 변경을 위한 폼 -->
-	                <%-- <form name="saveForm" id="saveForm">
-	                  	<input type="hidden" name="p_num" id="p_num" value="${pvo.p_num}" />
-	                   	<input type="hidden" name="p_ok" id="ok" />
-	                </form> --%>
+					<!-- 경기장 승인 상태 변경을 위한 폼 -->
+	                <form name="stdmAccept" id="stdmAccept">
+                    	<input type="hidden" name="s_no" id="s_no" value="${svo.s_no}" />
+                    	<input type="hidden" name="p_ok" id="actok" value="${p_ok}" />
+                    	<input type="hidden" name="p_status" id="actstatus" value="${p_status}" />
+                    </form>
 	                        
                     <!-- 경기장 정보 -->
                     <table class="table-style2">
@@ -77,7 +78,7 @@
                         <tr>
                             <td class="subject">경기장 상태</td>
                             <c:if test="${svo.s_status == 0}">
-                            	<td>미승인</td>
+                            	<td class="red">미승인</td>
                             </c:if>
                             <c:if test="${svo.s_status == 1}">
                             	<td>승인</td>
@@ -109,9 +110,8 @@
 		                    <td><a class="cancle" href="javascript:history.back();">취소</a></td>
 		                    <td class="positive">
 		                    	<c:if test="${svo.s_status == 0}">
-		                    		<button class="add ml">경기장 승인</button>
+		                    		<button id="accept" class="add ml">경기장 승인</button>
 		                    	</c:if>
-		                        <!-- <button class="save ml" disabled>저장</button> -->
 		                    </td>
 		                </tr>
                     </table>

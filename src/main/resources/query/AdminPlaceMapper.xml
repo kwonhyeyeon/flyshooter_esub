@@ -24,7 +24,7 @@
 					
 					<if test='p_name != null and p_name != ""'>
 						<![CDATA[
-						p.p_name like '%'||#{p_name}||'%'
+						p_name like '%'||#{p_name}||'%'
 						]]>
 					</if>
 				</where>
@@ -77,10 +77,31 @@
 		WHERE p_status = -2 and p_num = #{p_num}
 	</update>
 	
+	<!-- 구장 승인 상태 변경 -->
+	<update id="updatePok" parameterType="place">
+        UPDATE place
+        SET p_ok = 1
+        WHERE p_num = #{p_num}
+    </update>
+    
+    <select id="getRentalCnt" parameterType="String" resultType="int">
+    	select count(*)
+		from rental
+		where s_no in(
+		    select s_no 
+		    from stadium 
+		    where p_num = (
+		    	select p_num 
+		        from place 
+		        where p_num = #{p_num})
+		    	)
+		    and to_char(r_reserve_date, 'yyyy/MM/dd') > to_char(sysdate, 'yyyy/MM/dd')
+    </select>
+	
 	<!-- 구장 폐업 등록 -->
 	<update id="updateClose" parameterType="place">
 		update place
-		set p_status = -2
+		set p_status = -2, p_ok = 0
 		where p_num = #{p_num}
 	</update>
 	

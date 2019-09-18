@@ -47,4 +47,9 @@ public class AdminPlaceServiceImpl implements AdminPlaceService {
 		adminPlaceDao.updateClose(pvo);
 	}
 
+	@Override
+	public int getRentalCnt(String p_num) {
+		return adminPlaceDao.getRentalCnt(p_num);
+	}
+
 }

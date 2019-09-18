@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fly.admin.items.service.AdminItemsService;
@@ -85,6 +86,10 @@ public class AdminPlaceController {
 		model.addAttribute("s_no", svo.getS_no());
 		model.addAttribute("stadiumList", stadiumList);
 		
+		// 대관 리스트 확인
+		int rentalCnt = adminPlaceService.getRentalCnt(pvo.getP_num());
+		model.addAttribute("rentalCnt", rentalCnt);
+		
 		return "admin/place/placeDetail";
 	}
 	
@@ -108,12 +113,22 @@ public class AdminPlaceController {
 		
 		System.out.println("updateCloseChk 호출 성공");
 		
-		adminPlaceService.updateClose(pvo);
-		redirectAttr.addAttribute("p_num", pvo.getP_num());
+		// 대관 리스트 확인
+		int rentalCnt = adminPlaceService.getRentalCnt(pvo.getP_num());
 		
-		// 폐업 등록일 update
-		adminPlaceService.getCloseDate(pvo.getP_num());
-		redirectAttr.addAttribute("p_holiday_start", pvo.getP_holiday_start());
+		if(rentalCnt == 0) {
+			
+			adminPlaceService.updateClose(pvo);
+			redirectAttr.addAttribute("p_num", pvo.getP_num());
+			
+			// 폐업 등록일 update
+			adminPlaceService.getCloseDate(pvo.getP_num());
+			redirectAttr.addAttribute("p_holiday_start", pvo.getP_holiday_start());
+			
+		} else {
+			redirectAttr.addAttribute("p_num", pvo.getP_num());
+			redirectAttr.addFlashAttribute("rentalCnt", rentalCnt);
+		}
 		
 		return "redirect:/admin/place/placeDetail.do";
 		
