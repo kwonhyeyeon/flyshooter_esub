@@ -25,5 +25,15 @@
 	    where s_no = #{s_no} and to_char(r_reserve_date, 'yyyy-MM-dd') = #{r_reserve_date}
 	    <!-- <![CDATA[ '2019-10-01' ]]> -->
 	</select>
+	
+	<!-- 환불 리스트 -->
+	<select id="">
+		SELECT r.m_id, (SELECT m_name from member where m_id = r.m_id), 
+	    (SELECT p_name from place where p_num = (SELECT p_num from stadium where s_no = r.s_no) and m_id = #{m_id}), 
+	    r.r_total_pay, r.refund, to_char(r.r_recall_time, 'yyyy/MM/dd') r_recall_time
+		FROM rental r
+		WHERE r.r_pay_status = -1
+		ORDER BY r_recall_time desc
+	</select>
 
 </mapper>
