@@ -6,24 +6,55 @@
 	<!-- 구장 리스트 -->
 	<!-- 폐업 -2, 임시휴업 -1, 운영전 0, 운영중 1, 전체 2 -->
 	<!-- 구장명 검색 -->
-	<select id="adminPlaceList" parameterType="HashMap" resultType="place">		
-		select m.m_id, p.p_ceo, p.p_name, p.p_ok, to_char(p.p_regdate, 'yyyy/MM/dd') p_regdate, p_num,
+	<select id="adminPlaceList" parameterType="place" resultType="place">		
+		select p.m_id, p.p_ceo, p.p_name, p.p_ok, to_char(p.p_regdate, 'yyyy/MM/dd') p_regdate, p_num,
 			(select count(*) 
 			from stadium s 
-			where s.p_num = p.p_num and s.s_status = 0) p_holiday
-		from place p, member m
-		where m.m_id = p.m_id
-		
-		<if test='status != "2"'>
-			and	p.p_status = #{status}
-		</if>
-		
-		<if test='name != "null"'>
-			and
-			<![CDATA[
-			p.p_name like '%'||#{name}||'%'
-			]]>
-		</if>
+			where s.p_num = p.p_num and s.s_status = 0) p_holiday,
+			to_char(p_holiday_start, 'yyyy/MM/dd') p_holiday_start
+		from (
+			select rownum rnum, r.*
+			from (
+				select *
+				from place
+				<where>
+					<if test='p_status != 2'>
+						p_status = #{p_status}
+					</if>
+					
+					<if test='p_name != null and p_name != ""'>
+						<![CDATA[
+						p.p_name like '%'||#{p_name}||'%'
+						]]>
+					</if>
+				</where>
+				order by p_regdate desc
+			) r
+		) p
+		<where>
+	    	<if test="start_row != null and start_row != ''">
+	        	<if test="end_row != null and end_row != ''">
+	            	RNUM BETWEEN #{start_row} and #{end_row}
+	            </if>   
+	        </if>
+	    </where>
+	</select>
+	
+	<!-- paging -->
+	<select  id="adminPlaceListCnt" parameterType="place" resultType="int">
+		select count(*)
+		from place
+		<where>
+			<if test='p_status != 2'>
+				p_status = #{p_status}
+			</if>
+					
+			<if test='p_name != null and p_name != ""'>
+				<![CDATA[
+					p_name like '%'||#{p_name}||'%'
+				]]>
+			</if>
+		</where>
 	</select>
 	
 	<!-- 구장 상세 정보 -->
@@ -40,16 +71,17 @@
 	</select>
 	
 	<!-- 폐업으로 변경 시 변경된 날짜 가져옴 -->
-	<select id="getCloseDate" resultType="String" parameterType="String">
-		SELECT to_char(SCN_TO_TIMESTAMP(ORA_ROWSCN), 'yyyy/MM/dd') TM
-		FROM place
-		WHERE p_status = -2 and p_num = #{p_num}
-	</select>
-	
-	<update id="updatePok" parameterType="place">
+	<update id="getCloseDate" parameterType="place">
 		UPDATE place
-		SET p_ok = #{p_ok}
-		WHERE p_num = #{p_num}
+		SET p_holiday_start = sysdate
+		WHERE p_status = -2 and p_num = #{p_num}
+	</update>
+	
+	<!-- 구장 폐업 등록 -->
+	<update id="updateClose" parameterType="place">
+		update place
+		set p_status = -2
+		where p_num = #{p_num}
 	</update>
 	
 </mapper>

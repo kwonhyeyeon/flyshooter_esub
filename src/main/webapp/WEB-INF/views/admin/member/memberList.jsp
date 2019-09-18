@@ -63,7 +63,7 @@
 				    	
 				    	<c:if test="${ not empty memberList }">
 				    	<c:forEach var="member" items="${memberList }" varStatus="status">
-				        <tr class="list-hover">
+				        <tr class="list-hover nocursor">
 				        	<td>${ count - status.index }</td>
 				        	<td class="m_id">${ member.m_id }</td>
 				        	<td>${ member.m_name }</td>

@@ -5,14 +5,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <title>FLY SHOOTER 관리자</title>
-    <link rel="stylesheet" type="text/css" href="/resources/css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="/resources/css/adminStyle.css" />
-    <script src="http://code.jquery.com/jquery.min.js"></script>
-    <script src="/resources/js/adminPlace.js"></script>
+<meta charset="UTF-8">
+<title>FLY SHOOTER 관리자</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/adminStyle.css" />
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="/resources/js/adminPlace.js"></script>
 </head>
 
 <body>
@@ -36,10 +35,20 @@
             <div id="container">
                 <article id="contents">
                     <h2 class="con-subject">구장 상세 정보</h2>
-                    <a class="pre-page">이전</a>
 
                     <h3 class="sub-tit">구장 정보</h3>
 
+					<!-- 구장 승인 상태 변경을 위한 폼 -->
+	                <form name="saveForm" id="saveForm">
+	                  	<input type="hidden" name="p_num" id="p_num" value="${pvo.p_num}" />
+	                   	<input type="hidden" name="p_ok" id="ok" />
+	                </form>
+	                
+	                <!-- 구장 폐업 등록을 위한 폼 -->
+	                <form name="closeForm" id="closeForm">
+	                	<input type="hidden" name="p_num" id="p_num" value="${pvo.p_num}" />
+	                </form>
+	                        
                     <!-- 구장 정보 -->
                     <table class="table-style2">
                         <tr>
@@ -143,86 +152,111 @@
                         <c:if test="${pvo.p_status == -2}">
                         	<tr>
 	                            <td class="subject">폐업 등록일</td>
-	                            <td>${closeDate}</td>
+	                            <td>${pvo.p_holiday_start}</td>
 	                        </tr>
                         </c:if>
-                        <tr>
-                            <td class="subject">구장 승인 상태</td>
-                            <td>
-                            	<select name="p_ok" id="acceptSelect">
-                            		<option value="1">승인</option>
-                            		<option value="0">미승인</option>
-                            	</select>
-                            </td>
-                        </tr>
-                        <c:if test="${pvo.p_ok == 1}">
-	                        <tr>
-	                            <td class="subject">구장 승인일</td>
-	                            <td>${pvo.p_ok_date}</td>
+                        <c:if test="${pvo.p_status != -2 }">
+                        	<tr>
+	                            <td class="subject">구장 승인 상태</td>
+	                            <td>
+	                            	<select id="acceptSelect" class="tbl-select">
+	                            		<option value="1">승인</option>
+	                            		<option value="0">미승인</option>
+	                            	</select>
+	                            </td>
 	                        </tr>
+	                        <c:if test="${pvo.p_ok == 1}">
+		                        <tr>
+		                            <td class="subject">구장 승인일</td>
+		                            <td>${pvo.p_ok_date}</td>
+		                        </tr>
+	                        </c:if>
                         </c:if>
 
                         <tr>
                             <td class="subject">소개글</td>
                             <td>${pvo.p_intro}</td>
                         </tr>
-                        
-                        <!-- 구장 승인 상태 변경을 위한 폼 -->
-                        <form name="saveForm" id="saveForm">
-                        	<input type="hidden" name="p_num" id="p_num" value="${pvo.p_num}" />
-                        	<input type="hidden" name="p_ok" id="ok" value="${pvo.p_ok}" />
-                        </form>
 					    	
                         <tr class="btn-area">
 		                    <td><a class="cancle" href="javascript:history.back();">취소</a></td>
 		                    <td class="positive">
-		                    	<input type="text" id="dddd" value="${pvo.p_ok}" />
-		                    	<button class="delete">폐업 등록</button>
-		                        <button class="save" disabled>저장</button>
+		                    	<c:if test="${pvo.p_status != -2 }">
+		                    		<button class="delete ml">폐업 등록</button>
+		                    	</c:if>
+		                    	<c:if test="${pvo.p_status == -2 }">
+		                    		<button class="delete ml" disabled>폐업 등록</button>
+		                    	</c:if>
+		                        <button class="save ml" disabled>저장</button>
 		                    </td>
 		                </tr>
                     </table>
                     <!-- 구장 상세 정보 -->
-
+					
                     <h3 class="sub-tit">용품</h3>
 
                     <!-- 용품 정보 -->
                     <table class="table-style">
                         <tr>
                             <th width="100">번호</th>
-                            <th width="350">용품명</th>
-                            <th width="150">대여료</th>
-                            <th width="400">용품 상태</th>
+                            <th width="600">용품명</th>
+                            <th width="200">대여료</th>
+                            <th width="200">용품 상태</th>
                             <th width="100">대여 횟수</th>
                             <th>용품 등록일</th>
                         </tr>
-                        <c:if test="${not empty adminPlaceList}">
-                            <c:forEach var="place" items="${adminPlaceList}" varStatus="status">
-                                <tr class="list-hover">
-                                    <td>${fn:length(adminPlaceList)-status.count+1}</td>
-                                    <td>${pvo.m_id}</td>
-                                    <td>${pvo.p_ceo}</td>
-                                    <c:if test="${pvo.p_ok == 1}">
-                                        <td>Y</td>
+                        <c:if test="${not empty itemsList}">
+                            <c:forEach var="items" items="${itemsList}" varStatus="status">
+                                <tr>
+                                    <td>${fn:length(itemsList)-status.count+1}</td>
+                                    <td>${items.i_name}</td>
+                                    <td>${items.i_rental_fee}</td>
+                                    <c:if test="${items.i_status == 0}">
+                                    	<td>미게시</td>
                                     </c:if>
-                                    <c:if test="${pvo.p_ok == 0}">
-                                        <td>N</td>
+                                    <c:if test="${items.i_status == 1}">
+                                        <td>게시중</td>
                                     </c:if>
-                                    <td>${pvo.p_name}</td>
-                                    <td>${pvo.p_holiday}</td>
+                                    <td>${items.i_use}</td>
+                                    <td>${items.i_regdate}</td>
                                 </tr>
                             </c:forEach>
                         </c:if>
-                        <c:if test="${empty adminPlaceList}">
+                        <c:if test="${empty itemsList}">
                             <tr>
-                                <td class="empty" colspan="7">조회된 구장이 없습니다</td>
+                                <td class="empty" colspan="6">조회된 용품이 없습니다</td>
                             </tr>
                         </c:if>
                     </table>
                     <!-- 용품 정보 -->
 
                     <h3 class="sub-tit">경기장</h3>
-                    <a href="">경기장명</a>
+                    
+                    <!-- 경기장 상세 정보 페이지로 가기 위한 폼 -->
+                    <form name="stdmDetailForm" id="stdmDetailForm">
+                    	<input type="hidden" name="s_no" id="s_no" />
+                    </form>
+                    <table class="table-style">
+                    	<c:if test="${not empty stadiumList}">
+                    		<c:forEach var="stdm" items="${stadiumList}" varStatus="status">
+			                    <tr class="list-hover stadiumDetail" data-num="${stdm.s_no}">
+			                    	<td width="100">${fn:length(stadiumList)-status.count+1}</td>
+			                    	<td width="900">${stdm.s_name}</td>
+			                    	<c:if test="${stdm.s_status == 0}">
+			                    		<td class="red right">미승인</td>
+			                    	</c:if>
+			                    	<c:if test="${stdm.s_status == 1}">
+			                    		<td class="right">승인</td>
+			                    	</c:if>
+			                    </tr>
+		                    </c:forEach>
+	                    </c:if>
+	                    <c:if test="${empty stadiumList}">
+	                   		<tr>
+	                   			<td class="empty" colspan="3">조회된 경기장이 없습니다</td>
+	                   		</tr>
+	                    </c:if>
+                    </table>
                 </article><!-- contents -->
             </div><!-- container -->
 
@@ -232,7 +266,7 @@
 
 </body>
 <script>
-    $("#p_ok").val("${pvo.p_ok}");
+    $("#acceptSelect").val("${pvo.p_ok}");
     $("${pvo.p_ok}").text();
 </script>
 

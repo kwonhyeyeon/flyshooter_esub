@@ -65,47 +65,43 @@ public class PagingTag extends TagSupport {
 		if ( total%list_size != 0 ) lastPage = lastPage + 1;
 		currentlast = (currentlast>lastPage)?lastPage:currentlast;
 		
-		
-		ret += " <div class='paginate'> ";
-		
 		if ( page>1 ) {
-			ret += " <a href=\"javascript:goPage('1')\"><span> << </span></a> ";
+			ret += " <a class='pre spacing' href=\"javascript:goPage('1')\"> << </a> ";
 		}
 		else{
-			ret += " <span> << </span> ";
+			ret += " <a class='pre spacing'> << </a> ";
 		}
 		
 		if ( prevFirst > 0 ) {
-			ret += " <a href=\"javascript:goPage('"+prevFirst+"');\"><span> < </span></a> ";
+			ret += " <a class='pre' href=\"javascript:goPage('"+prevFirst+"');\"> < </a> ";
 		}
 		else{
-			ret += " <span> < </span> ";
+			ret += " <a class='pre'> < </a> ";
 		}
 
 		for (int j=currentFirst; j<currentFirst+page_size && j<=lastPage; j++) {	
 			if ( j <= currentlast ) {
 				if ( j == page ) {
-					ret += " <a href='#' class='on textAn'>"+j+"</a> ";
+					ret += " <a href='#' class='is-active num'>"+j+"</a> ";
 				} else {
-					ret += " <a href=\"javascript:goPage('"+j+"');\" class='textAn'>"+j+"</a> ";
+					ret += " <a href=\"javascript:goPage('"+j+"');\" class='num'>"+j+"</a> ";
 				}
 			} 
 		}
 
 		if ( nextFirst <= lastPage ) {
-			ret += " <a href=\"javascript:goPage('"+nextFirst+"')\"> > </span></a> ";
+			ret += " <a class='next' href=\"javascript:goPage('"+nextFirst+"')\"> > </a> ";
 		}
 		else{
-			ret += " <span> > </span> ";
+			ret += " <a class='next'> > </a> ";
 		}
 		
 		if ( page<lastPage ) {
-			ret += " <a href=\"javascript:goPage('"+lastPage+"')\"><span> >> </span></a> ";
+			ret += " <a class='next spacing' href=\"javascript:goPage('"+lastPage+"')\"> >> </a> ";
 		}
 		else{
-			ret += " <span> >> </span> ";
+			ret += " <a class='next spacing'> >> </a> ";
 		}
-		ret += " </div> ";
 
 		return ret;
 	}

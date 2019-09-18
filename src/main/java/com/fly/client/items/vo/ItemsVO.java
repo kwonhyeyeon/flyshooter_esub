@@ -1,6 +1,7 @@
 package com.fly.client.items.vo;
 
 public class ItemsVO {
+	
 	private int i_no;
 	private String p_num;
 	private String i_name;
@@ -8,6 +9,7 @@ public class ItemsVO {
 	private int i_use;
 	private int i_status;
 	private String i_regdate;
+	
 	public int getI_no() {
 		return i_no;
 	}
@@ -56,6 +58,5 @@ public class ItemsVO {
 				+ ", getI_rental_fee()=" + getI_rental_fee() + ", getI_use()=" + getI_use() + ", getI_status()="
 				+ getI_status() + ", getI_regdate()=" + getI_regdate() + "]";
 	}
-	
 	
 }
