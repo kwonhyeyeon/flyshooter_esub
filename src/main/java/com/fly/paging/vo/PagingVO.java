@@ -32,5 +32,10 @@ public class PagingVO {
 	public void setEnd_row(String end_row) {
 		this.end_row = end_row;
 	}
+	@Override
+	public String toString() {
+		return "PagingVO [getPage()=" + getPage() + ", getPageSize()=" + getPageSize() + ", getStart_row()="
+				+ getStart_row() + ", getEnd_row()=" + getEnd_row() + "]";
+	}
 	
 }

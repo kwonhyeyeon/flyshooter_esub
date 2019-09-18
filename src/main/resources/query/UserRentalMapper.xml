@@ -122,4 +122,13 @@
 		WHERE r.s_no = s.s_no and s.p_num = p.p_num and r.m_id = m.m_id and r.r_no = #{r_no}
 	</select>
 	
+	<update id="rentalUpdate" parameterType="rental" >
+		UPDATE rental
+			   SET 
+			   	refund = #{refund},
+			   	r_recall_time = sysdate,
+			   	r_pay_status = -1
+		WHERE r_no = #{r_no}	
+	</update>
+	
 </mapper>

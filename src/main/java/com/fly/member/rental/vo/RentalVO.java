@@ -119,6 +119,7 @@ public class RentalVO extends PagingVO{
 	}
 	@Override
 	public String toString() {
+		System.out.println(super.toString() + "=====rentalvo======");
 		return "RentalVO [getR_no()=" + getR_no() + ", getS_no()=" + getS_no() + ", getM_id()=" + getM_id()
 				+ ", getR_reserve_date()=" + getR_reserve_date() + ", getR_start()=" + getR_start()
 				+ ", getR_total_pay()=" + getR_total_pay() + ", getR_pay_type()=" + getR_pay_type() + ", getR_bank()="

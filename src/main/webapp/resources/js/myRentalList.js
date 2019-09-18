@@ -22,7 +22,7 @@ $(document).ready(function(){
 		
 		if( refundChk() ){
 			
-			alert("submit");
+			$("#goUpdate").submit();
 
 		}
 		
@@ -44,15 +44,22 @@ $(document).ready(function(){
 			alert("당일 취소는 불가합니다.");
 			return false;
 		}else if(day == 1){
-			return confirm(day+"일전 환불시 \n환불금액 : " + eval(total/2) + " 원\n진행하시겠습니까 ?");
+			total = eval(total/2);
+			$("#refund").val(total);
+			return confirm(day+"일전 환불시 \n환불금액 : " + total + " 원\n진행하시겠습니까 ?");
 		}else if(day > 1 && day < 6){
-			return confirm(day+"일전 환불시 \n환불금액 : " + eval(total * 0.6) + " 원\n진행하시겠습니까 ?");
+			total = eval(total * 0.6);
+			$("#refund").val(total);
+			return confirm(day+"일전 환불시 \n환불금액 : " + total + " 원\n진행하시겠습니까 ?");
 		}else if(day > 5 && day < 11){
-			return confirm(day+"일전 환불시 \n환불금액 : " + eval(total * 0.7) + " 원\n진행하시겠습니까 ?");
+			total = eval(total * 0.7);
+			$("#refund").val(total);
+			return confirm(day+"일전 환불시 \n환불금액 : " + total + " 원\n진행하시겠습니까 ?");
 		}else if(day >= 11){
-			return confirm(day+"일전 환불시 \n환불금액 : " + eval(total) + " 원\n진행하시겠습니까 ?")
+			$("#refund").val(total);
+			return confirm(day+"일전 환불시 \n환불금액 : " + total + " 원\n진행하시겠습니까 ?");
 		}
-		
+			
 			alert("환불이 불가합니다. \n관리자에게 문의하십시오.");
 			return false;
 	}

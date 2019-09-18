@@ -62,6 +62,12 @@ public class UserRentalDaoImpl implements UserRentalDao {
 		return sqlSession.selectOne(NAME_SPACE + ".showRentalDetail", r_no);
 	}
 
+	@Override
+	public int rentalUpdate(RentalVO rvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update(NAME_SPACE + ".rentalUpdate", rvo);
+	}
+
 
 }
 

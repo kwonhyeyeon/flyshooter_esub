@@ -207,6 +207,24 @@ public class UserRentalController {
 	   return "rental/rentalDetail";
    }
    
-   
+   @RequestMapping(value = "/rentalUpdate.do", method = RequestMethod.POST)
+   public String rentalUpdate(@ModelAttribute RentalVO rvo, Model model, RedirectAttributes redirectAttr) {
+	   System.out.println(rvo.toString());
+	   redirectAttr.addAttribute("page", rvo.getPage());
+	  int result = userRentalService.rentalUpdate(rvo);
+	   String massage = "";
+	   
+	   
+	   if(result == 1) {
+		   massage = "환불처리가 성공적으로 이루어졌습니다.";
+	   }
+	   else if(result == 0) {
+		   massage = "환불처리에 실패하였습니다.\n다시 시도해주십시오";
+	   }
+	   redirectAttr.addFlashAttribute("massage", massage);
+	   
+	   return "redirect:/user/rental/myRentalList.do";
+	   
+   }
    }
 

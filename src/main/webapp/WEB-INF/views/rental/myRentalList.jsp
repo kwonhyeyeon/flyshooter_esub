@@ -15,7 +15,9 @@
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/js/myRentalList.js"></script>
 <script>
-	$(function() {
+
+	$(function() 
+		{
 		$("#gnb").hover(function() {
 			$(".menu-wrap").slideDown(500);
 		});
@@ -32,6 +34,10 @@
 		});
 		
 		$("#f_search").submit();
+	}
+	
+	if("${massage}"){
+		alert("${massage}");
 	}
 </script>
 </head>

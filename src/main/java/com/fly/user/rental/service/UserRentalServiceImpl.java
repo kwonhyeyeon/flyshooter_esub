@@ -108,4 +108,10 @@ public class UserRentalServiceImpl implements UserRentalService {
 		return userRentalDao.showDetail(r_no);
 	}
 
+	@Override
+	public int rentalUpdate(RentalVO rvo) {
+		// TODO Auto-generated method stub
+		return userRentalDao.rentalUpdate(rvo);
+	}
+
 }

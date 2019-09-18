@@ -91,7 +91,7 @@ public class RentalDetailVO extends RentalVO{
 	}
 	@Override
 	public String toString() {
-		super.toString();
+		System.out.println(super.toString() + "======paging=====");
 		return "RentalDetailVO [getP_name()=" + getP_name() + ", getP_address()=" + getP_address() + ", getP_intro()="
 				+ getP_intro() + ", getS_name()=" + getS_name() + ", getS_hours()=" + getS_hours() + ", getS_img1()="
 				+ getS_img1() + ", getS_img2()=" + getS_img2() + ", getS_img3()=" + getS_img3() + ", getM_name()="

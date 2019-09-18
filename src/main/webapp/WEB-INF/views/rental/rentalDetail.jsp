@@ -179,10 +179,13 @@
 					<td colspan="2"><button id="goList" onclick="goBack();">확인</button></td>
 				</tr>			
 			</table>
-			<form action="goUpdate">
+			<input type="text" id="r_reserve_date" value="${data.r_reserve_date }" />
+			<input type="text" id="r_total_pay" value="${data.r_total_pay }" />
+			
+			<form id="goUpdate" method="post" action="/user/rental/rentalUpdate.do">
 				<input type="text" name="r_no" value="${data.r_no }"/>
-				<input type="text" id="r_reserve_date" value="${data.r_reserve_date }" />
-				<input type="text" id="r_total_pay" value="${data.r_total_pay }" />
+				<input type="text" id="refund" name="refund" />
+				<input type="text" name="page" value="${page }" />
 			</form>
 		</article>
 		
