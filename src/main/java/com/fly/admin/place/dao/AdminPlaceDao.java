@@ -25,4 +25,7 @@ public interface AdminPlaceDao {
 	// 구장 폐업 등록
 	public void updateClose(PlaceVO pvo);
 	
+	// 폐업 등록 시 대관 리스트 확인
+	public int getRentalCnt(String p_num);
+	
 }

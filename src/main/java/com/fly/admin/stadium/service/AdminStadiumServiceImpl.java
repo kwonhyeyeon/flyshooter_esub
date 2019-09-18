@@ -25,5 +25,10 @@ public class AdminStadiumServiceImpl implements AdminStadiumService {
 	public StadiumVO getStadiumDetail(int s_no) {
 		return adminStadiumDao.getStadiumDetail(s_no);
 	}
+
+	@Override
+	public void updateStdmAccept(int s_no) {
+		adminStadiumDao.updateStdmAccept(s_no);
+	}
 	
 }

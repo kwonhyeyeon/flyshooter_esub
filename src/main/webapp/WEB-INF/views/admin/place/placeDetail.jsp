@@ -34,14 +34,13 @@
 
             <div id="container">
                 <article id="contents">
-                    <h2 class="con-subject">구장 상세 정보</h2>
+                    <h2 class="con-subject">${pvo.p_name} 구장 상세 정보</h2>
 
                     <h3 class="sub-tit">구장 정보</h3>
 
 					<!-- 구장 승인 상태 변경을 위한 폼 -->
 	                <form name="saveForm" id="saveForm">
 	                  	<input type="hidden" name="p_num" id="p_num" value="${pvo.p_num}" />
-	                   	<input type="hidden" name="p_ok" id="ok" />
 	                </form>
 	                
 	                <!-- 구장 폐업 등록을 위한 폼 -->
@@ -130,14 +129,19 @@
                         </tr>
                         <tr>
                             <td class="subject">구장 상태</td>
-                            <td>
-                            	<c:choose>
-                            		<c:when test="${pvo.p_status == 1}">운영중</c:when>
-                            		<c:when test="${pvo.p_status == 0}">운영전</c:when>
-                            		<c:when test="${pvo.p_status == -1}">임시휴업</c:when>
-                            		<c:when test="${pvo.p_status == -2}">폐업</c:when>
-                            	</c:choose>
-                            </td>
+                            <c:if test="${pvo.p_status != -2 }">
+                            	<td>
+                            		<c:choose>
+	                            		<c:when test="${pvo.p_status == 1}">운영중</c:when>
+	                            		<c:when test="${pvo.p_status == 0}">운영전</c:when>
+	                            		<c:when test="${pvo.p_status == -1}">임시휴업</c:when>
+	                            		<c:when test="${pvo.p_status == -2}">폐업</c:when>
+	                            	</c:choose>
+                            	</td>
+                            </c:if>
+                            <c:if test="${pvo.p_status == -2 }">
+                            	<td class="red">폐업</td>
+                            </c:if>
                         </tr>
                         <c:if test="${pvo.p_status == -1}">
                         	<tr>
@@ -158,12 +162,12 @@
                         <c:if test="${pvo.p_status != -2 }">
                         	<tr>
 	                            <td class="subject">구장 승인 상태</td>
-	                            <td>
-	                            	<select id="acceptSelect" class="tbl-select">
-	                            		<option value="1">승인</option>
-	                            		<option value="0">미승인</option>
-	                            	</select>
-	                            </td>
+	                            <c:if test="${pvo.p_ok == 0}">
+	                            	<td id="placeAccept" class="red">미승인</td>
+	                            </c:if>
+	                            <c:if test="${pvo.p_ok == 1}">
+	                            	<td id="placeAccept">승인</td>
+	                            </c:if>
 	                        </tr>
 	                        <c:if test="${pvo.p_ok == 1}">
 		                        <tr>
@@ -181,13 +185,12 @@
                         <tr class="btn-area">
 		                    <td><a class="cancle" href="javascript:history.back();">취소</a></td>
 		                    <td class="positive">
-		                    	<c:if test="${pvo.p_status != -2 }">
-		                    		<button class="delete ml">폐업 등록</button>
+		                    	<c:if test="${pvo.p_status != -2}">
+		                    		<button class="delete ml" id="rentalCnt" value="${rentalCnt}">폐업 등록</button>
 		                    	</c:if>
-		                    	<c:if test="${pvo.p_status == -2 }">
-		                    		<button class="delete ml" disabled>폐업 등록</button>
+		                    	<c:if test="${pvo.p_status != -2 and pvo.p_ok != 1}">
+		                    		<button id="placeAcceptBtn" class="save ml">구장 승인</button>
 		                    	</c:if>
-		                        <button class="save ml" disabled>저장</button>
 		                    </td>
 		                </tr>
                     </table>
@@ -235,6 +238,8 @@
                     <!-- 경기장 상세 정보 페이지로 가기 위한 폼 -->
                     <form name="stdmDetailForm" id="stdmDetailForm">
                     	<input type="hidden" name="s_no" id="s_no" />
+                    	<input type="hidden" name="p_ok" value="${pvo.p_ok}" />
+                    	<input type="hidden" name="p_status" value="${pvo.p_status}" />
                     </form>
                     <table class="table-style">
                     	<c:if test="${not empty stadiumList}">

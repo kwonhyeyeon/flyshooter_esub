@@ -20,4 +20,11 @@
 		WHERE s_no = #{s_no}
 	</select>
 	
+	<!-- 경기장 승인 -->
+	<update id="updateStdmAccept" parameterType="int">
+		UPDATE stadium
+		SET s_status = 1
+		WHERE s_no = #{s_no}
+	</update>
+	
 </mapper>

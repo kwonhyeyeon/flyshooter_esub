@@ -47,4 +47,9 @@ public class AdminPlaceDaoImpl implements AdminPlaceDao {
 		sqlSession.update(NAME_SPACE + ".updateClose", pvo);
 	}
 
+	@Override
+	public int getRentalCnt(String p_num) {
+		return sqlSession.selectOne(NAME_SPACE + ".getRentalCnt", p_num);
+	}
+
 }

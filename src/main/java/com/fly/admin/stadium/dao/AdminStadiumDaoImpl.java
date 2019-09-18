@@ -25,5 +25,10 @@ public class AdminStadiumDaoImpl implements AdminStadiumDao {
 	public StadiumVO getStadiumDetail(int s_no) {
 		return sqlsession.selectOne(NAME_SPACE + ".getStadiumDetail", s_no);
 	}
+
+	@Override
+	public void updateStdmAccept(int s_no) {
+		sqlsession.update(NAME_SPACE + ".updateStdmAccept", s_no);
+	}
 	
 }
