@@ -80,8 +80,19 @@ public class ClientRentalController {
                 
             }
         }
-    
         
         return result;
     }
+    
+    // 환불 현황 리스트
+    @RequestMapping(value = "/refundList.do", method = RequestMethod.POST)
+    public String getRefundList() {
+    	
+    	System.out.println("getRefundList 호출 성공");
+    	
+    	
+    	
+    	return "/rental/refundList";
+    }
+    
 }

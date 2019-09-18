@@ -52,7 +52,7 @@
 				</nav>
 			</header>
 			
-			<div class="menu-wrap">
+			<div id="rrrr" class="menu-wrap">
 				<div class="menu">
 					<c:choose>
 						<c:when test="${m_type==1}">
@@ -74,8 +74,8 @@
 					
 						<c:when test="${m_type==0}">
 						<ul class="member-menu">
-							<li><a href="/client/rental/rentalList.do">대관 예약 현황</a></li>
-							<li><a href="/">대관 환불 현황</a></li>
+							<li><a href="/client/rental/rentalList.do">예약 현황</a></li>
+							<li><a href="/client/rental/refundList.do">환불 현황</a></li>
 							<li><a href="/">오프라인 대관 관리</a></li>
 						</ul>
 						<ul>
