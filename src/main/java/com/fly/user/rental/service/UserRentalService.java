@@ -29,4 +29,7 @@ public interface UserRentalService {
 	
 	// rentalDetail 페이지
 	public RentalDetailVO showDetail(String r_no);
+	
+	// rentalUpdate (환불처리)
+	public int rentalUpdate(RentalVO rvo);
 }
