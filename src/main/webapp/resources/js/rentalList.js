@@ -7,6 +7,7 @@ $(document).ready(function(){
 	var p_num = $(".placeName-op:selected").val();	
 	var s_no = $(".s_no").val();
 	
+	
 	// datepicker 설정
     $("#datepicker").datepicker({
         dateFormat: 'yy-mm-dd' // Input Display Format 변경
@@ -30,58 +31,101 @@ $(document).ready(function(){
 	$("#datepicker").datepicker("setDate", "today");
 	//(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
 	
-	// datepicker 값 변경 시 해당 경기장 예약 리스트 가져오는 이벤트
-//	$("#datepicker").on("change", function() {
-//		
-//		var r_reserve_date = $("#datepicker").val(); // 선택 날짜
-//		
-//		var query = {
-//			p_num : p_num,
-//			s_no : s_no,
-//			r_reserve_date : r_reserve_date
-//		};
-//		
-//		$.ajax({
-//			type : "get",
-//			url : "/client/rental/rentalList.do",
-//			data : query,
-//			error : function() {
-//				alert("시스템 오류입니다. 관리자에게 문의하세요");
-//			},
-//			success : function(result) {
-//				
-//				
-//				
-//			}			
-//		});
-//		
-//	});
+	var p_num = $("#placeName").val();
+	var selectDay = $("#datepicker").val();
+	getList(p_num, selectDay);
 	
 	// 구장명 값 변경 시 해당 경기장 리스트 가져오는 이벤트
 	$(".placeName").on("change", function(){
 		
-		var p_num = $(".placeName-op:selected").val(); // 구장명
-		var s_no = $(".s_no").val(); // 경기장 일련번호
+		p_num = $("#placeName").val();
+		selectDay = $("#datepicker").val();
+		
+		
+		getList(p_num, selectDay);
+		
+	});
+	
+	$("#datepicker").change(function(){
+		p_num = $("#placeName").val();
+		selectDay = $("#datepicker").val();
+		
+		getList(p_num, selectDay);
+	});
+	
+	$(document).on("click",".rental",function(){
+		var index = $(".rental").index(this);
+		
+		var rvo = setRentalVo(index);
+		
+		// 오프라인 대관시 상세페이지 이용불가.
+		if( !eval(rvo) ){
+			return
+		}
 		
 		$.ajax({
 			type : "post",
-			url : "/client/rental/rentalList.do",
-			data : {
-				p_num : p_num,
-				s_no : s_no
-			},
+			url : "/client/rental/showDetail.do",
+			data : rvo,
 			error : function() {
 				alert("시스템 오류입니다. 관리자에게 문의하세요");
 			},
 			success : function(result) {
-				
-				// 해당 영역 리로드
-				$(".stadiumList").load(window.location.href + $(".stadiumList"));
-				$(".stadiumList").html(result);
-				
+				alert(result);
 			}
-		});
-		
-	});
+			
+			});
+	 });
 	
 });
+
+
+		function getList(p_num, selectDay){
+			
+			$.ajax({
+				type : "post",
+				url : "/client/rental/getList.do",
+				data : {
+					p_num : p_num,
+					selectDay : selectDay
+				},
+				error : function() {
+					alert("시스템 오류입니다. 관리자에게 문의하세요");
+				},
+				success : function(result) {
+					$(".stadiumList").text("");
+					$(".stadiumList").append(result);
+					
+				}
+				
+			});
+		}
+		
+		
+		function setRentalVo(index){
+			
+			var r_info = $(".rental:eq("+index+")").attr("data-num");
+			param = r_info.split(",");
+			
+			
+			var stadiumName = $(".rental:eq("+index+")").parent().parent().parent().prev(".stadiumName").text();
+			var td = $(".rental:eq("+index+")").children();
+			
+			var status = td.eq(4).text();
+			if( status == '오프라인' ){
+				alert("오프라인 대관은 \n상세페이지가 없습니다.");
+				return false;
+			}
+			
+			var rvo = {
+				r_no : param[0],
+				r_regdate : param[1],
+				r_total_pay : param[2],
+				m_id : td.eq(0).text(),
+				r_reserve_date : td.eq(2).text(),
+				r_start : stadiumName,
+				r_account : td.eq(1).text()
+			};
+			
+			return rvo;
+		}

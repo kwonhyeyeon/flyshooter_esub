@@ -20,16 +20,6 @@ public class ClientPlaceDaoImpl implements ClientPlaceDao {
 	
 	private String NAME_SPACE = "com.fly.client.place.dao.ClientPlaceDao";
 
-	// 경기장 리스트
-	@Override
-	public List<StadiumVO> stadiumList(String p_num) {
-		return session.selectList(NAME_SPACE + ".stadiumList", p_num);
-	}
 	
-	// 대관 예약 리스트
-	@Override
-	public List<RentalVO> rentalList(HashMap<String, Object> map) {
-		return session.selectList("rentalList", map);
-	}
 
 }

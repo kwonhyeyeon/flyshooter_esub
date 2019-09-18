@@ -1,13 +1,20 @@
 package com.fly.client.rental.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fly.client.rental.service.ClientRentalService;
+import com.fly.member.rental.vo.RentalVO;
+import com.fly.member.stadium.vo.StadiumVO;
 
 @Controller
 @RequestMapping(value = "/client/rental")
@@ -24,7 +31,7 @@ public class ClientRentalController {
 		 */
 		String m_id = "esub17@naver.com";
 		
-		model.addAttribute("placeList", clientRentalService.placeList(m_id));
+		model.addAttribute("placeList", clientRentalService.getPlaceList(m_id));
 		
 		
 		
@@ -32,60 +39,103 @@ public class ClientRentalController {
 	}
 	
 	
+	@RequestMapping(value = "/getList.do", method = RequestMethod.POST,  produces= "text/html; charset=UTF-8")
+	@ResponseBody
+	public String setList(@RequestParam(value = "p_num") String p_num, 
+			@RequestParam(value = "selectDay") String selectDay) {
+		System.out.println("p_num ========"+p_num);
+		System.out.println("selectDay======" + selectDay);
+		
+		int r_end = 0;
+		StringBuffer result = new StringBuffer();
+		List<StadiumVO> stadiumList = clientRentalService.getStadiumList(p_num);
+		List<RentalVO> rentalList = null;
+		
+		if( stadiumList.isEmpty() ) {
+			result.append("<p class='noStadium'>등록된 경기장이 없습니다.</p>"); 
+			return result.toString();
+		}
 	
+		
+		for( StadiumVO svo : stadiumList ) {
+			
+			result.append("<p class='stadiumName'>");
+			result.append(svo.getS_name());
+			result.append("</p>");
+			result.append("<hr /><br />");
+			rentalList = clientRentalService.getRentalList(svo.getS_no(), selectDay);
+			result.append("<div class='rentalListArea'>");
+			if( rentalList.isEmpty() ) {
+				result.append("<p class='noStadium'>대관 이력이 없습니다.</p>");
+			}else {
+				result.append("<table class='rentalListTbl'>");
+				result.append("<tr><td>예약자명</td><td>전화번호</td><td>예약시간</td><td>용품대여</td><td>대관유형</td></tr>");
+					for( RentalVO rvo : rentalList ) {
+						result.append("<tr class='rental' data-num='");
+						result.append(rvo.getR_no());
+						result.append(",");
+						result.append(rvo.getR_regdate());
+						result.append(",");
+						result.append(rvo.getR_total_pay());
+						result.append("'>");
+						result.append("<td>");
+						result.append(rvo.getR_bank());
+						result.append("</td>");
+						result.append("<td>");
+						result.append(rvo.getR_account());
+						result.append("</td>");
+						result.append("<td>");
+						result.append(selectDay);
+						result.append(" (");
+						result.append(rvo.getR_start());
+						result.append("-");
+						
+						// 종료시간 계산
+						r_end = Integer.parseInt( rvo.getR_start() ) + rvo.getCal_status();
+
+						result.append(r_end);
+						result.append(")시");
+						result.append("</td>");
+						result.append("<td>");
+						if( rvo.getRefund() > 0 ) {
+							result.append("유");
+						}else {
+							result.append("무");
+						}
+						result.append("</td>");
+						
+						result.append("<td>");
+						if( rvo.getR_pay_status() == 0 ) {
+							result.append("오프라인");
+						}else if( rvo.getR_pay_status() == 1 ) {
+							result.append("온라인");
+						}else {
+							result.append("환불대기중");
+						}
+						result.append("</td>");
+						
+						
+						result.append("</tr>");
+						
+					}
+				result.append("</table>");
+			}
+			result.append("</div>");
+		}
 	
-	/*
-	 * // 구장 별 경기장 별 대관 예약 현황(선택 값이 변경될 때)
-	 * 
-	 * @RequestMapping(value = "/rentalList.do", method = RequestMethod.POST,
-	 * produces= "text/html; charset=UTF-8")
-	 * 
-	 * @ResponseBody public String rentalListByStadiumByPlace(
-	 * 
-	 * @ModelAttribute StadiumVO svo,
-	 * 
-	 * @ModelAttribute RentalVO rvo,
-	 * 
-	 * @RequestParam(value = "p_num", required = true, defaultValue = "x") String
-	 * p_num,
-	 * 
-	 * @RequestParam(value = "s_no", required = true, defaultValue = "1") int s_no)
-	 * {
-	 * 
-	 * System.out.println("구장 별 경기장 별 대관 예약 현황 호출");
-	 * 
-	 * String result = "";
-	 * 
-	 * // 구장의 경기장 리스트 List<StadiumVO> stadiumList =
-	 * clientPlaceService.stadiumList(p_num);
-	 * 
-	 * for(StadiumVO stadium : stadiumList) { System.out.println("경기장 리스트");
-	 * System.out.println(stadium.toString()); }
-	 * 
-	 * // 경기장명 출력 if(stadiumList.isEmpty()) { // 경기장 리스트가 없을 경우 result =
-	 * "<p class='noStadium'>경기장이 없습니다. 경기장을 등록해주세요</p>"; } else { // 경기장 리스트가 있을 경우
-	 * for(StadiumVO stadium : stadiumList) { result += "<h2 class='stadiumName'>" +
-	 * stadium.getS_name() + "</h2>";
-	 * 
-	 * // 경기장 별 대관 예약 리스트 String r_reserve_date = "2019-09-05"; List<RentalVO>
-	 * rentalList = clientPlaceService.rentalList(s_no, r_reserve_date);
-	 * for(RentalVO rental : rentalList) { System.out.println("대관 현황 리스트");
-	 * System.out.println(rental.toString()); }
-	 * 
-	 * } }
-	 * 
-	 * return result; }
-	 * 
-	 * // 환불 현황 리스트
-	 * 
-	 * @RequestMapping(value = "/refundList.do", method = RequestMethod.POST) public
-	 * String getRefundList() {
-	 * 
-	 * System.out.println("getRefundList 호출 성공");
-	 * 
-	 * 
-	 * 
-	 * return "/rental/refundList"; }
-	 */
+		System.out.println("버퍼크기" + result.capacity());
+		return result.toString();
+	}
+	@RequestMapping(value = "/showDetail.do", method = RequestMethod.POST,  produces= "text/html; charset=UTF-8")
+	@ResponseBody
+	public String showDetail(@ModelAttribute RentalVO rvo) {
+		
+	System.out.println(rvo.toString());
+		StringBuffer result = new StringBuffer();
+		
+		
+		
+		return "ㅋ시발 조졌다";
+	}
     
 }

@@ -110,7 +110,7 @@
 			<div class="placeList">
 				<c:choose>
 					<c:when test="${not empty placeList}">
-						<select name="placeName" class="placeName">
+						<select name="placeName" class="placeName" id="placeName">
 							<c:forEach var="place" items="${placeList}" varStatus="status">
 								<option class="placeName-op" value="${place.p_num}">${place.p_name}</option>
 							</c:forEach>
@@ -130,11 +130,15 @@
 			
 			<!-- 경기장 별 대관 예약 리스트 -->
 			<div class="stadiumList">
-				<c:if test="${empty stadiumList}">
-					<p class="noStadium">경기장이 없습니다. 경기장을 등록해주세요</p>
-				</c:if>
+				
 			</div>
 			<!-- 경기장 별 대관 예약 리스트 -->
+			
+			<!-- 대관 상세페이지 (모달창) -->
+			<div class="rentalDetail">
+			
+			</div>
+			<!-- 대관 상세페이지 (모달창) -->
 		</article>
 		
 	</div>
