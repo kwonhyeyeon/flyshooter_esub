@@ -135,7 +135,7 @@
 			<!-- 경기장 별 대관 예약 리스트 -->
 			
 			<!-- 대관 상세페이지 (모달창) -->
-			<div class="rentalDetail">
+			<div id="dialog" class="rentalDetail" style="display: none">
 			
 			</div>
 			<!-- 대관 상세페이지 (모달창) -->

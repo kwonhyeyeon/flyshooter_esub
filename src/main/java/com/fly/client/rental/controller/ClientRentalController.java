@@ -133,9 +133,30 @@ public class ClientRentalController {
 	System.out.println(rvo.toString());
 		StringBuffer result = new StringBuffer();
 		
+		result.append("<p>대관정보</p>");
+		result.append("<hr /><br />");
+		result.append("<table>");
+		result.append("<tr><td>신청자</td><td>");
+		result.append(rvo.getM_id());
+		result.append("</td></tr><tr><td>연락처</td><td>");
+		result.append(rvo.getR_account());
+		result.append("</td></tr>");
 		
+		result.append("<tr><td>대관 등록일</td><td>");
+		result.append(rvo.getR_regdate());
+		result.append("</td></tr><tr><td>예약시간</td><td>");
+		result.append(rvo.getR_reserve_date());
+		result.append("</td></tr>");
 		
-		return "ㅋ시발 조졌다";
+		result.append("<tr><td>경기장</td><td>");
+		result.append(rvo.getR_start());
+		result.append("</td></tr><tr><td>총 결제금액</td><td>");
+		result.append(rvo.getR_total_pay());
+		result.append(" 원</td></tr>");
+		result.append("</table>");
+		
+		result.append("<br /><hr /><br />");
+		return result.toString();
 	}
     
 }

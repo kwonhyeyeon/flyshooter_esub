@@ -71,7 +71,9 @@ $(document).ready(function(){
 				alert("시스템 오류입니다. 관리자에게 문의하세요");
 			},
 			success : function(result) {
-				alert(result);
+				$(".rentalDetail").text("");
+				$(".rentalDetail").append(result);
+				openDialog();
 			}
 			
 			});
@@ -95,7 +97,6 @@ $(document).ready(function(){
 				success : function(result) {
 					$(".stadiumList").text("");
 					$(".stadiumList").append(result);
-					
 				}
 				
 			});
@@ -108,7 +109,7 @@ $(document).ready(function(){
 			param = r_info.split(",");
 			
 			
-			var stadiumName = $(".rental:eq("+index+")").parent().parent().parent().prev(".stadiumName").text();
+			var stadiumName = $(".rental:eq("+index+")").parent().parent().parent().prev().prev().prev().text();
 			var td = $(".rental:eq("+index+")").children();
 			
 			var status = td.eq(4).text();
@@ -128,4 +129,43 @@ $(document).ready(function(){
 			};
 			
 			return rvo;
+		}
+		
+		// 상세페이지 모달창
+		function openDialog(){
+			$("#dialog").dialog({
+				title : '대관 상세페이지',
+				model : true,
+				width : '450',
+				height : '350',
+				closeOnEscape:false,
+				open:function(event, ui){
+					$(".ui-dialog-titlebar-close", $(this).parent()).hide();
+				},
+				resizeable : false,
+				show : {
+					effect : "blind",
+					duration : 1000
+				},
+				hide : {
+					effect : "explode",
+					duration : 1000
+				},
+				buttons:[
+					{
+						// 버튼 텍스트
+						text:'환불요청',
+						click:function(){
+							
+						}
+					},
+					{
+						text:'확인',
+						click:function(){
+							confirm("확인시 변경사항은 저장됩니다.");
+							$(this).dialog("close");
+						}
+					}
+				]
+			});
 		}
