@@ -19,14 +19,6 @@ public class ClientPlaceServiceImpl implements ClientPlaceService {
 	@Qualifier("clientPlaceDao")
 	private ClientPlaceDao clientPlaceDao;
 	
-	// 구장 리스트
-	@Override
-	public List<PlaceVO> placeList(String m_id) {
-		List<PlaceVO> placeList = null;
-		placeList = clientPlaceDao.placeList(m_id);
-		
-		return placeList;
-	}
 	
 	// 경기장 리스트
 	@Override

@@ -7,7 +7,7 @@
 	<select id="placeList" resultType="place" parameterType="String">
 		select p_name, p_num
 		from place
-		where m_id = #{m_id} and p_status = 1
+		where m_id = #{m_id} and p_status  <![CDATA[ > ]]> -2
 		order by p_regdate asc
 	</select>
 	

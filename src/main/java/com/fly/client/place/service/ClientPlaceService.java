@@ -8,9 +8,6 @@ import com.fly.member.stadium.vo.StadiumVO;
 
 public interface ClientPlaceService {
 	
-	// 구장 리스트
-	public List<PlaceVO> placeList(String m_id);
-	
 	// 경기장 리스트 - 메소드 변경 해야함
 	public List<StadiumVO> stadiumList(String p_num);
 
