@@ -166,8 +166,21 @@
 				<tr>
 					<td>경기장</td>
 					<td>${data.s_name }</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
 					<td>대여용품</td>
-					<td>${data.itemsCnt }개</td>
+					<td colspan="3">
+						<c:if test="${empty itemsList }">
+							<p>대여하신 용품이 없습니다.</p>
+						</c:if> 
+						<c:if test="${not empty itemsList }">
+							<c:forEach var="item" items="${ itemsList }">
+								<p>${ item.i_name } <span>${ item.ir_rental_ea } 개   </span><span> 대여금액 : ${ item.i_rental_fee } 원</span> </p>
+							</c:forEach>
+						</c:if>
+					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -179,13 +192,13 @@
 					<td colspan="2"><button id="goList" onclick="goBack();">확인</button></td>
 				</tr>			
 			</table>
-			<input type="text" id="r_reserve_date" value="${data.r_reserve_date }" />
-			<input type="text" id="r_total_pay" value="${data.r_total_pay }" />
+			<input type="hidden" id="r_reserve_date" value="${data.r_reserve_date }" />
+			<input type="hidden" id="r_total_pay" value="${data.r_total_pay }" />
 			
 			<form id="goUpdate" method="post" action="/user/rental/rentalUpdate.do">
-				<input type="text" name="r_no" value="${data.r_no }"/>
-				<input type="text" id="refund" name="refund" />
-				<input type="text" name="page" value="${page }" />
+				<input type="hidden" name="r_no" value="${data.r_no }"/>
+				<input type="hidden" id="refund" name="refund" />
+				<input type="hidden" name="page" value="${page }" />
 			</form>
 		</article>
 		

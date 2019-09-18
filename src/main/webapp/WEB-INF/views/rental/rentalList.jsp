@@ -133,38 +133,6 @@
 				<c:if test="${empty stadiumList}">
 					<p class="noStadium">경기장이 없습니다. 경기장을 등록해주세요</p>
 				</c:if>
-				
-				<c:forEach var="stadium" items="${stadiumList}" varStatus="status">
-					<input type="hidden" class="s_no" value="${stadium.s_no}" />
-
-					<h2 class="stadiumName">${stadium.s_name}</h2>
-					
-					<!-- 대관 예약 리스트 -->
-					<div class="rentalListArea">
-						<c:if test="${empty rentalList}">
-							<p class="noStadium">예약 현황이 없습니다</p>
-						</c:if>
-						<c:if test="${not empty rentalList}">
-							<table class="rentalListTbl">
-								<tr>
-									<th>예약자명</th>
-									<th>전화번호</th>
-									<th>예약 시간</th>
-									<th>용품 대여</th>
-								</tr>
-								<c:forEach var="rental" items="rentalList" varStatus="status">
-									<tr>
-										<td>${m_name}</td>
-										<td>${m_phone}</td>
-										<td>${r_reserve_date}</td>
-										<td>s</td>
-									</tr>
-								</c:forEach>
-							</table>
-						</c:if>
-					</div>
-					<!-- 대관 예약 리스트 -->
-				</c:forEach>
 			</div>
 			<!-- 경기장 별 대관 예약 리스트 -->
 		</article>

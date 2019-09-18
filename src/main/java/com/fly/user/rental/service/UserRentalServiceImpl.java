@@ -103,7 +103,7 @@ public class UserRentalServiceImpl implements UserRentalService {
 	}
 
 	@Override
-	public RentalDetailVO showDetail(String r_no) {
+	public RentalDetailVO showDetail(int r_no) {
 		// TODO Auto-generated method stub
 		return userRentalDao.showDetail(r_no);
 	}

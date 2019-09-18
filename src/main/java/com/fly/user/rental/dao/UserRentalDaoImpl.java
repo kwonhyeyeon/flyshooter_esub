@@ -57,7 +57,7 @@ public class UserRentalDaoImpl implements UserRentalDao {
 	}
 
 	@Override
-	public RentalDetailVO showDetail(String r_no) {
+	public RentalDetailVO showDetail(int r_no) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(NAME_SPACE + ".showRentalDetail", r_no);
 	}

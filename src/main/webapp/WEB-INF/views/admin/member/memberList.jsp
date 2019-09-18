@@ -128,7 +128,7 @@
         				</form>
         			</div>
         			
-        			<div id="boardPage">
+        			<div class="pagination">
         				<tag:paging page="${param.page }" total="${total }" list_size="${data.pageSize }" />
         			</div> 
 				    

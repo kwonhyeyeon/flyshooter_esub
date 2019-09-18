@@ -28,7 +28,7 @@ public interface UserRentalService {
 	public int myRentalListCnt(String m_id);
 	
 	// rentalDetail 페이지
-	public RentalDetailVO showDetail(String r_no);
+	public RentalDetailVO showDetail(int r_no);
 	
 	// rentalUpdate (환불처리)
 	public int rentalUpdate(RentalVO rvo);

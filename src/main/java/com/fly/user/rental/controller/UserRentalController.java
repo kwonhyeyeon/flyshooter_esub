@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fly.client.items.service.ItemsService;
 import com.fly.client.items.vo.ItemsVO;
+import com.fly.member.itemsrental.service.ItemsRentalService;
 import com.fly.member.place.vo.PlaceVO;
 import com.fly.member.rental.vo.RentalVO;
 import com.fly.member.stadium.vo.StadiumVO;
@@ -40,6 +41,8 @@ public class UserRentalController {
 	private UserRentalService userRentalService;
 	@Resource(name = "itemsService")
 	private ItemsService itemsService;
+	@Resource(name = "itemsRentalService")
+	private ItemsRentalService itemsRentalService;
    
 	private static final Logger log = LoggerFactory.getLogger(UserRentalController.class);   
    
@@ -51,7 +54,8 @@ public class UserRentalController {
    
    // 지역으로 검색한 구장리스트
    @RequestMapping(value = "/placeList.do", method = RequestMethod.GET)
-   public String searchPlaceList(@ModelAttribute PlaceVO pvo, Model model, RedirectAttributes redirectAttr, @RequestParam(value = "area", required = true, defaultValue = "null") String area) {
+   public String searchPlaceList(@ModelAttribute PlaceVO pvo, Model model, RedirectAttributes redirectAttr, 
+		   @RequestParam(value = "area", required = true, defaultValue = "null") String area) {
       
 	   log.info("============="+area);
       
@@ -66,7 +70,9 @@ public class UserRentalController {
    
    // 대관 신청페이지
    @RequestMapping(value = "/rentalStadium.do", method = RequestMethod.POST)
-   public String rentalInfo(@ModelAttribute PlaceVO pvo, Model model, @RequestParam(value = "p_num") String p_num, @RequestParam(value = "area", required = true, defaultValue = "null") String area, RedirectAttributes redirectAttr) {
+   public String rentalInfo(@ModelAttribute PlaceVO pvo, Model model, @RequestParam(value = "p_num") String p_num, 
+		   @RequestParam(value = "area", required = true, defaultValue = "null") String area, 
+		   RedirectAttributes redirectAttr) {
 
       pvo = placeService.selectPlace(p_num);
       List<StadiumVO> stadiumList = userStadiumService.selectStadiumList(p_num);
@@ -193,23 +199,17 @@ public class UserRentalController {
    
    
    @RequestMapping(value = "/rentalDetail.do", method = RequestMethod.POST)
-   public String rentalDetail(Model model, @RequestParam("r_no") String r_no, @RequestParam("page") String page) {
-	   // 확인후 삭제할것 
-	   RentalDetailVO rdvo = new RentalDetailVO();
-	   rdvo = userRentalService.showDetail(r_no);
-	   System.out.println(rdvo.toString());
-	   System.out.println(page);
-	   // 삭제할것
+   public String rentalDetail(Model model, @RequestParam("r_no") int r_no, @RequestParam("page") String page) {
 	   
 	   model.addAttribute("data", userRentalService.showDetail(r_no));
 	   model.addAttribute("page", page);
+	   model.addAttribute("itemsList", itemsRentalService.getItemsRentalList(r_no));
 	   
 	   return "rental/rentalDetail";
    }
    
    @RequestMapping(value = "/rentalUpdate.do", method = RequestMethod.POST)
    public String rentalUpdate(@ModelAttribute RentalVO rvo, Model model, RedirectAttributes redirectAttr) {
-	   System.out.println(rvo.toString());
 	   redirectAttr.addAttribute("page", rvo.getPage());
 	  int result = userRentalService.rentalUpdate(rvo);
 	   String massage = "";

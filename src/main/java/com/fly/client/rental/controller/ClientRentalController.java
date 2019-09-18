@@ -29,71 +29,15 @@ public class ClientRentalController {
 	
 	// 구장 별 경기장 별 대관 예약 현황(첫 로드)
 	@RequestMapping(value = "/rentalList.do", method = RequestMethod.GET)
-	public ModelAndView rentalListByStadiumByPlace(
-			@ModelAttribute PlaceVO pvo,
-			@RequestParam(value = "m_id", required = true, defaultValue = "aaa@naver.com") String m_id,
-			@RequestParam(value = "r_reserve_date", required=false) String r_reserve_date) {
+	public String rentalListByStadiumByPlace(Model model) {
+		/*
+		 * Session에서 회원 ID를 뺴와서 사용해야함 수정하시오.
+		 */
+		String m_id = "esub17@naver.com";
 		
-		ModelAndView mav = new ModelAndView();
-		System.out.println("구장 별 경기장 별 대관 예약 현황 호출");
-		System.out.println(m_id);
 		
-		// 구장 리스트 출력
-		List<PlaceVO> placeList = clientPlaceService.placeList(m_id);
 		
-		if(placeList.isEmpty()) { // 구장이 없을 때
-			mav.addObject("placeList", placeList);
-			mav.setViewName("rental/rentalList");
-			return mav;
-		} else {
-			mav.addObject("placeList", placeList);
-			mav.setViewName("rental/rentalList");
-			
-			for(PlaceVO place : placeList) {
-				System.out.println("구장 리스트");
-			   	System.out.println(placeList);
-			   	System.out.println(place.toString());
-			}
-		}
-		
-		// 경기장 리스트 출력
-		String p_num = placeList.get(0).getP_num();
-		
-		List<StadiumVO> stadiumList = clientPlaceService.stadiumList(p_num);
-		if(stadiumList.isEmpty()) {
-			System.out.println(stadiumList);
-			mav.addObject("stadiumList", stadiumList);
-			mav.setViewName("rental/rentalList");
-			
-			return mav;
-		} else {
-			mav.addObject("stadiumList", stadiumList);
-			mav.setViewName("rental/rentalList");
-			for(StadiumVO stadium : stadiumList) {
-				System.out.println("경기장 리스트");
-				System.out.println(stadiumList);
-			   	System.out.println(stadium.toString());
-			}
-		}
-		
-//		// 경기장 별 대관 예약 리스트
-//		int s_no = stadiumList.get(0).getS_no();
-//		MemberVO member = new MemberVO();
-//		
-//		List<RentalVO> rentalList = clientPlaceService.rentalList(s_no, r_reserve_date);
-//		System.out.println(s_no);
-//		System.out.println(r_reserve_date);
-//		mav.addObject("m_name", member.getM_name());
-//		mav.addObject("m_phone", member.getM_phone());
-//		mav.addObject("rentalList", rentalList);
-//		mav.setViewName("rental/rentalList");
-//		for(RentalVO rental : rentalList) {
-//			System.out.println("대관 현황 리스트");
-//			System.out.println(rentalList);
-//			System.out.println(rental.toString());
-//		}
-
-		return mav;
+		return "";
 	}
 	
     // 구장 별 경기장 별 대관 예약 현황(선택 값이 변경될 때)
