@@ -184,8 +184,8 @@ $(document).ready(function(){
 					$("#dialog").dialog({
 						title : 'fly_shooter 결제창',
 						model : true,
-						width : '700',
-						height : '500',
+						width : '584',
+						height : '400',
 						closeOnEscape:false,
 						open:function(event, ui){
 							$(".ui-dialog-titlebar-close", $(this).parent()).hide();

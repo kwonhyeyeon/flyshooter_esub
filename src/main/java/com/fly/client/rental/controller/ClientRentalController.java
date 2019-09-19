@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fly.client.rental.service.ClientRentalService;
+import com.fly.member.itemsrental.service.ItemsRentalService;
+import com.fly.member.itemsrental.vo.ItemsRentalVO;
 import com.fly.member.join.vo.MemberVO;
 import com.fly.member.place.vo.PlaceVO;
 import com.fly.member.rental.vo.RentalVO;
@@ -27,6 +29,8 @@ public class ClientRentalController {
 
 	@Resource(name = "clientRentalService")
 	private ClientRentalService clientRentalService;
+	@Resource(name = "itemsRentalService")
+	private ItemsRentalService ItemsRentalService;
 	
 	// 구장 별 경기장 별 대관 예약 현황(첫 로드)
 	@RequestMapping(value = "/rentalList.do", method = RequestMethod.GET)
@@ -135,7 +139,8 @@ public class ClientRentalController {
 	@ResponseBody
 	public String showDetail(@ModelAttribute RentalVO rvo) {
 		
-	System.out.println(rvo.toString());
+		System.out.println(rvo.toString());
+		List<ItemsRentalVO> itemsList = ItemsRentalService.getItemsRentalList(rvo.getR_no());
 		StringBuffer result = new StringBuffer();
 		
 		result.append("<p>대관정보</p>");
