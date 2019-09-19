@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.fly.member.join.vo.MemberVO;
 import com.fly.member.place.vo.PlaceVO;
 import com.fly.member.rental.vo.RentalVO;
 import com.fly.member.stadium.vo.StadiumVO;
@@ -35,6 +36,16 @@ public class ClientRentalDaoImpl implements ClientRentalDao {
 		@Override
 		public List<RentalVO> getRentalList(HashMap<String, Object> map) {
 			return sqlSession.selectList(NAME_SPACE + ".rentalList", map);
+		}
+
+		@Override
+		public List<RentalVO> getRefundList(MemberVO mvo) {
+			return sqlSession.selectList(NAME_SPACE + ".getRefundList", mvo);
+		}
+
+		@Override
+		public int refundListCnt() {
+			return sqlSession.selectOne(NAME_SPACE + ".refundListCnt");
 		}
 
 

@@ -13,10 +13,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fly.client.rental.service.ClientRentalService;
+<<<<<<< HEAD
 import com.fly.member.itemsrental.service.ItemsRentalService;
 import com.fly.member.itemsrental.vo.ItemsRentalVO;
+=======
+import com.fly.member.join.vo.MemberVO;
+import com.fly.member.place.vo.PlaceVO;
+>>>>>>> 0ac9ff218699af3f16ce7df2695f128a335df054
 import com.fly.member.rental.vo.RentalVO;
 import com.fly.member.stadium.vo.StadiumVO;
+import com.fly.paging.util.Paging;
+import com.fly.paging.util.Util;
 
 @Controller
 @RequestMapping(value = "/client/rental")
@@ -163,5 +170,32 @@ public class ClientRentalController {
 		result.append("<br /><hr /><br />");
 		return result.toString();
 	}
+	
+    // 환불 현황 리스트
+    @RequestMapping(value = "/refundList.do", method = RequestMethod.GET)
+    public String getRefundList(
+    		@ModelAttribute RentalVO rvo,
+    		@ModelAttribute MemberVO mvo,
+    		@ModelAttribute PlaceVO pvo,
+    		Model model
+    		) {
+        
+        System.out.println("getRefundList 호출 성공");
+        
+        Paging.setPage(rvo, 15);
+        String pageSize = rvo.getPageSize();
+		int total = clientRentalService.refundListCnt();
+		int count = total - (Util.nvl(rvo.getPage()) -1 ) * Util.nvl(rvo.getPageSize());
+        
+        List<RentalVO> refundList = clientRentalService.getRefundList(mvo);
+        model.addAttribute("mvo", mvo);
+        model.addAttribute("pvo", pvo);
+        model.addAttribute("refundList", refundList);
+        model.addAttribute("total", total);
+        model.addAttribute("count", count);
+        model.addAttribute("pageSize", pageSize);
+        
+        return "/rental/refundList";
+    }
     
 }

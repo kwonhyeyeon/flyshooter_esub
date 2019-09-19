@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.fly.client.rental.dao.ClientRentalDao;
+import com.fly.member.join.vo.MemberVO;
 import com.fly.member.place.vo.PlaceVO;
 import com.fly.member.rental.vo.RentalVO;
 import com.fly.member.stadium.vo.StadiumVO;
@@ -41,6 +42,16 @@ public class ClientRentalServiceImpl implements ClientRentalService {
 			map.put("selectDay", selectDay);
 			
 			return clientRentalDao.getRentalList(map);
+		}
+
+		@Override
+		public List<RentalVO> getRefundList(MemberVO mvo) {
+			return clientRentalDao.getRefundList(mvo);
+		}
+
+		@Override
+		public int refundListCnt() {
+			return clientRentalDao.refundListCnt();
 		}
 
 }
