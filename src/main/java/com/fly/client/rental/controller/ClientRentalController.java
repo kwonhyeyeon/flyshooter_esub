@@ -13,13 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fly.client.rental.service.ClientRentalService;
-<<<<<<< HEAD
 import com.fly.member.itemsrental.service.ItemsRentalService;
 import com.fly.member.itemsrental.vo.ItemsRentalVO;
-=======
 import com.fly.member.join.vo.MemberVO;
 import com.fly.member.place.vo.PlaceVO;
->>>>>>> 0ac9ff218699af3f16ce7df2695f128a335df054
 import com.fly.member.rental.vo.RentalVO;
 import com.fly.member.stadium.vo.StadiumVO;
 import com.fly.paging.util.Paging;
