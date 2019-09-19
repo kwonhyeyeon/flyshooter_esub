@@ -125,7 +125,8 @@ $(document).ready(function(){
 				m_id : td.eq(0).text(),
 				r_reserve_date : td.eq(2).text(),
 				r_start : stadiumName,
-				r_account : td.eq(1).text()
+				r_account : td.eq(1).text(),
+				r_recall_time : td.eq(3).text()
 			};
 			
 			return rvo;
