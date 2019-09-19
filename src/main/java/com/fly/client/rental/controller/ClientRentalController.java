@@ -1,6 +1,7 @@
 package com.fly.client.rental.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -178,14 +179,17 @@ public class ClientRentalController {
         String pageSize = rvo.getPageSize();
 		int total = clientRentalService.refundListCnt();
 		int count = total - (Util.nvl(rvo.getPage()) -1 ) * Util.nvl(rvo.getPageSize());
+		
+		List<Map<String, String>> refundList = clientRentalService.getRefundList(pvo);
+		model.addAttribute("refundList", refundList);
+		model.addAttribute("register", mvo.getM_regdate());
         
-        List<RentalVO> refundList = clientRentalService.getRefundList(mvo);
-        model.addAttribute("mvo", mvo);
-        model.addAttribute("pvo", pvo);
-        model.addAttribute("refundList", refundList);
-        model.addAttribute("total", total);
-        model.addAttribute("count", count);
-        model.addAttribute("pageSize", pageSize);
+		/*
+		 * List<RentalVO> refundList = clientRentalService.getRefundList(pvo);
+		 * model.addAttribute("refundList", refundList); model.addAttribute("total",
+		 * total); model.addAttribute("count", count); model.addAttribute("pageSize",
+		 * pageSize); System.out.println(refundList);
+		 */
         
         return "/rental/refundList";
     }

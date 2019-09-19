@@ -2,7 +2,7 @@ package com.fly.member.rental.vo;
 
 import com.fly.paging.vo.PagingVO;
 
-public class RentalVO extends PagingVO{
+public class RentalVO extends PagingVO {
 
 	private int r_no; // 대관 일련번호
 	private int s_no; // 경기장 일련번호

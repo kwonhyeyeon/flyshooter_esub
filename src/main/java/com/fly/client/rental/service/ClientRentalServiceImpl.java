@@ -2,6 +2,7 @@ package com.fly.client.rental.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -45,8 +46,8 @@ public class ClientRentalServiceImpl implements ClientRentalService {
 		}
 
 		@Override
-		public List<RentalVO> getRefundList(MemberVO mvo) {
-			return clientRentalDao.getRefundList(mvo);
+		public List<Map<String, String>> getRefundList(PlaceVO pvo) {
+			return clientRentalDao.getRefundList(pvo);
 		}
 
 		@Override
