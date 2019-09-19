@@ -13,5 +13,19 @@
 </head>
 <body>
 
+	<div id="wrapper">
+	
+		<div id="header-wrap">
+			<jsp:include page="../templates/header.jsp" flush="true" />
+		</div>
+		
+		<div class="sub-v"></div>
+		
+		<article id="contents">
+			payment
+		</article>
+	
+	</div>
+
 </body>
 </html>
