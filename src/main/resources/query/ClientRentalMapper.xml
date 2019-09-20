@@ -40,7 +40,7 @@
 	<!-- 환불 리스트 -->
 	<select id="getRefundList" parameterType="place" resultMap="getRefundList">
 		select r.m_id, m.m_name, p.p_name, r.r_total_pay, r.refund, 
-		to_char(r.r_recall_time, 'yyyy/MM/dd') r_recall_time, r.r_no, m.m_regdate
+		to_char(r.r_recall_time, 'yyyy/MM/dd') r_recall_time, r.r_no, to_char(m.m_regdate, 'yyyy/MM/dd') m_regdate
 		from rental r, member m, place p 
 		<where>
 			r.m_id = m.m_id and p.p_num = (select p_num from stadium where s_no = r.s_no) 

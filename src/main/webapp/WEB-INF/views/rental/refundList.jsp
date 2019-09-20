@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="/resources/css/reset.css" />
 <link rel="stylesheet" href="/resources/css/style.css" />
 <script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="/resources/js/clientRefund.js"></script>
 <script>
 	$(function() {
 		$("#gnb").hover(function() {
@@ -39,19 +40,20 @@
 			<h2 class="articleTit">환불 현황</h2>
 			
 			<div class="selectArea">
-				<select name="year" id="year">
-					<option selected>연도</option>
-				</select>
-				
-				<select name="month" id="month">
-					<option selected>월</option>
-				</select>
-				
-				<input type="submit" value="검색" />
-			</div>
-			
-			<div>
-				<input type="text" value="${register}" />
+				<form id="refundListForm">
+					<input type="hidden" id="register" value="${register}" />
+					<input type="hidden" id="p_ok" name="p_ok" value="${p_ok}" />
+					
+					<select name="year" id="year">
+						<option selected>연도</option>
+					</select>
+					
+					<select name="month" id="month">
+						<option selected>월 선택</option>
+					</select>
+					
+					<input type="submit" id="refundSearch" value="검색" />
+				</form>
 			</div>
 			
 			<!-- 환불 리스트 -->
