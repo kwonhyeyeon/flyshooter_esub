@@ -1,6 +1,7 @@
 package com.fly.client.rental.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -223,14 +224,20 @@ public class ClientRentalController {
         String pageSize = rvo.getPageSize();
 		int total = clientRentalService.refundListCnt();
 		int count = total - (Util.nvl(rvo.getPage()) -1 ) * Util.nvl(rvo.getPageSize());
-        
-        List<RentalVO> refundList = clientRentalService.getRefundList(mvo);
-        model.addAttribute("mvo", mvo);
-        model.addAttribute("pvo", pvo);
-        model.addAttribute("refundList", refundList);
-        model.addAttribute("total", total);
-        model.addAttribute("count", count);
-        model.addAttribute("pageSize", pageSize);
+		
+		List<Map<String, String>> refundList = clientRentalService.getRefundList(pvo);
+		model.addAttribute("refundList", refundList);
+		System.out.println(refundList);
+		
+		String register = refundList.get(0).get("register").toString(); // 회원 가입일
+		model.addAttribute("register", register);
+		String r_recall_time = rvo.getR_recall_time();
+		model.addAttribute("r_recall_time", r_recall_time);
+		
+//		for(int i = 0; i < refundList.size(); i++) {
+//			String year = refundList.get(i).get("r_recall_time").toString();
+//			System.out.println(year.substring(0, 4));
+//		}
         
         return "/rental/refundList";
     }

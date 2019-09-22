@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tag" uri="/WEB-INF/tld/custom_tag.tld" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +14,7 @@
 <link rel="stylesheet" href="/resources/css/reset.css" />
 <link rel="stylesheet" href="/resources/css/style.css" />
 <script src="http://code.jquery.com/jquery.min.js"></script>
-<!-- datepicker -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!-- datepicker -->
+<script src="/resources/js/clientRefund.js"></script>
 <script>
 	$(function() {
 		$("#gnb").hover(function() {
@@ -39,14 +37,27 @@
 		
 		<article id="contents">
 			
-			<h2>환불 현황</h2>
+			<h2 class="articleTit">환불 현황</h2>
 			
-			<div>
-				<input type="text" id="datepicker" />
+			<div class="selectArea">
+				<form id="refundListForm">
+					<input type="hidden" id="register" value="${register}" />
+					<input type="hidden" id="p_ok" name="p_ok" value="${p_ok}" />
+					
+					<select name="year" id="year">
+						<option selected>연도</option>
+					</select>
+					
+					<select name="month" id="month">
+						<option selected>월 선택</option>
+					</select>
+					
+					<input type="submit" id="refundSearch" value="검색" />
+				</form>
 			</div>
 			
 			<!-- 환불 리스트 -->
-			<table>
+			<table class="tbl-style">
 				<tr>
 					<th>회원  ID</th>
 					<th>회원명</th>
@@ -57,12 +68,12 @@
 				</tr>
 				<c:if test="${not empty refundList}">
 					<c:forEach var="refund" items="${refundList}" varStatus="status">
-						<tr>
-							<td>${mvo.m_id}</td>
-							<td>${mvo.m_name}</td>
-							<td>${pvo.p_name}</td>
-							<td>${refund.r_total_pay}</td>
-							<td>${refund.refund}</td>
+						<tr class="goDetail">
+							<td>${refund.m_id}</td>
+							<td>${refund.m_name}</td>
+							<td>${refund.p_name}</td>
+							<td><fmt:formatNumber value="${refund.r_total_pay}" pattern="#,###"/> 원</td>
+							<td><fmt:formatNumber value="${refund.refund}" pattern="#,###"/> 원</td>
 							<td>${refund.r_recall_time}</td>
 						</tr>
 					</c:forEach>
@@ -76,9 +87,9 @@
 			<!-- 환불 리스트 -->
 			
 			<!-- pagination -->
-			<div class="pagination">
+			<%-- <div class="pagination">
 				<tag:paging page="${param.page}" total="${total}" list_size="${pageSize}" />
-			</div>
+			</div> --%>
 			<!-- pagination -->
 			
 		</article>

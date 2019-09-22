@@ -239,6 +239,11 @@
 	margin:235px auto 0;
 	padding:10px;
 }
+.articleTit {
+	font-size:20px;
+	font-weight:bold;
+	margin-top:20px;
+}
 /* location end */
 
 /* placeList, stadiumList start */
@@ -297,9 +302,60 @@
 
 /* stadiumRental end */
 
+/* selectArea */
+.selectArea {
+	padding:20px 10px;
+	display:flex;
+	justify-content:flex-end;
+}
+.selectArea select {
+	outline:none;
+	appearance:none;
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	-ms-appearance:none;
+	cursor:pointer;
+	font-size:13px;
+	color:#4e4e4e;
+	border-radius:0;
+	border:1px solid #ebebeb;
+	padding:8px 70px 8px 10px;
+	background:url(/resources/img/select-arrow.png) no-repeat 80%;
+	margin-left:10px;
+}
+.selectArea input {
+	padding:8px 25px;
+	border:1px solid #ebebeb;
+	background:#fff;
+	margin-left:10px;
+	cursor:pointer;
+}
+/* selectArea */
 
-
-
+/* tbl-style */
+.tbl-style {
+	width:100%;
+	border-top:1px solid #e3e3e3;
+}
+.tbl-style th {
+	padding:15px 0 15px 20px;
+	border-bottom:1px solid #e3e3e3;
+	background:#f3f3f3;
+	text-align:center;
+	color:#888;
+	font-weight:bold;
+}
+.tbl-style td {
+	padding:15px 0 15px 20px;
+	text-align:center;
+	border-bottom:1px solid #ebebeb;
+	color:#555;
+}
+.tbl-style tr.goDetail td:hover {
+	cursor:pointer;
+	background:#fafafa;
+}
+/* tbl-style */
 
 /* toggle */
 .toggle-wrap {

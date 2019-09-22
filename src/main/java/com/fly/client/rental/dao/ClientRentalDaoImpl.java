@@ -2,6 +2,7 @@ package com.fly.client.rental.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,8 @@ public class ClientRentalDaoImpl implements ClientRentalDao {
 		}
 
 		@Override
-		public List<RentalVO> getRefundList(MemberVO mvo) {
-			return sqlSession.selectList(NAME_SPACE + ".getRefundList", mvo);
+		public List<Map<String, String>> getRefundList(PlaceVO pvo) {
+			return sqlSession.selectList(NAME_SPACE + ".getRefundList", pvo);
 		}
 
 		@Override
