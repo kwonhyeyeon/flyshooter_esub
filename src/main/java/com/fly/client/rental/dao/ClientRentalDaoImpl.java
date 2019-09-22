@@ -48,6 +48,18 @@ public class ClientRentalDaoImpl implements ClientRentalDao {
 			return sqlSession.selectOne(NAME_SPACE + ".refundListCnt");
 		}
 
+		@Override
+		public int refundUpdate(int r_no) {
+			// TODO Auto-generated method stub
+			return sqlSession.update(NAME_SPACE + ".refund_request", r_no);
+		}
+
+		@Override
+		public int deleteRental(int r_no) {
+			// TODO Auto-generated method stub
+			return sqlSession.delete(NAME_SPACE + ".deleteRental", r_no);
+		}
+
 
 	
 }

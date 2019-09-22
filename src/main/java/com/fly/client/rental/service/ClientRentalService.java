@@ -24,4 +24,10 @@ public interface ClientRentalService {
 	// paging
 	public int refundListCnt();
 	
+	// 환불요청
+	public int refundUpdate(int r_no);
+	
+	// 오프라인대관 대관취소
+	public int deleteRental(int r_no);
+	
 }

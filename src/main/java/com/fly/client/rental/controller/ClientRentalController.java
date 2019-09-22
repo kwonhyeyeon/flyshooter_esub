@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fly.client.rental.service.ClientRentalService;
 import com.fly.member.itemsrental.service.ItemsRentalService;
@@ -64,7 +66,7 @@ public class ClientRentalController {
 			return result.toString();
 		}
 	
-		
+		result.append("<h1 style='color:red'> ※ 온라인 대관일경우 환불요청  / 오프라인 대관일경우 대관취소 기능만 이용하실수 있습니다.</h1>");
 		for( StadiumVO svo : stadiumList ) {
 			
 			result.append("<p class='stadiumName'>");
@@ -77,7 +79,7 @@ public class ClientRentalController {
 				result.append("<p class='noStadium'>대관 이력이 없습니다.</p>");
 			}else {
 				result.append("<table class='rentalListTbl'>");
-				result.append("<tr><td>예약자명</td><td>전화번호</td><td>예약시간</td><td>용품대여</td><td>대관유형</td></tr>");
+				result.append("<tr><td>예약자명</td><td>전화번호</td><td>예약시간</td><td>용품대여</td><td>대관유형</td><td>환불/취소</td></tr>");
 					for( RentalVO rvo : rentalList ) {
 						result.append("<tr class='rental' data-num='");
 						result.append(rvo.getR_no());
@@ -104,26 +106,41 @@ public class ClientRentalController {
 						result.append(r_end);
 						result.append(")시");
 						result.append("</td>");
-						result.append("<td>");
 						if( rvo.getRefund() > 0 ) {
-							result.append("유");
+							switch( rvo.getR_pay_type() ) {
+							case 1:
+								result.append("<td style='color:red'>(미반납)");
+								break;
+							case 2:
+								result.append("<td style='color:blue'>(반납완료)");
+								break;
+							default:
+								result.append("<td>유");
+							}
+							
 						}else {
-							result.append("무");
+							result.append("<td>무");
 						}
 						result.append("</td>");
 						
 						result.append("<td>");
 						if( rvo.getR_pay_status() == 0 ) {
 							result.append("오프라인");
+							result.append("</td>");
+							result.append("<td><button class='r_cancle'>대관취소</button></td>");
 						}else if( rvo.getR_pay_status() == 1 ) {
 							result.append("온라인");
+							result.append("</td>");
+							result.append("<td><button class='r_refund'>환불요청</button></td>");
 						}else {
 							result.append("환불대기중");
+							result.append("</td>");
+							result.append("<td>..</td>");
 						}
-						result.append("</td>");
 						
 						
 						result.append("</tr>");
+						
 						
 					}
 				result.append("</table>");
@@ -140,6 +157,9 @@ public class ClientRentalController {
 		
 		System.out.println(rvo.toString());
 		List<ItemsRentalVO> itemsList = ItemsRentalService.getItemsRentalList(rvo.getR_no());
+		for(ItemsRentalVO irvo : itemsList) {
+			System.out.println(irvo.toString());
+		}
 		StringBuffer result = new StringBuffer();
 		
 		result.append("<p>대관정보</p>");
@@ -163,8 +183,28 @@ public class ClientRentalController {
 		result.append(rvo.getR_total_pay());
 		result.append(" 원</td></tr>");
 		result.append("</table>");
-		
-		result.append("<br /><hr /><br />");
+		if( !itemsList.isEmpty() ) {
+			result.append("<div><h2>대여용품</h2>");
+			result.append("<ul>");
+			for(ItemsRentalVO irvo : itemsList) {
+				result.append("<li data-num'");
+				result.append(irvo.getIr_no());
+				result.append("'>");
+				result.append("<p><span>");
+				result.append(irvo.getI_name());
+				result.append("</span>&nbsp&nbsp");
+				result.append("<span>");
+				result.append(irvo.getIr_rental_ea());
+				result.append("개</span>");
+				result.append("</p>");
+				result.append("<span class='toggle-wrap'><input type='checkbox' class='toggle' id='");
+				result.append(irvo.getIr_no());
+				result.append("' /><label for='");
+				result.append(irvo.getIr_no());
+				result.append("' class='toggle-btn'></label></span></li>");
+			}
+			result.append("</ul></div>");
+		}
 		return result.toString();
 	}
 	
@@ -195,4 +235,26 @@ public class ClientRentalController {
         return "/rental/refundList";
     }
     
+    // 온라인대관 환불요청
+    @RequestMapping(value = "/refundUpdate.do", method = RequestMethod.POST, produces= "text/html; charset=UTF-8")
+    @ResponseBody
+    public String refundUpdate(@RequestParam(value = "r_no") int r_no) {
+    	
+    	int result = clientRentalService.refundUpdate(r_no);
+    	System.out.println("update성공 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+    	System.out.println(r_no + "+========   r_no");
+    	
+    	
+    	
+    	return result + "";
+    }
+    // 오프라인대관 대관취소
+    @RequestMapping(value = "/deleteRental.do", method = RequestMethod.POST, produces= "text/html; charset=UTF-8")
+    @ResponseBody
+    public String deleteRental(@RequestParam(value = "r_no") int r_no) {
+    	
+    	int result = clientRentalService.deleteRental(r_no);
+    	
+    	return result + "";
+    }
 }

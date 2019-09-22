@@ -24,7 +24,7 @@
 	</insert>
 	
 	<select id="getItemsRentalList" parameterType="int" resultType="itemsrental">
-		 SELECT (select i_name from items where i_no = i.i_no) i_name, 
+		 SELECT i.ir_no, (select i_name from items where i_no = i.i_no) i_name, 
 		 		i.ir_rental_ea, 
 		 		( (select i_rental_fee from items where i_no = i.i_no) * i.ir_rental_ea ) i_rental_fee
 		 FROM items_rental i

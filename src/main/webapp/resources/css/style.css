@@ -322,7 +322,7 @@
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  top:-100%;
+  top:0%;
   left:50px;
 }
 .toggle-btn:after, .toggle-btn:before {

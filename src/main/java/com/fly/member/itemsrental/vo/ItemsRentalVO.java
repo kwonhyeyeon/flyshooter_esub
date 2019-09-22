@@ -42,6 +42,7 @@ public class ItemsRentalVO extends ItemsVO {
 	}
 	@Override
 	public String toString() {
+		System.out.println(super.toString());
 		return "ItemsRentalVO [getIr_no()=" + getIr_no() + ", getI_no()=" + getI_no() + ", getR_no()=" + getR_no()
 				+ ", getIr_return_status()=" + getIr_return_status() + ", getIr_rental_ea()=" + getIr_rental_ea() + "]";
 	}

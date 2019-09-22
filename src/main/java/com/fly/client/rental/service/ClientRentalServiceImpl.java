@@ -54,4 +54,16 @@ public class ClientRentalServiceImpl implements ClientRentalService {
 			return clientRentalDao.refundListCnt();
 		}
 
+		@Override
+		public int refundUpdate(int r_no) {
+			// TODO Auto-generated method stub
+			return clientRentalDao.refundUpdate(r_no);
+		}
+
+		@Override
+		public int deleteRental(int r_no) {
+			// TODO Auto-generated method stub
+			return clientRentalDao.deleteRental(r_no);
+		}
+
 }

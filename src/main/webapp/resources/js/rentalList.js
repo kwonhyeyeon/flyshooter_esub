@@ -78,6 +78,72 @@ $(document).ready(function(){
 			
 			});
 	 });
+		// 온라인 대관 환불요청
+		$(document).on("click", ".r_refund", function(e){
+			// 부모의 클릭이벤트가 전파되지 않도록 방지
+			e.stopPropagation();
+			
+			var index = $(".r_refund").index(this);
+			var data = $(".r_refund:eq("+index+")").parent().parent().attr("data-num");
+			var r_no = data.split(",");
+			var p_num = $("#placeName").val();
+			var selectDay = $("#datepicker").val();
+			if( confirm("환불요청후 수정이 불가합니다.\n계속 진행하시겠습니까 ? ") ){
+			$.ajax({
+				type : "post",
+				url : "/client/rental/refundUpdate.do",
+				data : {
+					r_no : r_no[0]
+				},
+				error : function() {
+					alert("시스템 오류입니다. 관리자에게 문의하세요");
+				},
+				success : function(result) {
+					if(result == 0){
+						alert("요청에 실패하였습니다\n다시 시도해주십시오.");
+					}else{
+						getList(p_num, selectDay);
+						alert("환불요청되었습니다.");
+					}
+				}
+				
+				});
+			}
+			
+		});
+		
+		// 오프라인 대관취소
+		$(document).on("click", ".r_cancle", function(e){
+			// 부모의 클릭이벤트가 전파되지 않도록 방지
+			e.stopPropagation();
+			
+			var index = $(".r_cancle").index(this);
+			var data = $(".r_cancle:eq("+index+")").parent().parent().attr("data-num");
+			var r_no = data.split(",");
+			var p_num = $("#placeName").val();
+			var selectDay = $("#datepicker").val();
+			if( confirm("오프라인으로 등록한 대관입니다.\n대관취소하시겠습니까 ?") ){
+			$.ajax({
+				type : "post",
+				url : "/client/rental/deleteRental.do",
+				data : {
+					r_no : r_no[0]
+				},
+				error : function() {
+					alert("시스템 오류입니다. 관리자에게 문의하세요");
+				},
+				success : function(result) {
+					if(result == 0){
+						alert("요청에 실패하였습니다\n다시 시도해주십시오.");
+					}else{
+						getList(p_num, selectDay);
+						alert("대관이 취소되었습니다.");
+					}
+				}
+				
+				});
+			}
+		});
 	
 });
 
@@ -106,7 +172,7 @@ $(document).ready(function(){
 		function setRentalVo(index){
 			
 			var r_info = $(".rental:eq("+index+")").attr("data-num");
-			param = r_info.split(",");
+			var param = r_info.split(",");
 			
 			
 			var stadiumName = $(".rental:eq("+index+")").parent().parent().parent().prev().prev().prev().text();
@@ -155,15 +221,14 @@ $(document).ready(function(){
 				buttons:[
 					{
 						// 버튼 텍스트
-						text:'환불요청',
+						text:'저장',
 						click:function(){
 							
 						}
 					},
 					{
-						text:'확인',
+						text:'닫기',
 						click:function(){
-							confirm("확인시 변경사항은 저장됩니다.");
 							$(this).dialog("close");
 						}
 					}

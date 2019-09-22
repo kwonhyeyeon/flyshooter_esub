@@ -23,7 +23,14 @@
 		SELECT r.m_id, r.r_no, m.m_name r_bank, m.m_phone r_account,
 				 r.r_start, s.s_hours cal_status,
 				  (select count(*) from items_rental where r_no = r.r_no) refund, r.r_pay_status, 
-				  to_char(r.r_regdate, 'yyyy-MM-dd') r_regdate, r.r_total_pay
+				  to_char(r.r_regdate, 'yyyy-MM-dd') r_regdate, r.r_total_pay,
+				CASE
+                    WHEN to_char(r.r_reserve_date, 'yyyy-MM-dd') <![CDATA[ > ]]> to_char(sysdate, 'yyyy-MM-dd') THEN -1
+                    WHEN (select count(*) from items_rental where r_no = r.r_no and ir_return_status = 1) <![CDATA[  > ]]> 0 THEN 1
+                    else 2
+				END r_pay_type
+				  
+				  
 		FROM rental r, member m, stadium s
 		WHERE r.m_id = m.m_id 
 				and r.s_no = s.s_no  
@@ -53,5 +60,18 @@
 		from rental
 		where r_pay_status = -1
 	</select>
+	
+	<update id="refund_request" parameterType="int">
+		UPDATE rental
+			SET r_pay_status = 2,
+				refund = r_total_pay,
+				r_recall_time = sysdate
+		WHERE r_no = #{r_no}
+	</update>
+	
+	<delete id="deleteRental">
+		DELETE FROM rental WHERE r_no = #{r_no}
+	</delete>
 
+	
 </mapper>

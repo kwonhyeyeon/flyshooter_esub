@@ -142,7 +142,7 @@
 								</tr>
 							</c:forEach>
 						</table>
-						<input type="text" value="${ itemsList.size() }" id="items_ec" placeholder="0"/>
+						<input type="hidden" value="${ itemsList.size() }" id="items_ec" placeholder="0"/>
 					</c:if>
 				</div>
 				
@@ -160,17 +160,17 @@
 	</div>
 	
 	<div id="dialog" title="결제창" style="display: none">
-		<form id="insertRentalForm">
-			<input type="text" id="r_reserve_date" name="r_reserve_date" />
-			<input type="text" id="s_no" name="s_no" />
-			<input type="text" id="r_start" name="r_start" />
-			<input type="text" id="r_total_pay" name="r_total_pay" />
-			<input type="text" id="r_pay_type" name="r_pay_type"/>
-			<input type="text" id="r_bank" name="r_bank" />	
-			<input type="text" id="r_account_num" name="r_account_num"/>
-			<input type="text" id="r_account" name="r_account"/>		
-			<input type="text" id="items_no" name="items_no"/>
-			<input type="text" id="items_ea" name="items_ea"/>
+		<form id="insertRentalForm" >
+			<input type="hidden" id="r_reserve_date" name="r_reserve_date" />
+			<input type="hidden" id="s_no" name="s_no" />
+			<input type="hidden" id="r_start" name="r_start" />
+			<input type="hidden" id="r_total_pay" name="r_total_pay" />
+			<input type="hidden" id="r_pay_type" name="r_pay_type"/>
+			<input type="hidden" id="r_bank" name="r_bank" />	
+			<input type="hidden" id="r_account_num" name="r_account_num"/>
+			<input type="hidden" id="r_account" name="r_account"/>		
+			<input type="hidden" id="items_no" name="items_no"/>
+			<input type="hidden" id="items_ea" name="items_ea"/>
 		</form>	
 			<h1>결제</h1>
 			<hr />
