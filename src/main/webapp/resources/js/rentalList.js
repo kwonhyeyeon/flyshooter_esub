@@ -31,26 +31,19 @@ $(document).ready(function(){
 	$("#datepicker").datepicker("setDate", "today");
 	//(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
 	
-	var p_num = $("#placeName").val();
-	var selectDay = $("#datepicker").val();
-	getList(p_num, selectDay);
+	getList();
 	
 	// 구장명 값 변경 시 해당 경기장 리스트 가져오는 이벤트
 	$(".placeName").on("change", function(){
 		
-		p_num = $("#placeName").val();
-		selectDay = $("#datepicker").val();
 		
-		
-		getList(p_num, selectDay);
+		getList();
 		
 	});
 	
 	$("#datepicker").change(function(){
-		p_num = $("#placeName").val();
-		selectDay = $("#datepicker").val();
-		
-		getList(p_num, selectDay);
+
+		getList();
 	});
 	
 	$(document).on("click",".rental",function(){
@@ -74,8 +67,6 @@ $(document).ready(function(){
 			var index = $(".r_refund").index(this);
 			var data = $(".r_refund:eq("+index+")").parent().parent().attr("data-num");
 			var r_no = data.split(",");
-			var p_num = $("#placeName").val();
-			var selectDay = $("#datepicker").val();
 			if( confirm("환불요청후 수정이 불가합니다.\n계속 진행하시겠습니까 ? ") ){
 			$.ajax({
 				type : "post",
@@ -90,7 +81,7 @@ $(document).ready(function(){
 					if(result == 0){
 						alert("요청에 실패하였습니다\n다시 시도해주십시오.");
 					}else{
-						getList(p_num, selectDay);
+						getList();
 						alert("환불요청되었습니다.");
 					}
 				}
@@ -108,8 +99,6 @@ $(document).ready(function(){
 			var index = $(".r_cancle").index(this);
 			var data = $(".r_cancle:eq("+index+")").parent().parent().attr("data-num");
 			var r_no = data.split(",");
-			var p_num = $("#placeName").val();
-			var selectDay = $("#datepicker").val();
 			if( confirm("오프라인으로 등록한 대관입니다.\n대관취소하시겠습니까 ?") ){
 			$.ajax({
 				type : "post",
@@ -124,7 +113,7 @@ $(document).ready(function(){
 					if(result == 0){
 						alert("요청에 실패하였습니다\n다시 시도해주십시오.");
 					}else{
-						getList(p_num, selectDay);
+						getList();
 						alert("대관이 취소되었습니다.");
 					}
 				}
@@ -134,14 +123,43 @@ $(document).ready(function(){
 		});
 		
 		$(document).on("change", ".toggle", function(){
+			
 			var index = $(".toggle").index(this);
 			var ir_return_status = $(".toggle:eq("+index+")").val();
+			var list_index = $("#list-index").val();
+			
+			
+			if( ir_return_status == '1' ){
+				if( confirm("반납완료로 변경하시겠습니까 ?") ){
+					setItems_status(index, ir_return_status, list_index);
+				}else{
+					var rvo = setRentalVo(list_index);
+					showDetail(rvo);
+				}
+			}
+			
+			if( ir_return_status == '2' ){
+				if( confirm("대여중상태로 변경하시겠습니까?") ){
+					setItems_status(index, ir_return_status, list_index);
+				}else{
+					var rvo = setRentalVo(list_index);
+					showDetail(rvo);
+				}
+			}
+			
+			return;
+		});
+		
+		
+	
+});
+	
+		// 대여된 아이템에 관하여 상태변경 함수
+		function setItems_status(index, ir_return_status, list_index){
+			
 			
 			// 토글버튼 change시 비동기로 상태변경
 			var ir_no = $(".toggle:eq("+index+")").parent().parent().attr("data-num");
-			var list_index = $("#list-index").val();
-			
-			if( confirm("") ){
 			
 			$.ajax({
 				type : "post",
@@ -150,6 +168,7 @@ $(document).ready(function(){
 					ir_return_status : ir_return_status,
 					ir_no : ir_no
 				},
+				async : false, // 동기
 				error : function() {
 					alert("시스템 오류입니다. 관리자에게 문의하세요");
 				},
@@ -158,23 +177,20 @@ $(document).ready(function(){
 						alert("변경에 실패했습니다.\n다시 시도해주십시오");
 						return;
 					}
-					alert("반납여부가 성공적으로 변경되었습니다.");
 					// 상세페이지 reload
 					var rvo = setRentalVo(list_index);
 					showDetail(rvo);
 				}
 			});
 			
-			}
-			
-		});
-		
-		
+		}
 	
-});
-
-
-		function getList(p_num, selectDay){
+		
+		// 대관리스트를 가져오는 비동기함수
+		function getList(){
+			
+			var p_num = $("#placeName").val();
+			var selectDay = $("#datepicker").val();
 			
 			$.ajax({
 				type : "post",
@@ -189,6 +205,7 @@ $(document).ready(function(){
 				success : function(result) {
 					$(".stadiumList").text("");
 					$(".stadiumList").append(result);
+					return;
 				}
 				
 			});
@@ -247,16 +264,11 @@ $(document).ready(function(){
 				},
 				buttons:[
 					{
-						// 버튼 텍스트
-						text:'저장',
-						click:function(){
-							
-						}
-					},
-					{
-						text:'닫기',
+						text:'확인',
 						click:function(){
 							$(this).dialog("close");
+							
+							getList();
 						}
 					}
 				]
