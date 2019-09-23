@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fly.client.rental.service.ClientRentalService;
 import com.fly.member.itemsrental.service.ItemsRentalService;
@@ -54,8 +52,6 @@ public class ClientRentalController {
 	@ResponseBody
 	public String setList(@RequestParam(value = "p_num") String p_num, 
 			@RequestParam(value = "selectDay") String selectDay) {
-		System.out.println("p_num ========"+p_num);
-		System.out.println("selectDay======" + selectDay);
 		
 		int r_end = 0;
 		StringBuffer result = new StringBuffer();
@@ -154,17 +150,14 @@ public class ClientRentalController {
 	}
 	@RequestMapping(value = "/showDetail.do", method = RequestMethod.POST,  produces= "text/html; charset=UTF-8")
 	@ResponseBody
-	public String showDetail(@ModelAttribute RentalVO rvo) {
+	public String showDetail(@ModelAttribute RentalVO rvo, @RequestParam(value = "index") int index) {
 		
-		System.out.println(rvo.toString());
 		List<ItemsRentalVO> itemsList = ItemsRentalService.getItemsRentalList(rvo.getR_no());
-		for(ItemsRentalVO irvo : itemsList) {
-			System.out.println(irvo.toString());
-		}
 		StringBuffer result = new StringBuffer();
+		result.append("<input type='hidden' id='list-index' value='");
+		result.append(index);
+		result.append("' />");
 		
-		result.append("<p>대관정보</p>");
-		result.append("<hr /><br />");
 		result.append("<table>");
 		result.append("<tr><td>신청자</td><td>");
 		result.append(rvo.getM_id());
@@ -188,7 +181,7 @@ public class ClientRentalController {
 			result.append("<div><h2>대여용품</h2>");
 			result.append("<ul>");
 			for(ItemsRentalVO irvo : itemsList) {
-				result.append("<li data-num'");
+				result.append("<li data-num='");
 				result.append(irvo.getIr_no());
 				result.append("'>");
 				result.append("<p><span>");
@@ -198,7 +191,13 @@ public class ClientRentalController {
 				result.append(irvo.getIr_rental_ea());
 				result.append("개</span>");
 				result.append("</p>");
-				result.append("<span class='toggle-wrap'><input type='checkbox' class='toggle' id='");
+				result.append("<span class='toggle-wrap'><input type='checkbox' class='toggle'");
+				if( irvo.getIr_return_status() == 2) {
+					result.append(" checked value = '2'");
+				}else {
+					result.append(" value = '1' ");
+				}
+				result.append("id='");
 				result.append(irvo.getIr_no());
 				result.append("' /><label for='");
 				result.append(irvo.getIr_no());
@@ -248,8 +247,6 @@ public class ClientRentalController {
     public String refundUpdate(@RequestParam(value = "r_no") int r_no) {
     	
     	int result = clientRentalService.refundUpdate(r_no);
-    	System.out.println("update성공 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
-    	System.out.println(r_no + "+========   r_no");
     	
     	
     	
@@ -264,4 +261,25 @@ public class ClientRentalController {
     	
     	return result + "";
     }
+    
+	
+	  @RequestMapping(value = "/updateItems_rental.do", method = RequestMethod.POST, produces= "text/html; charset=UTF-8")
+	  
+	  @ResponseBody public String updateItems_rental(@ModelAttribute ItemsRentalVO irvo) {
+		 
+		  int result = 0;
+		  System.out.println(irvo.toString());
+		  try {
+			  // 상태변경 ㄱ
+			  result = ItemsRentalService.updateStatus(irvo);
+			  
+		  }catch(Exception e){
+			  e.printStackTrace();
+			  System.out.println(e.toString());
+			  result = 0;
+		  }
+		  
+		  return result+"";
+	  }
+	 
 }

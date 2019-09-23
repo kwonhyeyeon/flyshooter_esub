@@ -63,20 +63,8 @@ $(document).ready(function(){
 			return
 		}
 		
-		$.ajax({
-			type : "post",
-			url : "/client/rental/showDetail.do",
-			data : rvo,
-			error : function() {
-				alert("시스템 오류입니다. 관리자에게 문의하세요");
-			},
-			success : function(result) {
-				$(".rentalDetail").text("");
-				$(".rentalDetail").append(result);
-				openDialog();
-			}
-			
-			});
+		showDetail(rvo);
+		
 	 });
 		// 온라인 대관 환불요청
 		$(document).on("click", ".r_refund", function(e){
@@ -144,6 +132,44 @@ $(document).ready(function(){
 				});
 			}
 		});
+		
+		$(document).on("change", ".toggle", function(){
+			var index = $(".toggle").index(this);
+			var ir_return_status = $(".toggle:eq("+index+")").val();
+			
+			// 토글버튼 change시 비동기로 상태변경
+			var ir_no = $(".toggle:eq("+index+")").parent().parent().attr("data-num");
+			var list_index = $("#list-index").val();
+			
+			if( confirm("") ){
+			
+			$.ajax({
+				type : "post",
+				url : "/client/rental/updateItems_rental.do",
+				data : {
+					ir_return_status : ir_return_status,
+					ir_no : ir_no
+				},
+				error : function() {
+					alert("시스템 오류입니다. 관리자에게 문의하세요");
+				},
+				success : function(result) {
+					if( result == '0' ){
+						alert("변경에 실패했습니다.\n다시 시도해주십시오");
+						return;
+					}
+					alert("반납여부가 성공적으로 변경되었습니다.");
+					// 상세페이지 reload
+					var rvo = setRentalVo(list_index);
+					showDetail(rvo);
+				}
+			});
+			
+			}
+			
+		});
+		
+		
 	
 });
 
@@ -185,6 +211,7 @@ $(document).ready(function(){
 			}
 			
 			var rvo = {
+				index : index,
 				r_no : param[0],
 				r_regdate : param[1],
 				r_total_pay : param[2],
@@ -204,7 +231,7 @@ $(document).ready(function(){
 				title : '대관 상세페이지',
 				model : true,
 				width : '450',
-				height : '350',
+				height : 'auto',
 				closeOnEscape:false,
 				open:function(event, ui){
 					$(".ui-dialog-titlebar-close", $(this).parent()).hide();
@@ -234,4 +261,23 @@ $(document).ready(function(){
 					}
 				]
 			});
+		}
+		
+		
+		function showDetail(rvo){
+			
+			$.ajax({
+				type : "post",
+				url : "/client/rental/showDetail.do",
+				data : rvo,
+				error : function() {
+					alert("시스템 오류입니다. 관리자에게 문의하세요");
+				},
+				success : function(result) {
+					$(".rentalDetail").text("");
+					$(".rentalDetail").append(result);
+					openDialog();
+				}
+				
+				});
 		}

@@ -24,11 +24,30 @@
 	</insert>
 	
 	<select id="getItemsRentalList" parameterType="int" resultType="itemsrental">
-		 SELECT i.ir_no, (select i_name from items where i_no = i.i_no) i_name, 
-		 		i.ir_rental_ea, 
-		 		( (select i_rental_fee from items where i_no = i.i_no) * i.ir_rental_ea ) i_rental_fee
-		 FROM items_rental i
-		 WHERE r_no = #{r_no}
+		 SELECT ir.ir_no, i.i_name, ir.ir_rental_ea, i.i_rental_fee, ir.ir_return_status
+         FROM items_Rental ir, items i
+         WHERE ir.i_no = i.i_no and ir.r_no = #{r_no}
 	
 	</select>
+	
+	<update id="updateStatus" parameterType="itemsrental">
+		UPDATE items_rental
+		SET 
+		<if test="ir_return_status == 1">
+				ir_return_status = 2
+		</if>
+		<if test="ir_return_status == 2">
+				ir_return_status = 1
+		</if>
+		WHERE ir_no = #{ir_no}
+	</update>
+	
+	<update id="rentalUpdate" parameterType="rental" >
+		UPDATE rental
+			   SET 
+			   	refund = #{refund},
+			   	r_recall_time = sysdate,
+			   	r_pay_status = -1
+		WHERE r_no = #{r_no}	
+	</update>
 </mapper>
