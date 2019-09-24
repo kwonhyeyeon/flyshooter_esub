@@ -44,6 +44,12 @@
 	
 	</select>
 	
+	<select id="getRegdate" resultType="String">
+		select to_char(m_regdate, 'yyyy/MM/dd') register 
+		from member 
+		where m_id = 'esub17@naver.com'
+	</select>
+	
 	<!-- 환불 리스트 -->
 	<select id="getRefundList" parameterType="place" resultMap="getRefundList">
 		select r.m_id, m.m_name, p.p_name, r.r_total_pay, r.refund, 
@@ -58,10 +64,10 @@
 				and to_char(r.r_recall_time, 'yyyy/MM') = to_char(sysdate, 'yyyy/MM')
 			</if>
 			<if test='p_ok == 2'>
-				and to_char(r.r_recall_time, 'yyyy') = #{r_recall_time}
+				and to_char(r.r_recall_time, 'yyyy') = #{p_open}
 			</if>
 			<if test='p_ok == 3'>
-				and to_char(r.r_recall_time, 'yyyy/MM') = #{r_recall_time}
+				and to_char(r.r_recall_time, 'yyyy/MM') = #{p_open}
 			</if>
 			
 		</where>
@@ -69,6 +75,7 @@
 	</select>
 	
 	<resultMap type="map" id="getRefundList">
+        <result column="r_no" property="r_no"/>
         <result column="m_id" property="m_id"/>
         <result column="m_name" property="m_name"/>
         <result column="p_name" property="p_name"/>
@@ -97,6 +104,37 @@
 	<delete id="deleteRental">
 		DELETE FROM rental WHERE r_no = #{r_no}
 	</delete>
-
+	
+	<select id="getDetailRefund" resultType="rental" parameterType="int">
+		select p.p_name, p.p_phone, p.p_address,
+		r.m_id, r.r_account, m.m_phone, r.r_regdate, r.r_reserve_date, r.r_start, s.s_hours, s.s_name, r.r_total_pay,
+		r.r_recall_time, r.refund, r.r_pay_type, r.r_bank, r.r_account, r.r_account_num, r.r_no
+		from place p, member m, rental r, stadium s
+		where p.p_num = s.p_num
+		and s.s_no = r.s_no
+		and r.m_id = m.m_id
+		and r_no = #{r_no}
+	</select>
+	<!-- <resultMap type="map" id="getDetailRefund">
+        <result column="p_name" property="p_name"/>
+        <result column="p_phone" property="p_phone"/>
+        <result column="p_address" property="p_address"/>
+        <result column="m_id" property="m_id"/>
+        <result column="r_account" property="r_account"/>
+        <result column="m_phone" property="m_phone"/>
+        <result column="r_regdate" property="r_regdate"/>
+        <result column="r_reserve_date" property="r_reserve_date"/>
+        <result column="r_start" property="r_start"/>
+        <result column="s_hours" property="s_hours"/>
+        <result column="s_name" property="s_name"/>
+        <result column="r_total_pay" property="r_total_pay"/>
+        <result column="r_recall_time" property="r_recall_time"/>
+        <result column="refund" property="refund"/>
+        <result column="r_pay_type" property="r_pay_type"/>
+        <result column="r_bank" property="r_bank"/>
+        <result column="r_account" property="r_account"/>
+        <result column="r_account_num" property="r_account_num"/>
+        <result column="r_no" property="r_no"/>
+    </resultMap> -->
 	
 </mapper>

@@ -61,6 +61,16 @@ public class ClientRentalDaoImpl implements ClientRentalDao {
 			return sqlSession.delete(NAME_SPACE + ".deleteRental", r_no);
 		}
 
+		@Override
+		public String getRegdate(String m_id) {
+			return sqlSession.selectOne(NAME_SPACE + ".getRegdate", m_id);
+		}
+
+		@Override
+		public RentalVO getDetailRefund(int r_no) {
+			return sqlSession.selectOne(NAME_SPACE + ".getDetailRefund", r_no);
+		}
+
 
 	
 }

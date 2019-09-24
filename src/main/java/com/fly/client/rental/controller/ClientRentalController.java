@@ -228,15 +228,8 @@ public class ClientRentalController {
 		model.addAttribute("refundList", refundList);
 		System.out.println(refundList);
 		
-		String register = refundList.get(0).get("register").toString(); // 회원 가입일
+		String register = clientRentalService.getRegdate(mvo.getM_id());
 		model.addAttribute("register", register);
-		String r_recall_time = rvo.getR_recall_time();
-		model.addAttribute("r_recall_time", r_recall_time);
-		
-//		for(int i = 0; i < refundList.size(); i++) {
-//			String year = refundList.get(i).get("r_recall_time").toString();
-//			System.out.println(year.substring(0, 4));
-//		}
         
         return "/rental/refundList";
     }
@@ -280,6 +273,22 @@ public class ClientRentalController {
 		  }
 		  
 		  return result+"";
+	  }
+	  
+	  // 환불 관리 상세 페이지
+	  @RequestMapping(value = "/detailRefund.do", method = RequestMethod.POST)
+	  public String getDetailRefund(
+			  @ModelAttribute RentalVO rvo,
+			  Model model
+			  ) {
+		  System.out.println("getDetailRefund 호출 성공");
+		  
+		  int r_no = rvo.getR_no();
+		  rvo = clientRentalService.getDetailRefund(r_no);
+		  model.addAttribute("rvo", rvo);
+		  System.out.println(rvo);
+		  
+		  return "/rental/detailRefund";
 	  }
 	 
 }
